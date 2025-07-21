@@ -17,7 +17,7 @@ def clear(output_dir: Path):
 
 def fetch(search_term: str, input_dir: Path, output_dir: Path):
     """
-        encontra todos os arquivo que contém o search_term em seu nome dentro do input_dir  
+        encontra todos os arquivos que contém o search_term em seu nome dentro do input_dir  
         e então, copia esses arquivos pro output_dir, identificando o pack de ícones de onde cada um vem  
         adicionando o nome desse pack (o diretório pai relativo ao input) no ínicio do nome do arquivo copiado
     """

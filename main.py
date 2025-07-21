@@ -1,7 +1,7 @@
 import argparse
 from pathlib import Path
 
-from src import fetch
+from src import fetch, replace
 from src.utils.paths import FETCH_OUTPUT, ORIGINAL_UNZIPPED
 
 def set_parser():
@@ -28,5 +28,11 @@ def main():
             fetch.fetch(search_term=t, input_dir=ORIGINAL_UNZIPPED, output_dir=FETCH_OUTPUT)
     elif args.mode == "fetch" and args.clear:
         fetch.clear(output_dir=FETCH_OUTPUT)
+    elif args.mode == "replace":
+        replace.replace(
+            "acrobat.svg",
+            Path("/home/luan/Desktop/a/7zip.svg"),
+            Path("/home/luan/Desktop/a/")
+        )
 
 main()
