@@ -1,0 +1,14 @@
+- ajustar padding/altura dos ícones
+- cores de folders
+
+- ark, zip
+- btop
+- appimagelauncher
+- roblox, studio, sober, vinegar
+- aseprite, libresprite
+- davinci resolve
+- kvantum
+- thunderbird (tamanho relativo ao firefox)
+
+- symbolic
+- weather
