@@ -23,7 +23,8 @@ def main():
             "kvantum",
             "pureref",
             "davinci",
-            "settings"
+            "settings",
+            "folder"
         ]
 
         fetch.fetch(search_terms=terms, input_dir=ORIGINAL_UNZIPPED, output_dir=FETCH_OUTPUT)
