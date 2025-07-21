@@ -30,17 +30,10 @@ def replace(target_names: list, substitute_file: Path, destinations_dirs: list[P
             if not tname.endswith(".svg"):
                 tname += ".svg"
 
-            count = 0
             for f in destination.rglob("*"): # rglob ao invés de iterdir pra que a busca seja recursiva
                 if f.name == tname:
                     try:
                         copy2(substitute_file, f)
-                        logger.info(f"arquivo substituídos: {f}")
-                        count += 1
+                        logger.success(f"arquivo substituído: {f}")
                     except Exception as err:
                         logger.error(f"erro ao substituir {f}: {err}")
-
-            if count == 0:
-                logger.info(f"nenhum arquivo chamado {tname} foi encontrado em {destination}")
-            else:
-                logger.success(f"{count} arquivos substituídos")
