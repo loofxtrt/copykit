@@ -20,6 +20,7 @@ def main():
         terms = [
             "appimagelauncher",
             "btop",
+            "ark",
             "kvantum",
             "pureref",
             "davinci",
