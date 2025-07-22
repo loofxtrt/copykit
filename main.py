@@ -25,7 +25,9 @@ def main():
             "pureref",
             "davinci",
             "settings",
-            "folder"
+            "folder",
+            "archive",
+            "arca"
         ]
 
         fetch.fetch(search_terms=terms, input_dir=ORIGINAL_UNZIPPED, output_dir=FETCH_OUTPUT)
