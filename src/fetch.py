@@ -47,8 +47,9 @@ def fetch(search_terms: list[str], input_dir: Path, output_dir: Path):
                     logger.error("o arquivo encontrado não possui um diretório pai")
                     continue
                 
-                # montar o novo path e copiar o arquivo pro destino final
+                # montar o novo path e copiar o arquivo pro destino final (caso ele já não tenha sido copiado)
                 new_path = output_dir / f"{parent_pack}_{f.name}"
-                copy2(f, new_path)
+                if not new_path.exists():
+                    copy2(f, new_path)
 
                 logger.info(f"arquivo encontrado em {parent_pack}: {f.name}")
