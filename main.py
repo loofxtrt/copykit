@@ -46,20 +46,20 @@ def main():
                         "discord-ptb", 
                         "solstice-discord-discord",
                         "com.discordapp.Discord",
-                    ],
+                    ]
                 },
                 "discord-canary": {
                     "substitute": SUBSTITUTES_APPS / "kora_discord-canary.svg",
                     "aliases": [
                         "discord-canary",
                         "com.discordapp.DiscordCanary",
-                    ],
+                    ]
                 },
                 "discord-development": {
                     "substitute": SUBSTITUTES_APPS / "kora_discord-development.svg",
                     "aliases": [
                         "discord-development",
-                    ],
+                    ]
                 },
                 "spotify": {
                     "substitute": SUBSTITUTES_APPS / "marwaita_spotify.svg",
@@ -70,14 +70,14 @@ def main():
                         "spotify-client",
                         "solstice-spotify-spotify",
                         "spotify-qt",
-                    ],
+                    ]
                 },
                 "obs": {
                     "substitute": SUBSTITUTES_APPS / "kora_obs.svg",
                     "aliases": [
                         "com.obsproject.Studio",
                         "obs",
-                    ],
+                    ]
                 },
                 "krita": {
                     "substitute": SUBSTITUTES_APPS / "marwaita_krita.svg",
@@ -85,14 +85,14 @@ def main():
                         "calligrakrita",
                         "calligrakrita2",
                         "org.kde.krita",
-                    ],
+                    ]
                 },
                 "gimp": {
                     "substitute": SUBSTITUTES_APPS / "breeze-dark_gimp.svg",
                     "aliases": [
                         "gimp",
                         "org.gimp.GIMP",
-                    ],
+                    ]
                 },
                 "godot": {
                     "substitute": SUBSTITUTES_APPS / "plasmax_godot.svg",
@@ -102,7 +102,7 @@ def main():
                         "lutris_godot-engine",
                         "org.godotengine.Godot",
                         "org.godotengine.Godot3",
-                    ],
+                    ]
                 },
                 "inkscape": {
                     "substitute": SUBSTITUTES_APPS / "plasmax_inkscape.svg",
@@ -110,13 +110,13 @@ def main():
                         "inkscape",
                         "inkscape-logo",
                         "org.inkscape.Inkscape",
-                    ],
+                    ]
                 },
                 "blender": {
                     "substitute": SUBSTITUTES_APPS / "blender.svg",
                     "aliases": [
                         "org.blender.Blender",
-                    ],
+                    ]
                 },
                 "obsidian": {
                     "substitute": SUBSTITUTES_APPS / "kora_obsidian.svg",
@@ -124,7 +124,7 @@ def main():
                         "md.obsidian.Obsidian",
                         "obsidian",
                         "appimagekit-obsidian",
-                    ],
+                    ]
                 },
                 "steam": {
                     "substitute": SUBSTITUTES_APPS / "marwaita_steam.svg",
@@ -135,25 +135,22 @@ def main():
                         "steamos-logo-icon",
                         "steampowered",
                         "steamskinmanager",
-                    ],
+                    ]
                 },
                 "libresprite": {
                     "substitute": SUBSTITUTES_APPS / "libresprite.svg",
                     "aliases": [
                         "com.github.libresprite.LibreSprite"
-                    ],
+                    ]
                 },
                 "aseprite": {
                     "substitute": SUBSTITUTES_APPS / "aseprite.svg",
                     "aliases": [
                         "lutris_aseprite"
-                    ],
+                    ]
                 },
                 "pureref": {
                     "substitute": SUBSTITUTES_APPS / "kora_pureref.svg",
-                    "aliases": [
-
-                    ],
                 },
                 "endeavouros": {
                     "substitute": SUBSTITUTES_APPS / "endeavouros.svg",
@@ -161,38 +158,38 @@ def main():
                         "distributor-logo-endeavouros",
                         "endeavouros",
                         "endeavouros-icon"
-                    ],
+                    ]
                 },
                 "sqlitebrowser": {
                     "substitute": SUBSTITUTES_APPS / "sqlitebrowser.svg",
                     "aliases": [
                         "org.sqlitebrowser.sqlitebrowser",
-                    ],
+                    ]
                 },
                 "vinegar": {
                     "substitute": SUBSTITUTES_APPS / "vinegar.svg",
                     "aliases": [
                         "io.github.vinegarhq.Vinegar",
                         "org.vinegarhq.Vinegar"
-                    ],
+                    ]
                 },
                 "roblox": {
                     "substitute": SUBSTITUTES_APPS / "roblox.svg",
                     "aliases": [
                         "io.github.vinegarhq.Vinegar.player"
-                    ],
+                    ]
                 },
                 "roblox-studio": {
                     "substitute": SUBSTITUTES_APPS / "roblox-studio.svg",
                     "aliases": [
                         "io.github.vinegarhq.Vinegar.studio"
-                    ],
+                    ]
                 },
                 "sober": {
                     "substitute": SUBSTITUTES_APPS / "sober.svg",
                     "aliases": [
                         "org.vinegarhq.Sober"
-                    ],
+                    ]
                 },
                 "audacity": {
                     "substitute": SUBSTITUTES_APPS / "reversal-black_audacity.svg",
@@ -201,19 +198,28 @@ def main():
                         "application-x-audacity-project",
                         "audacity16",
                         "audacity32"
-                    ],
+                    ]
                 },
                 "vscodium": {
                     "substitute": SUBSTITUTES_APPS / "codium.svg",
                     "aliases": [
                         "com.vscodium.codium",
-                    ],
+                    ]
                 },
                 "appimagelauncher": {
                     "substitute": SUBSTITUTES_APPS / "flat-remix-blue-dark_appimagelauncher.svg",
                     "aliases": [
                         "AppImageLauncher"
                     ]
+                },
+                "android-studio": {
+                    "substitute": SUBSTITUTES_APPS / "fairywren_dark_android-studio.svg",
+                    "aliases": [
+                        "android-studio-beta"
+                    ]
+                },
+                "android-studio-canary": {
+                    "substitute": SUBSTITUTES_APPS / "fairywren_dark_android-studio-canary.svg"
                 }
             }
         elif args.section == "system":
@@ -249,9 +255,9 @@ def main():
         # obter os valores do replace_map, obttendo a chave e os valores das entradas
         # então, pra cada 
         for key, entry in replace_map.items():
-            # adicionar key na lista de aliases, por que em alguns casos
-            # um alias do software pode também ser a key
-            aliases = entry["aliases"]
+            # adicionar key na lista de aliases (caso o campo de aliases exista)
+            # por que em alguns casos um alias do software pode também ser a key
+            aliases = entry.get("aliases", [])
             aliases.append(key)
 
             replace.replace(
