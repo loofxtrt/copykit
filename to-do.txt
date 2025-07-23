@@ -9,6 +9,7 @@
 - davinci resolve
 - kvantum
 - thunderbird (tamanho relativo ao firefox)
+- android studio
 
 - symbolic
 - weather

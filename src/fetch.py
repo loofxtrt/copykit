@@ -37,6 +37,10 @@ def fetch(search_terms: list[str], input_dir: Path, output_dir: Path):
     for f in input_dir.rglob("*"):
         f_name_lower = f.name.lower()
 
+        # ignorar diretórios e obter apenas arquivos
+        if not f.is_file():
+            continue
+
         # ignorar esse arquivo caso o nome dele não esteja presente na lista de termos de pesquisa
         # o any retorna true caso tenha pelo menos uma ocorrência do termo, e dá continuidade ao código
         # se o nome do arquivo nao bater com NENHUM search_term, é false, e vai pro próximo
@@ -58,8 +62,10 @@ def fetch(search_terms: list[str], input_dir: Path, output_dir: Path):
         
         # montar o novo path e copiar o arquivo pro destino final (caso ele já não tenha sido copiado)
         new_path = output_dir / f"{parent_pack}_{f.name}"
-        if not new_path.exists():
-            copy2(f, new_path)
-            logger.success(f"arquivo encontrado em {parent_pack}: {f.name}")
-        else:
+        
+        if new_path.exists():
             logger.info(f"{f.name} já foi copiado pro diretório de destino, ignorando")
+            continue
+
+        copy2(f, new_path)
+        logger.success(f"arquivo encontrado em {parent_pack}: {f.name}")
