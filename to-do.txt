@@ -12,3 +12,5 @@
 
 - symbolic
 - weather
+
+- OTIMIZAÇÃO DO FETCH
