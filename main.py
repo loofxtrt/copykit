@@ -248,8 +248,8 @@ def main():
 
         destinations = [
             Path("/home/luan/.local/share/icons/copycat"),
-            Path("/home/luan/.local/share/icons/copycat-light"),
-            Path("/home/luan/.local/share/icons/copycat-light-panel"),
+            #Path("/home/luan/.local/share/icons/copycat-light"),
+            #Path("/home/luan/.local/share/icons/copycat-light-panel"),
             Path("/mnt/seagate/workspace/coding/projects/icons/copycat/copycat"),
             Path("/mnt/seagate/workspace/coding/projects/icons/copycat/copycat-light"),
             Path("/mnt/seagate/workspace/coding/projects/icons/copycat/copycat-light-panel")
