@@ -220,6 +220,9 @@ def main():
                 },
                 "android-studio-canary": {
                     "substitute": SUBSTITUTES_APPS / "fairywren_dark_android-studio-canary.svg"
+                },
+                "btop": {
+                    "substitute": SUBSTITUTES_APPS / "btop.svg"
                 }
             }
         elif args.section == "system":
@@ -244,12 +247,12 @@ def main():
             }
 
         destinations = [
-            Path("/home/luan/.local/share/icons/coral"),
-            Path("/home/luan/.local/share/icons/coral-light"),
-            Path("/home/luan/.local/share/icons/coral-light-panel"),
-            Path("/mnt/seagate/workspace/coding/projects/icons/coral/coral"),
-            Path("/mnt/seagate/workspace/coding/projects/icons/coral/coral-light"),
-            Path("/mnt/seagate/workspace/coding/projects/icons/coral/coral-light-panel")
+            Path("/home/luan/.local/share/icons/copycat"),
+            Path("/home/luan/.local/share/icons/copycat-light"),
+            Path("/home/luan/.local/share/icons/copycat-light-panel"),
+            Path("/mnt/seagate/workspace/coding/projects/icons/copycat/copycat"),
+            Path("/mnt/seagate/workspace/coding/projects/icons/copycat/copycat-light"),
+            Path("/mnt/seagate/workspace/coding/projects/icons/copycat/copycat-light-panel")
         ]
 
         # obter os valores do replace_map, obttendo a chave e os valores das entradas
