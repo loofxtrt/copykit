@@ -2,12 +2,13 @@ import argparse
 from pathlib import Path
 
 from src import fetch, replace
-from src.utils.paths import FETCH_OUTPUT, ORIGINAL_UNZIPPED, SUBSTITUTES_APPS, SUBSTITUTES_SYSTEM
+from src.utils.paths import FETCH_OUTPUT, ORIGINAL_UNZIPPED, SUBSTITUTES_APPS, SUBSTITUTES_SYSTEM, SUBSTITUTES_PLACES
 
 def set_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("mode", help="fetch/replace")
     parser.add_argument("--section", "-s", help="software/system, seção à qual o replace deve ser aplicado")
+    parser.add_argument("--replacelevel", "-rl", help="repo/local, se presente, define se só o repo ou o local vai ser atualizado. se não, atualiza os dois")
     parser.add_argument("--clear", "-c", action="store_true", help="limpa o diretório de output")
 
     return parser
@@ -245,15 +246,62 @@ def main():
                     ]
                 }
             }
+        elif args.section == "places":
+            replace_map = {
+                "folder-videos": {
+                    "substitute": SUBSTITUTES_PLACES / "kora_folder-videos.svg"
+                },
+                "folder-pictures": {
+                    "substitute": SUBSTITUTES_PLACES / "kora_folder-pictures.svg"
+                },
+                "folder-pictures-open": {
+                    "substitute": SUBSTITUTES_PLACES / "kora_folder-pictures-open.svg"
+                },
+                "folder-music": {
+                    "substitute": SUBSTITUTES_PLACES / "kora_folder-music.svg"
+                },
+                "folder-music-open": {
+                    "substitute": SUBSTITUTES_PLACES / "kora_folder-music-open.svg"
+                },
+                "folder-documents": {
+                    "substitute": SUBSTITUTES_PLACES / "kora_folder-documents.svg"
+                },
+                "folder-download": {
+                    "substitute": SUBSTITUTES_PLACES / "kora_folder-download.svg"
+                },
+                "user-desktop": {
+                    "substitute": SUBSTITUTES_PLACES / "kora_user-desktop.svg",
+                    # removido pq afeta o ícone de engrenagem, não deve ser mudado
+                    #"aliases": [
+                    #    "gnome-desktop-config"
+                    #]
+                },
+                "user-home": {
+                    "substitute": SUBSTITUTES_PLACES / "kora_user-home.svg"
+                }
+            }
 
-        destinations = [
-            Path("/home/luan/.local/share/icons/copycat"),
-            #Path("/home/luan/.local/share/icons/copycat-light"),
-            #Path("/home/luan/.local/share/icons/copycat-light-panel"),
+        repo_destinations = [
             Path("/mnt/seagate/workspace/coding/projects/icons/copycat/copycat"),
             Path("/mnt/seagate/workspace/coding/projects/icons/copycat/copycat-light"),
             Path("/mnt/seagate/workspace/coding/projects/icons/copycat/copycat-light-panel")
         ]
+
+        local_destinations = [
+            Path("/home/luan/.local/share/icons/copycat"),
+            #Path("/home/luan/.local/share/icons/copycat-light"),
+            #Path("/home/luan/.local/share/icons/copycat-light-panel")
+        ]
+
+        if args.replacelevel == "repo":
+            # atualizar o repo dos ícones
+            destinations = repo_destinations
+        elif args.replacelevel == "local":
+            # atualizar só localmente
+            destinations = local_destinations
+        else:
+            # atualizar os dois
+            destinations = repo_destinations + local_destinations
 
         # obter os valores do replace_map, obttendo a chave e os valores das entradas
         # então, pra cada 
