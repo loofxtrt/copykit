@@ -14,4 +14,6 @@
 - symbolic
 - weather
 
-- OTIMIZAÇÃO DO FETCH
+- mudar posição do símbolo de + pra esquerda pra não ficar em baixo do de volume
+
+- balancear o constrante dos ícones das folders
