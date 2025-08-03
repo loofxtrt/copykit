@@ -1,19 +1,15 @@
 - ajustar padding/altura dos ícones
-- cores de folders
+- cores de folders (public e templates)?
 
-- ark, zip
-- btop
-- appimagelauncher
+- appimagelauncher quadrado ao invés de redondo?
 - roblox, studio, sober, vinegar
 - aseprite, libresprite
 - davinci resolve
-- kvantum
 - thunderbird (tamanho relativo ao firefox)
-- android studio
+- android studio (arredondar com base no kvantum)
+- ark (arredondar com base no kvantum)
 
 - symbolic
 - weather
 
 - mudar posição do símbolo de + pra esquerda pra não ficar em baixo do de volume
-
-- balancear o constrante dos ícones das folders

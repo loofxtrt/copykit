@@ -31,7 +31,12 @@ def main():
             # "arca",
             # "android",
             # "btop",
-            "monitor"
+            # "monitor",
+            # "dolphin",
+            # "gcolor3",
+            # "nl.hjdskes.gcolor3",
+            # "picker",
+            "cmake"
         ]
 
         fetch.fetch(search_terms=terms, input_dir=ORIGINAL_UNZIPPED, output_dir=FETCH_OUTPUT)
@@ -239,6 +244,45 @@ def main():
                         "org.gnome.ArchiveManager",
                         "utilities-file-archiver",
                         "xarchiver"
+                    ]
+                },
+                "dolphin": {
+                    "substitute": SUBSTITUTES_APPS / "kora_dolphin.svg",
+                    "aliases": [
+                        "org.kde.dolphin"
+                    ]
+                },
+                "github-desktop": {
+                    "substitute": SUBSTITUTES_APPS / "kora_github-desktop.svg",
+                    "aliases": [
+                        "appimagekit-github-desktop",
+                        "io.github.shiftey.Desktop"
+                    ]
+                },
+                "color-picker": {
+                    "substitute": SUBSTITUTES_APPS / "marwaita_color-picker.svg",
+                    "aliases": [
+                        "gcolor3",
+                        "nl.hjdskes.gcolor3"
+                    ]
+                },
+                "kvantum": {
+                    "substitute": SUBSTITUTES_APPS / "kora_kvantum.svg"
+                },
+                "fspy": {
+                    "substitute": SUBSTITUTES_APPS / "kora_fspy.svg",
+                    "aliases": [
+                        "appimagekit-fspy",
+                        "appimagekit_7b72cc93eb7f580b01420d811fd0cc64_fspy"
+                    ]
+                },
+                "cmake": {
+                    "substitute": SUBSTITUTES_APPS / "kora_cmake.svg",
+                    "aliases": [
+                        "cmake",
+                        "cmake-gui",
+                        "CMakeSetup",
+                        "CMakeSetup32"
                     ]
                 }
             }
