@@ -8,6 +8,7 @@
 - thunderbird (tamanho relativo ao firefox)
 - android studio (arredondar com base no kvantum)
 - ark (arredondar com base no kvantum)
+- firewall
 
 - symbolic
 - weather

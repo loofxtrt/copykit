@@ -36,7 +36,8 @@ def main():
             # "gcolor3",
             # "nl.hjdskes.gcolor3",
             # "picker",
-            "cmake"
+            # "cmake",
+            "firewall"
         ]
 
         fetch.fetch(search_terms=terms, input_dir=ORIGINAL_UNZIPPED, output_dir=FETCH_OUTPUT)
