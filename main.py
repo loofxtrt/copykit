@@ -19,17 +19,19 @@ def main():
 
     if args.mode == "fetch" and not args.clear:
         terms = [
-            "appimagelauncher",
-            "btop",
-            "ark",
-            "kvantum",
-            "pureref",
-            "davinci",
-            "settings",
-            "folder",
-            "archive",
-            "arca",
-            "android"
+            # "appimagelauncher",
+            # "btop",
+            # "ark",
+            # "kvantum",
+            # "pureref",
+            # "davinci",
+            # "settings",
+            # "folder",
+            # "archive",
+            # "arca",
+            # "android",
+            # "btop",
+            "monitor"
         ]
 
         fetch.fetch(search_terms=terms, input_dir=ORIGINAL_UNZIPPED, output_dir=FETCH_OUTPUT)
@@ -223,7 +225,21 @@ def main():
                     "substitute": SUBSTITUTES_APPS / "fairywren_dark_android-studio-canary.svg"
                 },
                 "btop": {
-                    "substitute": SUBSTITUTES_APPS / "btop.svg"
+                    "substitute": SUBSTITUTES_APPS / "kora_btop.svg"
+                },
+                "ark": {
+                    "substitute": SUBSTITUTES_APPS / "yosa-max_ark.svg",
+                    "aliases": [
+                        "org.kde.ark",
+                        "accessories-archiver",
+                        "archive-manager",
+                        "archivemanager",
+                        "gvfsd-archive-file",
+                        "lxqt-archiver",
+                        "org.gnome.ArchiveManager",
+                        "utilities-file-archiver",
+                        "xarchiver"
+                    ]
                 }
             }
         elif args.section == "system":
@@ -242,7 +258,8 @@ def main():
                         "xfce4-settings",
                         "org.gnome.Settings",
                         "redhat-server_settings",
-                        "xfce-system-settings"
+                        "xfce-system-settings",
+                        "utilities-tweak-tool"
                     ]
                 }
             }
