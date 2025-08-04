@@ -175,29 +175,34 @@ def main():
                         "org.sqlitebrowser.sqlitebrowser",
                     ]
                 },
-                "vinegar": {
-                    "substitute": SUBSTITUTES_APPS / "vinegar.svg",
+                "roblox-player": {
+                    "substitute": SUBSTITUTES_APPS / "roblox-player.svg",
                     "aliases": [
-                        "io.github.vinegarhq.Vinegar",
-                        "org.vinegarhq.Vinegar"
-                    ]
-                },
-                "roblox": {
-                    "substitute": SUBSTITUTES_APPS / "roblox.svg",
-                    "aliases": [
-                        "io.github.vinegarhq.Vinegar.player"
+                        "io.github.vinegarhq.Vinegar.player",
+                        "net.brinkervii.grapejuice.robloxplayer",
+                        "grapejuice-roblox-player"
                     ]
                 },
                 "roblox-studio": {
                     "substitute": SUBSTITUTES_APPS / "roblox-studio.svg",
                     "aliases": [
-                        "io.github.vinegarhq.Vinegar.studio"
+                        "io.github.vinegarhq.Vinegar.studio",
+                        "grapejuice-roblox-studio",
+                        "net.brinkervii.grapejuice.robloxstudio",
+                        "org.vinegarhq.Vinegar.studio"
                     ]
                 },
                 "sober": {
-                    "substitute": SUBSTITUTES_APPS / "sober.svg",
+                    "substitute": SUBSTITUTES_APPS / "roblox-sober.svg",
                     "aliases": [
                         "org.vinegarhq.Sober"
+                    ]
+                },
+                "vinegar": {
+                    "substitute": SUBSTITUTES_APPS / "roblox-vinegar.svg",
+                    "aliases": [
+                        "io.github.vinegarhq.Vinegar",
+                        "org.vinegarhq.Vinegar"
                     ]
                 },
                 "audacity": {

@@ -9,6 +9,7 @@
 - android studio (arredondar com base no kvantum)
 - ark (arredondar com base no kvantum)
 - firewall
+- fspy
 
 - symbolic
 - weather
