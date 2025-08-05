@@ -1,3 +1,5 @@
+from src.utils.paths import SUBSTITUTES_APPS, SUBSTITUTES_SYSTEM, SUBSTITUTES_PLACES
+
 software = {
     "discord": {
         "substitute": SUBSTITUTES_APPS / "kora_discord.svg",
@@ -133,7 +135,9 @@ software = {
             "io.github.vinegarhq.Vinegar.player",
             "net.brinkervii.grapejuice.robloxplayer",
             "grapejuice-roblox-player"
-        ]
+        ],
+        "ignore_key": True,
+        "force_creation_in": "apps/scalable/"
     },
     "roblox-studio": {
         "substitute": SUBSTITUTES_APPS / "roblox-studio.svg",
@@ -142,20 +146,26 @@ software = {
             "grapejuice-roblox-studio",
             "net.brinkervii.grapejuice.robloxstudio",
             "org.vinegarhq.Vinegar.studio"
-        ]
+        ],
+        "ignore_key": True,
+        "force_creation_in": "apps/scalable/"
     },
     "sober": {
         "substitute": SUBSTITUTES_APPS / "roblox-sober.svg",
         "aliases": [
             "org.vinegarhq.Sober"
-        ]
+        ],
+        "ignore_key": True,
+        "force_creation_in": "apps/scalable/"
     },
     "vinegar": {
         "substitute": SUBSTITUTES_APPS / "roblox-vinegar.svg",
         "aliases": [
             "io.github.vinegarhq.Vinegar",
             "org.vinegarhq.Vinegar"
-        ]
+        ],
+        "ignore_key": True,
+        "force_creation_in": "apps/scalable/"
     },
     "audacity": {
         "substitute": SUBSTITUTES_APPS / "reversal-black_audacity.svg",
@@ -188,7 +198,9 @@ software = {
         "substitute": SUBSTITUTES_APPS / "fairywren_dark_android-studio-canary.svg"
     },
     "btop": {
-        "substitute": SUBSTITUTES_APPS / "kora_btop.svg"
+        "substitute": SUBSTITUTES_APPS / "kora_btop.svg",
+        "ignore_key": True,
+        "force_creation_in": "apps/scalable/"
     },
     "ark": {
         "substitute": SUBSTITUTES_APPS / "yosa-max_ark.svg",

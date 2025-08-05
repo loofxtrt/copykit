@@ -3,7 +3,7 @@ from pathlib import Path
 
 from src import fetch, replace, switch
 from src.utils.paths import FETCH_OUTPUT, ORIGINAL_UNZIPPED, SUBSTITUTES_APPS, SUBSTITUTES_SYSTEM, SUBSTITUTES_PLACES
-import maps
+from maps import replace as replace_maps
 
 def set_parser():
     parser = argparse.ArgumentParser()
@@ -28,14 +28,15 @@ def main():
     
     if args.mode == "replace":
         if args.section == "software":
-            replace_map = maps.replace.software
+            replace_map = replace_maps.software
         elif args.section == "system":
-            replace_map = maps.replace.system
+            replace_map = replace_maps.system
         elif args.section == "places":
-            replace_map = maps.replace.places
+            replace_map = replace_maps.places
         else:
             # mudar tudo caso uma seção não seja especificada
-            replace_map = maps.replace.software + maps.replace.system + maps.replace.places
+            # | cria um novo dicionário juntando todos os outros
+            replace_map = replace_maps.software | replace_maps.system | replace_maps.places
 
         repo_destinations = [
             Path("/mnt/seagate/workspace/coding/projects/icons/copycat/copycat"),
@@ -62,16 +63,37 @@ def main():
         # obter os valores do replace_map, obttendo a chave e os valores das entradas
         # então, pra cada 
         for key, entry in replace_map.items():
+            # obter as flags, se presentes
+            # o force_creation_in serve principalmente pra criação de ícones que podem não existir no pack original
+            # assim, ao invés de só tentar substituir, se o ícone não existir, ele será criado caso seja true
+            #
+            # e o ignore_key serve pra não procurar por ícones com o nome da chave em si, e sim só seus aliases
+            # ele não é passado pra função diretamente porque nesse mesmo trecho de código, a chave só é
+            # atribuída ao array de aliases se ele for true, então não precisa passar pra função explicitamente
+            get_force_creation = entry.get("force_creation_in", None)
+            ignore_key = entry.get("ignore_key", False)
+
             # adicionar key na lista de aliases (caso o campo de aliases exista)
             # por que em alguns casos um alias do software pode também ser a key
             aliases = entry.get("aliases", [])
-            aliases.append(key)
+            if not ignore_key: aliases.append(key)
 
-            replace.replace(
-                target_names=aliases,
-                substitute_file=entry["substitute"],
-                destinations_dirs=destinations
-            )
+            for dest in destinations:
+                # atribuir o path do destination caso presente
+                if get_force_creation is not None:
+                    force_path = dest / get_force_creation
+                else:
+                    force_path = None
+                
+                # dest está entre colchetes pq a função original esperava uma lista
+                # agora que a iteração é feita diretamente aqui pra poder ter precisão no force_path,
+                # ela é feita assim, obtendo o índice atual da iteração de destinations
+                replace.replace(
+                    target_names=aliases,
+                    substitute_file=entry["substitute"],
+                    destinations_dirs=[dest],
+                    force_creation_in=force_path
+                )
 
     if args.mode == "switch":
         switch.switch(
