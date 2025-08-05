@@ -1,7 +1,7 @@
 import argparse
 from pathlib import Path
 
-from src import fetch, replace, switch
+from src import fetch, replace, switch, create
 from src.utils.paths import FETCH_OUTPUT, ORIGINAL_UNZIPPED, SUBSTITUTES_APPS, SUBSTITUTES_SYSTEM, SUBSTITUTES_PLACES
 from maps import replace as replace_maps
 
@@ -64,27 +64,37 @@ def main():
         # então, pra cada 
         for key, entry in replace_map.items():
             # obter as flags, se presentes
-            # o force_creation_in serve principalmente pra criação de ícones que podem não existir no pack original
+            # o force_creation_in serve pra criação de ícones que podem não existir no pack original
             # assim, ao invés de só tentar substituir, se o ícone não existir, ele será criado caso seja true
+            # o caminho onde essa criação deve acontecer acontece no dicionário de entradas
+            # esse path deve ser a partir da raiz do icon pack. ex: kora, kora/apps/scalables
             #
             # e o ignore_key serve pra não procurar por ícones com o nome da chave em si, e sim só seus aliases
-            # ele não é passado pra função diretamente porque nesse mesmo trecho de código, a chave só é
+            # ele não é passado pra função diretamente porque nesse mesmo for, a chave só é
             # atribuída ao array de aliases se ele for true, então não precisa passar pra função explicitamente
             get_force_creation = entry.get("force_creation_in", None)
             ignore_key = entry.get("ignore_key", False)
 
-            # adicionar key na lista de aliases (caso o campo de aliases exista)
+            # adicionar key na lista de aliases (caso o campo de aliases exista e caso o ignore_key seja false)
             # por que em alguns casos um alias do software pode também ser a key
             aliases = entry.get("aliases", [])
             if not ignore_key: aliases.append(key)
 
             for dest in destinations:
-                # atribuir o path do destination caso presente
+                # montar o path de criação caso 
                 if get_force_creation is not None:
+                    # juntar o destino (que a raiz do icon pack) com o diretório do force
+                    # que pode ser algo como apps/scalable
                     force_path = dest / get_force_creation
-                else:
-                    force_path = None
-                
+
+                    for alias in aliases:
+                        # e depois adicionar o nome do arquivo novo no final
+                        new_icon_name = alias + ".svg"
+                        create.create(
+                            target_path=force_path / new_icon_name,
+                            file_to_create=entry["substitute"]
+                        )
+
                 # dest está entre colchetes pq a função original esperava uma lista
                 # agora que a iteração é feita diretamente aqui pra poder ter precisão no force_path,
                 # ela é feita assim, obtendo o índice atual da iteração de destinations
@@ -92,7 +102,7 @@ def main():
                     target_names=aliases,
                     substitute_file=entry["substitute"],
                     destinations_dirs=[dest],
-                    force_creation_in=force_path
+                    #force_creation_in=force_path
                 )
 
     if args.mode == "switch":

@@ -199,7 +199,6 @@ software = {
     },
     "btop": {
         "substitute": SUBSTITUTES_APPS / "kora_btop.svg",
-        "ignore_key": True,
         "force_creation_in": "apps/scalable/"
     },
     "ark": {

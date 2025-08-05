@@ -9,13 +9,15 @@ GREEN = "\033[1;32m"
 RED = "\033[1;31m"
 YELLOW = "\033[1;33m"
 BLUE = "\033[1;34m"
+PINK = "\033[1;35m"
 
 color_map = {
     "success": GREEN,
     "error": RED,
     "warning": YELLOW,
     "info": BLUE,
-    "debug": GREEN
+    "debug": GREEN,
+    "create": PINK
 }
 
 def get_caller_name():
@@ -73,3 +75,6 @@ def debug(msg):
 
 def warning(msg):
     base("warning", msg)
+
+def create(msg):
+    base("create", msg)
