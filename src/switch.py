@@ -12,16 +12,17 @@ def switch(target_dir: Path, source_dir: Path):
 
     # passar todos os nomes de arquivo do source_dir pra um dicionário
     # se usa um dict ao invés de uma list pra que se possa usar o .get("file_name")
-    # ao invés de ter que percorrer um array inteiro
-    source_dir = {f.name for f in source_dir.iterdir() if f.is_file()}
+    # assim, o nome do arquivo é a chave, e o valor da chave é o próprio arquivo
+    source_dir = {f.name: f for f in source_dir.iterdir() if f.is_file()}
 
-    for icon in target_dir:
+    for icon in target_dir.iterdir():
         if not icon.is_file():
             continue
 
         twin = source_dir.get(icon.name)
 
         if twin:
-            copy2(src, trg)
+            copy2(twin, icon)
+            logger.info(f"{icon.name} substituído")
         else:
             logger.info(f"o diretório de entrada não possui o arquivo {icon.name}; ignorando")

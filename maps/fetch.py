@@ -1,0 +1,21 @@
+terms = [
+    # "appimagelauncher",
+    # "btop",
+    # "ark",
+    # "kvantum",
+    # "pureref",
+    # "davinci",
+    # "settings",
+    # "folder",
+    # "archive",
+    # "arca",
+    # "android",
+    # "btop",
+    # "monitor",
+    # "dolphin",
+    # "gcolor3",
+    # "nl.hjdskes.gcolor3",
+    # "picker",
+    # "cmake",
+    "firewall"
+]
