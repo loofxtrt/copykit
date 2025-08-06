@@ -253,6 +253,10 @@ software = {
             "CMakeSetup",
             "CMakeSetup32"
         ]
+    },
+    "java21-openjdk": {
+        "substitute": SUBSTITUTES_APPS / "kora_java.svg",
+        "force_creation_in": "apps/scalable/"
     }
 }
 
