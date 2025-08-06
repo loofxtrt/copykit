@@ -90,6 +90,7 @@ def main():
                     for alias in aliases:
                         # e depois adicionar o nome do arquivo novo no final
                         new_icon_name = alias + ".svg"
+
                         create.create(
                             target_path=force_path / new_icon_name,
                             file_to_create=entry["substitute"]
@@ -106,15 +107,20 @@ def main():
                 )
 
     if args.mode == "switch":
-        switch.switch(
-            #target_dir=Path("/mnt/seagate/symlinks/kde-user-icons/copycat/apps/symbolic/"),
-            #source_dir=Path("/mnt/seagate/symlinks/copykit-data/data/original-unzipped/Fluent-dark/symbolic/apps/")
+        copycat = Path("/home/luan/.local/share/icons/copycat")
+        fluent = Path("/mnt/seagate/authoral-software/copykit/data/original-unzipped/Fluent-dark/symbolic")
 
-            #target_dir=Path("/mnt/seagate/symlinks/kde-user-icons/copycat/actions/symbolic/"),
-            #source_dir=Path("/mnt/seagate/symlinks/copykit-data/data/original-unzipped/Fluent-dark/symbolic/actions/")
-        
-            target_dir=Path("/mnt/seagate/symlinks/kde-user-icons/copycat/status/symbolic/"),
-            source_dir=Path("/mnt/seagate/symlinks/copykit-data/data/original-unzipped/Fluent-dark/symbolic/status/")
-        )
+        targets = ["apps", "actions", "status", "categories", "places", "devices", "emblems", "mimetypes"]
+
+        for trg in targets:
+            switch.switch(
+                copycat / trg / "symbolic",
+                fluent / trg
+            )
+
+            switch.switch(
+                copycat / trg / "16",
+                fluent / trg
+            )
 
 main()

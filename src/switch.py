@@ -10,6 +10,9 @@ def switch(target_dir: Path, source_dir: Path):
         por segurança, não faz busca recursiva, e só afeta os itens especificamente do dir indicado
     """
 
+    if not target_dir.exists():
+        return
+
     # passar todos os nomes de arquivo do source_dir pra um dicionário
     # se usa um dict ao invés de uma list pra que se possa usar o .get("file_name")
     # assim, o nome do arquivo é a chave, e o valor da chave é o próprio arquivo
@@ -23,6 +26,6 @@ def switch(target_dir: Path, source_dir: Path):
 
         if twin:
             copy2(twin, icon)
-            logger.info(f"{icon.name} substituído")
+            logger.success(f"{icon.name} substituído")
         else:
             logger.info(f"o diretório de entrada não possui o arquivo {icon.name}; ignorando")

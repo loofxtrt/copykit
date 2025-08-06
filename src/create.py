@@ -10,5 +10,9 @@ def create(target_path: Path, file_to_create: Path):
         o target_path deve ser passado inteiro, incluindo o nome final do ícone  
         ex: */apps/scalable/btop.svg ao invés de só */apps/scalable/
     """
+    
+    if not target_path.parent.exists():
+        return
+
     copy2(file_to_create, target_path)
     logger.create(f"arquivo criado: {target_path}")
