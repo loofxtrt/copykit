@@ -257,6 +257,21 @@ software = {
     "java21-openjdk": {
         "substitute": SUBSTITUTES_APPS / "kora_java.svg",
         "force_creation_in": "apps/scalable/"
+    },
+    "trenchbroom": {
+        "substitute": SUBSTITUTES_APPS / "trenchbroom.svg",
+        "aliases": [
+            "com.kristianduske.TrenchBroom"
+        ],
+        "force_creation_in": "apps/scalable/",
+        "ignore_key": True
+    },
+    "minecraft": {
+        "substitute": SUBSTITUTES_APPS / "minecraft.svg",
+        "aliases": [
+            "com.mojang.Minecraft",
+            "minecraft-launcher"
+        ]
     }
 }
 
