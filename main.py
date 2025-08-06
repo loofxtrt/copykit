@@ -108,19 +108,34 @@ def main():
 
     if args.mode == "switch":
         copycat = Path("/home/luan/.local/share/icons/copycat")
-        fluent = Path("/mnt/seagate/authoral-software/copykit/data/original-unzipped/Fluent-dark/symbolic")
+        fluent = Path("/mnt/seagate/authoral-software/copykit/data/original-unzipped/Fluent-dark")
 
+        # mais lugares onde os ícones do fluent podem estar espalhados
+        fluent_variants = [
+            fluent / "16",
+            fluent / "24",
+            fluent / "32",
+            fluent / "256",
+            fluent / "symbolic",
+            #fluent / "22" # rodado por último pq esses ícones tem prioridade
+        ]
+
+        # nome de todos os diretórios do kora que tem um subdir chamado "symbolic" ou com uma variação numérica
         targets = ["apps", "actions", "status", "categories", "places", "devices", "emblems", "mimetypes"]
 
         for trg in targets:
-            switch.switch(
-                copycat / trg / "symbolic",
-                fluent / trg
-            )
+            for fluent_var in fluent_variants:
+                # ir nos diretórios symbolic de cada target
+                switch.switch(
+                    copycat / trg / "symbolic",
+                    fluent_var / trg
+                )
 
-            switch.switch(
-                copycat / trg / "16",
-                fluent / trg
-            )
+                # ir nos diretórios de ícones de tamanhos diferentes
+                for numerical_variant in ["16", "22", "24", "32", "256"]:
+                    switch.switch(
+                        copycat / trg / numerical_variant,
+                        fluent_var / trg
+                    )
 
 main()
