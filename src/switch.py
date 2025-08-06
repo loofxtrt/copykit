@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from shutil import copy2
 
@@ -20,6 +21,10 @@ def switch(target_dir: Path, source_dir: Path):
 
     for icon in target_dir.iterdir():
         if not icon.is_file():
+            continue
+
+        # ignorar arquivos que são links simbólicos
+        if os.path.islink(icon):
             continue
 
         twin = source_dir.get(icon.name)
