@@ -11,7 +11,6 @@
 - firewall
 - fspy
 - grid no trenchbroom
-- sombras melhores no trenchbroom e minecraft
 
 - symbolic
 - weather
