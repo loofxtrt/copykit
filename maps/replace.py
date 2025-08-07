@@ -100,16 +100,16 @@ software = {
             "steamskinmanager",
         ]
     },
-    "libresprite": {
-        "substitute": SUBSTITUTES_APPS / "libresprite.svg",
-        "aliases": [
-            "com.github.libresprite.LibreSprite"
-        ]
-    },
     "aseprite": {
         "substitute": SUBSTITUTES_APPS / "aseprite.svg",
         "aliases": [
             "lutris_aseprite"
+        ]
+    },
+    "libresprite": {
+        "substitute": SUBSTITUTES_APPS / "libresprite.svg",
+        "aliases": [
+            "com.github.libresprite.LibreSprite"
         ]
     },
     "pureref": {
@@ -271,6 +271,14 @@ software = {
         "aliases": [
             "com.mojang.Minecraft",
             "minecraft-launcher"
+        ]
+    },
+    "librewolf": {
+        "substitute": SUBSTITUTES_APPS / "librewolf.svg",
+        "aliases": [
+            "appimagekit-librewolf",
+            "io.gitlab.LibreWolf",
+            "io.gitlab.librewolf-community"
         ]
     }
 }
