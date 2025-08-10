@@ -12,7 +12,10 @@
 - fspy
 - grid no trenchbroom
 - qt
-- librewolf
+- xorg
+- animeeffects
+
+- steam, krita e spotify nao têm o mesmo tamanho dos outros apps de circulo do kora, mas talvez isso nao seja alterado
 
 - symbolic
 - weather

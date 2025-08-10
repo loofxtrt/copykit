@@ -280,6 +280,14 @@ software = {
             "io.gitlab.LibreWolf",
             "io.gitlab.librewolf-community"
         ]
+    },
+    "animeeffects": {
+        "substitute": SUBSTITUTES_APPS / "animeeffects.svg",
+        "aliases": [
+            "AnimeEffects"
+        ],
+        "ignore_key": True,
+        "force_creation_in": "apps/scalable"
     }
 }
 
