@@ -168,7 +168,7 @@ software = {
         "force_creation_in": "apps/scalable/"
     },
     "audacity": {
-        "substitute": SUBSTITUTES_APPS / "reversal-black_audacity.svg",
+        "substitute": SUBSTITUTES_APPS / "audacity.svg",
         "aliases": [
             "org.audacityteam.Audacity",
             "application-x-audacity-project",
