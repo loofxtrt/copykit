@@ -15,6 +15,8 @@
 - xorg
 - animeeffects
 
+- tem sombra no icone da godot?
+
 - steam, krita e spotify nao têm o mesmo tamanho dos outros apps de circulo do kora, mas talvez isso nao seja alterado
 
 - symbolic

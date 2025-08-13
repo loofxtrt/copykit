@@ -1,9 +1,11 @@
 import argparse
 from pathlib import Path
 
-from src import fetch, replace, switch, create
-from src.utils.paths import FETCH_OUTPUT, ORIGINAL_UNZIPPED, SUBSTITUTES_APPS, SUBSTITUTES_SYSTEM, SUBSTITUTES_PLACES
+from src import fetch, replace, switch, create, remove
+from src.utils.paths import FETCH_OUTPUT, ORIGINAL_UNZIPPED, SUBSTITUTES_APPS, SUBSTITUTES_SYSTEM, SUBSTITUTES_PLACES, COPYCAT_REPO_MAIN
 from maps import replace as replace_maps
+from maps import fetch as fetch_maps
+from maps import remove as remove_maps
 
 def set_parser():
     parser = argparse.ArgumentParser()
@@ -20,7 +22,7 @@ def main():
 
     if args.mode == "fetch" and not args.clear:
         # obter os termos de pesquisa e rodar o fetch
-        terms = maps.fetch.terms
+        terms = fetch_maps.terms
         fetch.fetch(search_terms=terms, input_dir=ORIGINAL_UNZIPPED, output_dir=FETCH_OUTPUT)
     elif args.mode == "fetch" and args.clear:
         # rodar o clear caso o arg clear esteja presente
@@ -137,5 +139,10 @@ def main():
                         copycat / trg / numerical_variant,
                         fluent_var / trg
                     )
+
+    # sempre rodar o remove independente do comando
+    for icon_path in remove_maps.remove:
+        icon_path = COPYCAT_REPO_MAIN / icon_path
+        remove(icon_path)
 
 main()

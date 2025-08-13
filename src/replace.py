@@ -3,7 +3,7 @@ from shutil import copy2
 
 from src.utils import logger
 
-def replace(target_names: list, substitute_file: Path, destinations_dirs: list[Path]):
+def replace(target_names: list, substitute_file: Path, destinations_dirs: list[Path], force_hard_replace: bool = False):
     """
         target_name: lista com o nome EXATO dos arquivos que devem ser substituídos. deve ser exato porque se não, nomes como "obs" e "obsidian"  
         seriam ambíguos por ambos terem "obs" presente no nome. deve incluir extensão, como .svg
@@ -13,6 +13,8 @@ def replace(target_names: list, substitute_file: Path, destinations_dirs: list[P
         destinations_dirs: lista de paths de diretórios onde a busca será feita.  
         todos os arquivos dentro desse diretório que baterem com o nome do target vão ser substituídos  
         é uma lista pra que diferentes versões do mesmo icon pack possam ser mudadas em uma chamada. ex: kora-light, kora-dark  
+          
+        force_hard_replace: se estiver como true, vai substituir os symlinks por uma cópia real, ao invés de pular eles
     """
 
     if not substitute_file.is_file():
@@ -33,6 +35,10 @@ def replace(target_names: list, substitute_file: Path, destinations_dirs: list[P
                 trg_name += ".svg"
 
             for f in destination.rglob("*"): # rglob ao invés de iterdir pra que a busca seja recursiva
+                # pular symlinks conforme a flag
+                if not force_hard_replace and f.is_symlink:
+                    continue
+                
                 if f.name == trg_name:
                     try:
                         copy2(substitute_file, f)

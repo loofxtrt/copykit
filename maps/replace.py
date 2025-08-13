@@ -212,7 +212,8 @@ software = {
             "lxqt-archiver",
             "org.gnome.ArchiveManager",
             "utilities-file-archiver",
-            "xarchiver"
+            "xarchiver",
+            "file-roller.svgi"
         ]
     },
     "dolphin": {
