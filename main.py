@@ -9,7 +9,7 @@ from maps import remove as remove_maps
 
 def set_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument("mode", help="fetch/replace/switch")
+    parser.add_argument("mode", help="fetch/replace/switch/remove")
     parser.add_argument("--section", "-s", help="software/system, seção à qual o replace deve ser aplicado")
     parser.add_argument("--replacelevel", "-rl", help="repo/local, se presente, define se só o repo ou o local vai ser atualizado. se não, atualiza os dois")
     parser.add_argument("--clear", "-c", action="store_true", help="limpa o diretório de output")
@@ -89,14 +89,26 @@ def main():
                     # que pode ser algo como apps/scalable
                     force_path = dest / get_force_creation
 
+                    # obter o ícone principal, o que vai ser usado de referência caso precise de symlinks
+                    first_icon_name = aliases[0]
+
                     for alias in aliases:
-                        # e depois adicionar o nome do arquivo novo no final
+                        # formatar o novo nome do arquivo
                         new_icon_name = alias + ".svg"
 
-                        create.create(
-                            target_path=force_path / new_icon_name,
-                            file_to_create=entry["substitute"]
-                        )
+                        # criar uma cópia real APENAS se o índice for 0, o ícone principal
+                        # caso contrário, criar só symlinks que apontem pra este
+                        if alias == first_icon_name:
+                            create.create(
+                                target_path=force_path / new_icon_name,
+                                file_to_create=entry["substitute"]
+                            )
+                        else:
+                            create.create(
+                                target_path=force_path / new_icon_name,
+                                file_to_create=entry["substitute"],
+                                as_symlink_to=force_path / (first_icon_name + ".svg")
+                            )
 
                 # dest está entre colchetes pq a função original esperava uma lista
                 # agora que a iteração é feita diretamente aqui pra poder ter precisão no force_path,

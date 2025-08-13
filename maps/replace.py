@@ -110,7 +110,8 @@ software = {
         "substitute": SUBSTITUTES_APPS / "libresprite.svg",
         "aliases": [
             "com.github.libresprite.LibreSprite"
-        ]
+        ],
+        "force_creation_in": "apps/scalable",
     },
     "pureref": {
         "substitute": SUBSTITUTES_APPS / "kora_pureref.svg",
@@ -136,7 +137,7 @@ software = {
             "net.brinkervii.grapejuice.robloxplayer",
             "grapejuice-roblox-player"
         ],
-        "ignore_key": True,
+        "ignore_key": True,        
         "force_creation_in": "apps/scalable/"
     },
     "roblox-studio": {

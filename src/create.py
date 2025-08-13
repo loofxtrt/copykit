@@ -3,7 +3,7 @@ from shutil import copy2
 
 from src.utils import logger
 
-def create(target_path: Path, file_to_create: Path):
+def create(target_path: Path, file_to_create: Path, as_symlink_to: Path = None):
     """
         copia um arquivo de ícone pra um lugar onde originalmente ele NÃO existe  
         serve pra criar ícones em locais específicos, e não faz isso recursivamente  
@@ -20,5 +20,9 @@ def create(target_path: Path, file_to_create: Path):
     if target_path.exists():
         return
 
-    copy2(file_to_create, target_path)
-    logger.create(f"arquivo criado: {target_path}")
+    if as_symlink_to is not None:
+        target_path.symlink_to(as_symlink_to)
+        logger.create(f"symlink criado: {target_path} -> {as_symlink_to}")
+    else:
+        copy2(file_to_create, target_path)
+        logger.create(f"arquivo criado: {target_path}")
