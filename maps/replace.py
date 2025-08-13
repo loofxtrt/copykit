@@ -317,7 +317,8 @@ system = {
         "substitute": SUBSTITUTES_SYSTEM / "reversal-black_cosmic-settings.svg",
         "aliases": [
             "preferences-system.svg",
-            "utilities-tweak-tool.svg"
+            "utilities-tweak-tool.svg",
+            "configuration-section"
         ]
     }
 }

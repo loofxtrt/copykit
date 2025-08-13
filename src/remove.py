@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from utils import logger
+from src.utils import logger
 
 def remove(icon_path: Path):
     icon_path.unlink(missing_ok=True)
