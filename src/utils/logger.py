@@ -16,7 +16,8 @@ color_map = {
     "warning": YELLOW,
     "info": BLUE,
     "debug": GREEN,
-    "create": YELLOW
+    "create": YELLOW,
+    "remove": RED
 }
 
 def get_caller_name():
@@ -77,3 +78,6 @@ def warning(msg):
 
 def create(msg):
     base("create", msg)
+
+def remove(msg):
+    base("remove", msg)

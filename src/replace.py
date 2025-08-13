@@ -36,7 +36,7 @@ def replace(target_names: list, substitute_file: Path, destinations_dirs: list[P
 
             for f in destination.rglob("*"): # rglob ao invés de iterdir pra que a busca seja recursiva
                 # pular symlinks conforme a flag
-                if not force_hard_replace and f.is_symlink:
+                if not force_hard_replace and f.is_symlink():
                     continue
                 
                 if f.name == trg_name:

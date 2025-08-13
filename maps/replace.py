@@ -292,23 +292,32 @@ software = {
     }
 }
 
+# system = {
+#     "settings": {
+#         "substitute": SUBSTITUTES_SYSTEM / "reversal-black_cosmic-settings.svg",
+#         "aliases": [
+#             "computersettings",
+#             "org.xfce.settings.manager",
+#             "redhat-system_settings",
+#             "com.system76.CosmicSettings",
+#             "package-settings",
+#             "systemsettings",
+#             "gnome-settings",
+#             "package_settings",
+#             "xfce4-settings",
+#             "org.gnome.Settings",
+#             "redhat-server_settings",
+#             "xfce-system-settings",
+#             "utilities-tweak-tool"
+#         ]
+#     }
+# }
 system = {
     "settings": {
         "substitute": SUBSTITUTES_SYSTEM / "reversal-black_cosmic-settings.svg",
         "aliases": [
-            "computersettings",
-            "org.xfce.settings.manager",
-            "redhat-system_settings",
-            "com.system76.CosmicSettings",
-            "package-settings",
-            "systemsettings",
-            "gnome-settings",
-            "package_settings",
-            "xfce4-settings",
-            "org.gnome.Settings",
-            "redhat-server_settings",
-            "xfce-system-settings",
-            "utilities-tweak-tool"
+            "preferences-system.svg",
+            "utilities-tweak-tool.svg"
         ]
     }
 }
