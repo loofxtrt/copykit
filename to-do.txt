@@ -14,6 +14,8 @@
 - qt
 - xorg
 - animeeffects
+- mate-network-properties
+- gtk-network
 
 - tem sombra no icone da godot?
 
