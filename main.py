@@ -153,8 +153,8 @@ def main():
                     )
 
     # sempre rodar o remove independente do comando
-    for icon_path in remove_maps.remove:
-        icon_path = COPYCAT_REPO_MAIN / icon_path
-        remove.remove(icon_path)
+    #for icon_path in remove_maps.remove:
+    #    icon_path = COPYCAT_REPO_MAIN / icon_path
+    #    remove.remove(icon_path)
 
 main()
