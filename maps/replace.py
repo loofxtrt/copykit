@@ -290,6 +290,12 @@ software = {
         ],
         "ignore_key": True,
         "force_creation_in": "apps/scalable"
+    },
+    "mpv": {
+        "substitute": SUBSTITUTES_APPS / "breeze-dark_mpv.svg",
+        "aliases": [
+            "mplayer"
+        ]
     }
 }
 
