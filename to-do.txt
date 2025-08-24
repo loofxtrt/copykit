@@ -16,6 +16,8 @@
 - animeeffects
 - mate-network-properties
 - gtk-network
+- minecraft (trocar pra mcpe)
+- kcalc
 
 - tem sombra no icone da godot?
 
