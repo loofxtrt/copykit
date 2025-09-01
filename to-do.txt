@@ -18,8 +18,15 @@
 - gtk-network
 - minecraft (trocar pra mcpe)
 - kcalc
+- xt7-player-mpv
+
+- mpv ainda tá errado
 
 - tem sombra no icone da godot?
+- tem sombra no icone do gimp?
+
+- opção replace de um único ícone
+- copy de um ícone e todos os seus symlinks pra um dir só
 
 - steam, krita e spotify nao têm o mesmo tamanho dos outros apps de circulo do kora, mas talvez isso nao seja alterado
 
