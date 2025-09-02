@@ -8,5 +8,6 @@ SUBSTITUTES = DATA / "substitutes"
 SUBSTITUTES_APPS = SUBSTITUTES / "apps"
 SUBSTITUTES_SYSTEM = SUBSTITUTES / "system"
 SUBSTITUTES_PLACES = SUBSTITUTES / "places"
+SUBSTITUTES_MIMETYPES = SUBSTITUTES / "mimetypes"
 
 COPYCAT_REPO_MAIN = Path("/mnt/seagate/workspace/coding/projects/icons/copycat/copycat/")

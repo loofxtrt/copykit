@@ -20,6 +20,9 @@ def create(target_path: Path, file_to_create: Path, as_symlink_to: Path = None):
     if target_path.exists():
         return
 
+    if not str(target_path).endswith(".svg"):
+        target_path = Path(str(target_path) + ".svg")
+
     if as_symlink_to is not None:
         target_path.symlink_to(as_symlink_to)
         logger.create(f"symlink criado: {target_path} -> {as_symlink_to}")

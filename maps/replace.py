@@ -1,4 +1,4 @@
-from src.utils.paths import SUBSTITUTES_APPS, SUBSTITUTES_SYSTEM, SUBSTITUTES_PLACES
+from src.utils.paths import SUBSTITUTES_APPS, SUBSTITUTES_SYSTEM, SUBSTITUTES_PLACES, SUBSTITUTES_MIMETYPES
 
 software = {
     "discord": {
@@ -296,6 +296,9 @@ software = {
         "aliases": [
             "mplayer"
         ]
+    },
+    "protoncalendar": {
+        "substitute": SUBSTITUTES_APPS / "kora_protoncalendar.svg"
     }
 }
 
@@ -361,5 +364,106 @@ places = {
     },
     "user-home": {
         "substitute": SUBSTITUTES_PLACES / "kora_user-home.svg"
+    }
+}
+
+mimetypes = {
+    "zip": {
+        "substitute": SUBSTITUTES_MIMETYPES / "kora_zip-2.svg",
+        "aliases": [
+            "7zip",
+            "application-7zip",
+            "application-archive-blank",
+            "application-archive",
+            "application-archive-zip",
+            "application-gzip",
+            "application-vnd.kde.fontspackage",
+            "application-vnd.kde.okular-archive",
+            "application-vnd.ms-cab-compressed",
+            "application-vnd.rar",
+            "application-x-7z-ace",
+            "application-x-7z-arj",
+            "application-x-7z-compressed",
+            "application-x-7zip",
+            "application-x-ace",
+            "application-x-archive",
+            "application-x-arc",
+            "application-x-arj",
+            "application-x-ar",
+            "application-x-awk",
+            "application-x-bzdvi",
+            "application-x-bzip-compressed",
+            "application-x-bzip-compressed-tar",
+            "application-x-bzip",
+            "application-x-compressed-iso",
+            "application-x-compressed",
+            "application-x-compressed-tar",
+            "application-x-compress",
+            "application-x-compress-tar",
+            "application-x-cpio",
+            "application-x-gzdvi",
+            "application-x-gz-font-linux-psf",
+            "application-x-gzip",
+            "application-x-kns",
+            "application-x-lha",
+            "application-x-lhz",
+            "application-x-lz4-compressed-tar",
+            "application-x-lzip-compressed-tar",
+            "application-x-lzma-compressed-tar",
+            "application-x-lzma",
+            "application-x-lzop",
+            "application-x-rar",
+            "application-x-shar",
+            "application-x-stuffit",
+            "application-x-superkaramba",
+            "application-x-tar",
+            "application-x-tarz",
+            "application-x-texgzdvi",
+            "application-x-tex-pk",
+            "application-x-tha",
+            "application-x-thz",
+            "application-x-tzo",
+            "application-x-xz-compressed-tar",
+            "application-x-xz",
+            "application-x-zip",
+            "application-x-zoo",
+            "application-zip",
+            "archive",
+            "folder-tar",
+            "folder_tar",
+            "gnome-mime-application-vnd.ms-cab-compressed",
+            "gnome-mime-application-x-7z-compressed",
+            "gnome-mime-application-x-7zip",
+            "gnome-mime-application-x-ace",
+            "gnome-mime-application-x-archive",
+            "gnome-mime-application-x-arj",
+            "gnome-mime-application-x-bzip-compressed",
+            "gnome-mime-application-x-bzip-compressed-tar",
+            "gnome-mime-application-x-bzip",
+            "gnome-mime-application-x-compressed-tar",
+            "gnome-mime-application-x-compress",
+            "gnome-mime-application-x-cpio-compressed",
+            "gnome-mime-application-x-cpio-compress",
+            "gnome-mime-application-x-cpio",
+            "gnome-mime-application-x-gzip",
+            "gnome-mime-application-x-lha",
+            "gnome-mime-application-x-lhz",
+            "gnome-mime-application-x-lzma-compressed-tar",
+            "gnome-mime-application-x-lzma",
+            "gnome-mime-application-x-lzop",
+            "gnome-mime-application-x-rar",
+            "gnome-mime-application-x-shar",
+            "gnome-mime-application-x-stuffit",
+            "gnome-mime-application-x-tar",
+            "gnome-mime-application-x-tarz",
+            "gnome-mime-application-x-zip",
+            "gnome-mime-application-x-zoo",
+            "gnome-mime-application-zip",
+            "rar",
+            "tar",
+            "tgz",
+            "viewdvi"
+        ],
+        "delete_aliases_make_symlinks": [True, "mimetypes/scalable"]
     }
 }
