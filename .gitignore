@@ -1,2 +1,6 @@
 /data/original-unzipped/*
 /data/fetch-output/*
+
+/venv/
+venv
+/venv/*

@@ -464,6 +464,6 @@ mimetypes = {
             "tgz",
             "viewdvi"
         ],
-        "delete_aliases_make_symlinks": [True, "mimetypes/scalable"]
+        "delete_aliases_make_symlinks_at": "mimetypes/scalable"
     }
 }
