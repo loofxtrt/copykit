@@ -1,7 +1,7 @@
 import argparse
 from pathlib import Path
 
-from src import fetch, replace, switch, create, remove, make_symlinks
+from src import fetch, replace, create, remove, make_symlinks
 from src.utils.paths import FETCH_OUTPUT, ORIGINAL_UNZIPPED, SUBSTITUTES_APPS, SUBSTITUTES_SYSTEM, SUBSTITUTES_PLACES, COPYCAT_REPO_MAIN
 from src.utils import logger
 from maps import replace as replace_maps
@@ -10,7 +10,7 @@ from maps import remove as remove_maps
 
 def set_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument("mode", help="fetch/replace/switch/remove")
+    parser.add_argument("mode", help="fetch/replace/remove")
     parser.add_argument("--section", "-s", help="software/system/mimetypes, seção à qual o replace deve ser aplicado")
     parser.add_argument("--replacelevel", "-rl", help="repo/local, se presente, define se só o repo ou o local vai ser atualizado. se não, atualiza os dois")
     parser.add_argument("--clear", "-c", action="store_true", help="limpa o diretório de output")
@@ -58,6 +58,34 @@ def wrap_make_symlinks(pack_root: Path, symlinks_dir: Path, new_main_icon_name: 
             original_file=main_icon,
             new_symlink=target_dir / alias
         )
+
+def wrap_force_creation(pack_root: Path, aliases: list[str]):
+    # montar o path de criação caso o force creation esteja presente
+    if get_force_creation is not None:
+        # juntar o destino (que é a raiz do icon pack) com o diretório do force
+        # que pode ser algo como apps/scalable
+        force_path = dest / get_force_creation
+
+        # obter o ícone principal, o que vai ser usado de referência caso precise de symlinks
+        first_icon_name = aliases[0]
+
+        for alias in aliases:
+            # formatar o novo nome do arquivo
+            new_icon_name = alias + ".svg"
+
+            # criar uma cópia real APENAS se o índice for 0, o ícone principal
+            # caso contrário, criar só symlinks que apontem pra este
+            if alias == first_icon_name:
+                create.create(
+                    target_path=force_path / new_icon_name,
+                    file_to_create=entry["substitute"]
+                )
+            else:
+                create.create(
+                    target_path=force_path / new_icon_name,
+                    file_to_create=entry["substitute"],
+                    as_symlink_to=force_path / (first_icon_name + ".svg")
+                )
 
 def handle_replace(args, destinations: list[Path]):
     """
@@ -155,38 +183,6 @@ def main():
             destinations = repo_destinations + local_destinations
         
         handle_replace(args, destinations)
-
-    if args.mode == "switch":
-        copycat = Path("/home/luan/.local/share/icons/copycat")
-        fluent = Path("/mnt/seagate/authoral-software/copykit/data/original-unzipped/Fluent-dark")
-
-        # mais lugares onde os ícones do fluent podem estar espalhados
-        fluent_variants = [
-            fluent / "16",
-            fluent / "24",
-            fluent / "32",
-            fluent / "256",
-            fluent / "symbolic",
-            #fluent / "22" # rodado por último pq esses ícones tem prioridade
-        ]
-
-        # nome de todos os diretórios do kora que tem um subdir chamado "symbolic" ou com uma variação numérica
-        targets = ["apps", "actions", "status", "categories", "places", "devices", "emblems", "mimetypes"]
-
-        for trg in targets:
-            for fluent_var in fluent_variants:
-                # ir nos diretórios symbolic de cada target
-                switch.switch(
-                    copycat / trg / "symbolic",
-                    fluent_var / trg
-                )
-
-                # ir nos diretórios de ícones de tamanhos diferentes
-                for numerical_variant in ["16", "22", "24", "32", "256"]:
-                    switch.switch(
-                        copycat / trg / numerical_variant,
-                        fluent_var / trg
-                    )
 
     # sempre rodar o remove independente do comando
     #for icon_path in remove_maps.remove:
