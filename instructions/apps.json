@@ -16,7 +16,7 @@
                 { "action": "symlink", "icon": "com.discordapp.Discord" }
             ],
             "sources": ["KORA"],
-            "changes": "edited SVG to make the color closer to the official Discord burple"
+            "changelog": "edited SVG to make the color closer to the official Discord burple"
         },
         "Discord Canary": {
             "substitute": "kora_discord-canary",
@@ -26,7 +26,7 @@
                 { "action": "symlink", "icon": "com.discordapp.DiscordCanary" }
             ],
             "sources": ["KORA"],
-            "changes": "background shape changed to be like regular Discord"
+            "changelog": "background shape changed to be like regular Discord"
         },
         "Discord Development": {
             "substitute": "kora_discord-development",
@@ -34,7 +34,7 @@
                 { "action": "replace", "icon": "discord-development" }
             ],
             "sources": ["KORA"],
-            "changes": "modified to match size and style of other Discord variants"
+            "changelog": "modified to match size and style of other Discord variants"
         },
         "Spotify": {
             "substitute": "marwaita_spotify",
@@ -48,7 +48,7 @@
                 { "action": "symlink", "icon": "spotify-qt" }
             ],
             "sources": ["MARWAITA"],
-            "changes": "added a subtle gradient"
+            "changelog": "added a subtle gradient"
         },
         "OBS": {
             "substitute": "kora_obs",
@@ -58,7 +58,7 @@
                 { "action": "symlink", "icon": "com.obsproject.Studio" }
             ],
             "sources": ["KORA"],
-            "changes": "edited SVG to make it darker"
+            "changelog": "edited SVG to make it darker"
         },
         "Krita": {
             "substitute": "marwaita_krita",
@@ -79,7 +79,7 @@
                 { "action": "symlink", "icon": "org.gimp.GIMP" }
             ],
             "sources": ["BREEZE"],
-            "changes": "edited SVG to make it bigger"
+            "changelog": "edited SVG to make it bigger"
         },
         "Godot": {
             "substitute": "plasmax_godot",
@@ -92,7 +92,7 @@
                 { "action": "symlink", "icon": "org.godotengine.Godot3" }
             ],
             "sources": ["PLASMAX"],
-            "changes": "edited SVG to make the tones match"
+            "changelog": "edited SVG to make the tones match"
         },
         "Inkscape": {
             "substitute": "plasmax_inkscape",
@@ -104,7 +104,7 @@
                 { "action": "symlink", "icon": "org.inkscape.Inkscape-symbolic" }
             ],
             "sources": ["PLASMAX"],
-            "changes": "edited SVG to make it darker"
+            "changelog": "edited SVG to make it darker"
         },
         "Blender": {
             "substitute": "blender",
@@ -116,7 +116,7 @@
                 { "action": "symlink", "icon": "org.blender.Blender" }
             ],
             "sources": ["https://commons.wikimedia.org/wiki/File:Blender_logo_no_text.svg"],
-            "changes": "added a subtle gradient"
+            "changelog": "added a subtle gradient"
         },
         "Obsidian": {
             "substitute": "kora_obsidian",
@@ -140,7 +140,7 @@
                 { "action": "symlink", "icon": "com.valvesoftware.Steam" }
             ],
             "sources": ["MARWAITA"],
-            "changes": "inverted the gradient direction"
+            "changelog": "inverted the gradient direction"
         },
         "Aseprite": {
             "substitute": "aseprite",
@@ -160,7 +160,7 @@
                 { "action": "symlink", "icon": "com.bitwig.BitwigStudio" }
             ],
             "sources": ["KORA"],
-            "changes": "adjusted to match the colors and proportions of Bitwig mimetypes"
+            "changelog": "adjusted to match the colors and proportions of Bitwig mimetypes"
         },
         "PureRef": {
             "substitute": "kora_pureref",
@@ -168,7 +168,7 @@
                 { "action": "replace", "icon": "pureref" }
             ],
             "sources": ["KORA"],
-            "changes": "edited SVG to make it darker"
+            "changelog": "edited SVG to make it darker"
         },
         "EndeavourOS": {
             "substitute": "endeavouros",
@@ -201,7 +201,7 @@
                 { "action": "symlink", "icon": "audacity32" }
             ],
             "sources": ["https://fr.wikipedia.org/wiki/Fichier:Audacity_Logo.svg#/media/Fichier:Audacity_Logo_nofilter.svg"],
-            "changes": "adjusted colors, added gradients and normalized clip groups"
+            "changelog": "adjusted colors, added gradients and normalized clip groups"
         },
         "VSCodium": {
             "substitute": "codium",
@@ -220,7 +220,7 @@
                 { "action": "symlink", "icon": "AppImageLauncher" }
             ],
             "sources": ["FLATREMIX"],
-            "changes": "modified colors and shapes"
+            "changelog": "modified colors and shapes"
         },
         "Android Studio": {
             "substitute": "morewaita_android-studio",
@@ -232,7 +232,7 @@
                 { "action": "symlink", "icon": "com.google.AndroidStudio" }
             ],
             "sources": ["MOREWAITA"],
-            "changes": "removed bottom highlight and added gradients"
+            "changelog": "removed bottom highlight and added gradients"
         },
         "Android Studio Canary": {
             "substitute": "morewaita_android-studio-canary",
@@ -242,7 +242,7 @@
                 { "action": "symlink", "icon": "androidstudio-preview" }
             ],
             "sources": ["MOREWAITA"],
-            "changes": "removed bottom highlight and added gradients"
+            "changelog": "removed bottom highlight and added gradients"
         },
         "btop++": {
             "substitute": "kora_btop",
@@ -250,7 +250,7 @@
                 { "action": "replace", "icon": "btop" }
             ],
             "sources": ["SCRATCH", "KORA", "MOREWAITA"],
-            "changes": "remade the B manually, used KORA system monitor background and MOREWAITA colors"
+            "changelog": "remade the B manually, used KORA system monitor background and MOREWAITA colors"
         },
         "Ark": {
             "substitute": "qogir_ark",
@@ -269,7 +269,7 @@
                 { "action": "symlink", "icon": "file-roller" }
             ],
             "sources": ["QOGIR", "KORA"],
-            "changes": "made the colors match with the zip mimetypes and replaced the original zipper with the one present in application-x-sogouskin from KORA)"
+            "changelog": "made the colors match with the zip mimetypes and replaced the original zipper with the one present in application-x-sogouskin from KORA)"
         },
         "Github Desktop": {
             "substitute": "kora_github-desktop",
@@ -280,7 +280,7 @@
                 { "action": "symlink", "icon": "io.github.shiftey.Desktop" }
             ],
             "sources": ["KORA"],
-            "changes": "adjusted colors"
+            "changelog": "adjusted colors"
         },
         "Color Picker": {
             "substitute": "marwaita_color-picker",
@@ -306,7 +306,7 @@
                 { "action": "replace", "icon": "kvantum" }
             ],
             "sources": ["KORA", "MARWAITA"],
-            "changes": "switched the colors to the ones present in kvantum from MARWAITA"
+            "changelog": "switched the colors to the ones present in kvantum from MARWAITA"
         },
         "Cmake": {
             "substitute": "kora_cmake",
@@ -318,7 +318,7 @@
                 { "action": "symlink", "icon": "CMakeSetup32" }
             ],
             "sources": ["KORA"],
-            "changes": "removed background and added gradients"
+            "changelog": "removed background and added gradients"
         },
         "Minecraft": {
             "substitute": "kora_minecraft",
@@ -339,7 +339,7 @@
                 { "action": "symlink", "icon": "io.gitlab.librewolf-community" }
             ],
             "sources": ["https://www.reddit.com/r/LibreWolf/comments/t9c84n/icon_update/"],
-            "changes": "vectorized the original image"
+            "changelog": "vectorized the original image"
         },
         "MPV": {
             "substitute": "breeze-dark_mpv",
@@ -354,7 +354,7 @@
                 { "action": "symlink", "icon": "mpv-symbolic"}
             ],
             "sources": ["BREEZE"],
-            "changes": "removed some shadows, changed the play button and added gradients"
+            "changelog": "removed some shadows, changed the play button and added gradients"
         },
         "Proton Calendar": {
             "substitute": "kora_protoncalendar",
@@ -362,7 +362,7 @@
                 { "action": "replace", "icon": "protoncalendar" }
             ],
             "sources": ["KORA"],
-            "changes": "removed background to match other Proton applications"
+            "changelog": "removed background to match other Proton applications"
         },
         "Libresprite": {
             "substitute": "libresprite",
@@ -409,7 +409,7 @@
                 { "action": "symlink", "icon": "org.vinegarhq.Vinegar" }
             ],
             "sources": ["SCRATCH", "https://www.svgrepo.com/svg/443560/brand-winehq"],
-            "changes": "added the wine icon on top of it"
+            "changelog": "added the wine icon on top of it"
         },
         "Java 21 OpenJDK": {
             "substitute": "kora_java",
@@ -424,7 +424,7 @@
                 { "action": "create", "icon": "AnimeEffects" }
             ],
             "sources": ["https://github.com/AnimeEffectsDevs/AnimeEffects"],
-            "changes": "vectorized the original image"
+            "changelog": "vectorized the original image"
         },
         "BlueMail": {
             "substitute": "papirus_bluemail",
@@ -434,7 +434,7 @@
                 { "action": "symlink", "icon": "net.blix.BlueMail" }
             ],
             "sources": ["PAPIRUS"],
-            "changes": "changed colors to be closer to the original logo and added gradients"
+            "changelog": "changed colors to be closer to the original logo and added gradients"
         },
         "Mail apps": {
             "substitute": "papirus_internet-mail",
@@ -479,7 +479,7 @@
                 { "action": "symlink", "icon": "org.claws_mail.Claws-Mail" }
             ],
             "sources": ["PAPIRUS"],
-            "changes": "changed colors to match KORA original mail icons and added gradients. @ symbol taken from the icon application-mbox from KORA"
+            "changelog": "changed colors to match KORA original mail icons and added gradients. @ symbol taken from the icon application-mbox from KORA"
         },
         "Merkuro Mail": {
             "substitute": "kora_merkuro-mail",
@@ -493,7 +493,7 @@
                 { "action": "replace", "icon": "dev.vencord.Vesktop" }
             ],
             "sources": ["KORA", "https://github.com/Vencord/Vesktop", "https://vencord.dev/"],
-            "changes": "fused the original logo with the with the base shape of the icon agentdesktop from KORA and used the alternative logo to recreate the Z pattern in the C letter"
+            "changelog": "fused the original logo with the with the base shape of the icon agentdesktop from KORA and used the alternative logo to recreate the Z pattern in the C letter"
         },
         "Calculator": {
             "substitute": "calculator",
@@ -515,7 +515,7 @@
                 { "action": "symlink", "icon": "xfce4-calculator-plugin" }
             ],
             "sources": ["www.svgrepo.com/svg/362041/calculator"],
-            "changes": "changed colors (taken from the icon calculator from BREEZE) and added gradients"
+            "changelog": "changed colors (taken from the icon calculator from BREEZE) and added gradients"
         },
         "Filelight": {
             "substitute": "breeze-dark_filelight",
@@ -525,7 +525,7 @@
                 { "action": "symlink", "icon": "org.kde.filelight" }
             ],
             "sources": ["BREEZE"],
-            "changes": "added gradients and removed some shadows"
+            "changelog": "added gradients and removed some shadows"
         },
         "Flycast": {
             "substitute": "kora_flycast",
@@ -535,7 +535,7 @@
                 { "action": "symlink", "icon": "org.flycast.Flycast" }
             ],
             "sources": ["KORA"],
-            "changes": "removed background, increased logo size and added gradients"
+            "changelog": "removed background, increased logo size and added gradients"
         },
         "qBittorrent": {
             "substitute": "kora_qbittorrent",
@@ -545,7 +545,7 @@
                 { "action": "symlink", "icon": "org.qbittorrent.qBittorrent" }
             ],
             "sources": ["KORA", "https://commons.wikimedia.org/wiki/File:New_qBittorrent_Logo.svg"],
-            "changes": "changed the colors to match the original logo and removed rounded ends"
+            "changelog": "changed the colors to match the original logo and removed rounded ends"
         },
         "Bitwarden": {
             "substitute": "kora_bitwarden",
@@ -556,7 +556,7 @@
                 { "action": "symlink", "icon": "com.bitwarden.desktop" }
             ],
             "sources": ["KORA"],
-            "changes": "removed background and increased logo size"
+            "changelog": "removed background and increased logo size"
         },
         "SteamLink": {
             "substitute": "kora_steamlink",
@@ -573,7 +573,7 @@
                 { "action": "replace", "icon": "picard" },
                 { "action": "symlink", "icon": "org.musicbrainz.Picard" }
             ],
-            "changes": "remade the icon based on the dmanager icon shape from KORA and drop picked the colors and inside shapes from PAPIRUS"
+            "changelog": "remade the icon based on the dmanager icon shape from KORA and drop picked the colors and inside shapes from PAPIRUS"
         }
     }
 }

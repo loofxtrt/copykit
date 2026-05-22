@@ -67,11 +67,25 @@ class Entry:
         
         symlink_to:
             pra onde o symlink deve apontar. só é necessário se a action do target for 'symlink' 
+
+        changelog:
+            mudanças que foram feitas no ícone
+
+        sources:
+            fontes de onde elementos do ícone vieram
+
+        key:
+            chave que identifica essa entry dentro do json de instruções, tipo "Discord"
+            não tem função prática na substituição, mas é útil pra documentação
+            é literalmente a chave de um dict, não é um valor definido dentro dele
     """
 
     substitute: Optional[Substitute] # pode ser nulo se não precisar
     targets: List[Target]
     symlink_to: Optional[str]
+    changelog: Optional[str]
+    sources: Optional[list]
+    key: Optional[str]
 
 
 @dataclass
@@ -99,6 +113,7 @@ class Context:
 class Mapping:
     """
     representa uma unidade completa de instrução carregada de um json, contendo contexto e entries
+    é equivalente ao .json pai das instruções
 
     args:
     	context:
@@ -409,14 +424,14 @@ def resolve_mapping(json_file: Path) -> Mapping:
                 path=path
             ))
 
-        # resolver o ponteiro do symlink (se presente)
-        symlink_to = raw_entry.get('symlink-to')
-        
         # finalizar a criação da entry e adicionar ela na lista final
         entry = Entry(
             substitute=substitute,
             targets=targets,
-            symlink_to=symlink_to
+            symlink_to=raw_entry.get('symlink-to'), # TODO: mudar pra link_target ou canonical ou master
+            changelog=raw_entry.get('changelog'),
+            sources=raw_entry.get('sources'),
+            key=key
         )
         entries[key] = entry
 

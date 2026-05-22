@@ -2,7 +2,8 @@ from pathlib import Path
 
 
 PACK_LOCAL = Path('/mnt/seagate/symlinks/kde-user-icons/copycat')
-PACK_REMOTE = Path('/mnt/seagate/recursos/copycat/copycat')
+PACK_REMOTE = Path('/mnt/seagate/recursos/copycat/copycat') # icon pack dentro do repositório git
+PACK_REPO = Path('/mnt/seagate/recursos/copycat') # repositório git
 SUBSTITUTES = Path('/mnt/seagate/symlinks/copydb/substitutos')
 INSTRUCTIONS = Path('/mnt/seagate/workspace/coding/projetos/scripts/copykit/instructions')
 

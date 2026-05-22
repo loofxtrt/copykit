@@ -8,7 +8,7 @@
             "targets": [
                 { "action": "remove", "icon": "folder-open-recent" }
             ],
-            "changes": "removed to make the icons on file managers (like dolphin) more consistent"
+            "changelog": "removed to make the icons on file managers (like dolphin) more consistent"
         }
     }
 }

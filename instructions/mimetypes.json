@@ -33,7 +33,7 @@
             "symlink-to": "zip",
             "substitute": "zip",
             "sources": ["YOSAMAX", "QOGIR"],
-            "changes": "changed colors, simplified the tape, added QOGIR details on top of it"
+            "changelog": "changed colors, simplified the tape, added QOGIR details on top of it"
         }
     }
 }
