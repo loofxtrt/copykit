@@ -90,7 +90,7 @@ Those packs includes:
     # criar as tabelas
     tables = []
     for f in INSTRUCTIONS.rglob('*.json'):
-        mapping = resolve_table_writing(resolve_mapping(f))
+        mapping = resolve_table_writing(Mapping.from_file(f))
         tables.append(mapping)
     
     # condensar as informações junto com as tabelas em uma só string

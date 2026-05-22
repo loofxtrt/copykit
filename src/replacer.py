@@ -9,6 +9,71 @@ from . import logger
 
 
 @dataclass
+class Context:
+    """
+    define o contexto base para resolução de caminhos e identificação do mapping
+
+    args:
+    	id:
+    		identificador usado principalmente para logs e rastreamento
+
+    	target_parent:
+    		diretório base onde os targets estão localizados
+
+    	substitute_parent:
+    		diretório base onde os substitutos estão localizados, pode ser nulo
+    """
+
+    id: str # pra identificação nos logs
+    target_parent: Path
+    substitute_parent: Optional[Path] # pode ser nulo se não precisar
+
+    @classmethod
+    def from_dict(cls, data: dict, file: Path, root: Path) -> Context:
+        """
+        resolve e valida o contexto a partir dos dados carregados de um json
+
+        args:
+            data:
+                dicionário com os dados do json
+
+            file:
+                caminho do arquivo json, usado para mensagens de erro
+        """
+
+        raw_context = data.get('context')
+        if not raw_context:
+            raise ValueError(f'contexto não definido ({file.name})')
+
+        id = raw_context.get('id')
+        if not id:
+            raise ValueError(f'id não definido ({file.name})')
+
+        # obter o parent do target e resolver o path
+        raw_target_parent = raw_context.get('target-parent')
+        if 'ROOT' not in raw_target_parent:
+            raise ValueError(f"'ROOT' precisa estar presente em target-parent ({id})")
+        
+        target_parent = Path(raw_target_parent.replace('ROOT', str(root)))
+        
+        # obter o parent do substituto e resolver o path
+        substitute_parent = None
+        raw_substitute_parent = raw_context.get('substitute-parent')
+        
+        if raw_substitute_parent:
+            if 'SUBSTITUTES' not in raw_substitute_parent:
+                raise ValueError(f"'SUBSTITUTES' precisa estar presente em substitute-parent ou ser completamente nulo ({id})")
+            
+            substitute_parent = Path(raw_substitute_parent.replace('SUBSTITUTES', str(SUBSTITUTES)))
+        
+        return cls(
+            id=id,
+            target_parent=target_parent,
+            substitute_parent=substitute_parent
+        )
+
+
+@dataclass
 class Target:
     """
     representa um arquivo de destino que sofrerá alguma ação (create, replace, symlink ou remove)
@@ -60,7 +125,8 @@ class Entry:
 
     args:
     	substitute:
-    		substituto associado aos targets, pode ser nulo para ações que não precisam dele
+    		substituto associado aos targets,
+            pode ser nulo para ações que não precisam dele, tipo remoções
 
     	targets:
     		lista de targets que serão processados
@@ -80,33 +146,54 @@ class Entry:
             é literalmente a chave de um dict, não é um valor definido dentro dele
     """
 
+    key: str
     substitute: Optional[Substitute] # pode ser nulo se não precisar
     targets: List[Target]
     symlink_to: Optional[str]
     changelog: Optional[str]
     sources: Optional[list]
-    key: Optional[str]
 
+    @classmethod
+    def from_dict(cls, data: dict, key: str, context: Context) -> Entry | None:
+        # resolver o substitute
+        substitute_name = raw_entry.get('substitute')
+        substitute = None
+        
+        if substitute_name:
+            if not context.substitute_parent:
+                logger.warning(f'substitute definido, mas substitute-parent é inválido ({context.id})')
+                return
 
-@dataclass
-class Context:
-    """
-    define o contexto base para resolução de caminhos e identificação do mapping
+            substitute = Substitute(
+                name=sbt_name,
+                path=context.substitute_parent / normalize_svg_name(sbt_name)
+            )
+        
+        # resolver os targets e adicionar eles numa lista
+        targets = []
+        for raw_target in raw_entry.get('targets', []):
+            icon = raw_target.get('icon')
+            action = raw_target.get('action')
 
-    args:
-    	id:
-    		identificador usado principalmente para logs e rastreamento
+            if not icon or not action:
+                logger.error(f'target inválido em {context.id}')
+                continue
+            
+            path = context.target_parent / normalize_svg_name(icon)
+            targets.append(Target(
+                icon=icon,
+                action=action,
+                path=path
+            ))
 
-    	target_parent:
-    		diretório base onde os targets estão localizados
-
-    	substitute_parent:
-    		diretório base onde os substitutos estão localizados, pode ser nulo
-    """
-
-    id: str # pra identificação nos logs
-    target_parent: Path
-    substitute_parent: Optional[Path] # pode ser nulo se não precisar
+        return cls(
+            key=key,
+            substitute=substitute,
+            targets=targets,
+            symlink_to=raw_entry.get('symlink-to'), # TODO: mudar pra link_target ou canonical ou master
+            changelog=raw_entry.get('changelog'),
+            sources=raw_entry.get('sources')
+        )
 
 
 @dataclass
@@ -125,6 +212,48 @@ class Mapping:
 
     context: Context
     entries: dict[str, Entry] # TODO: talvez key na Entry não seja necessário pela key já estar presente aqui
+
+    @classmethod
+    def from_file(cls, file: Path) -> Mapping | None:
+        """
+        converte um arquivo json em um objeto mapping estruturado
+
+        args:
+            file:
+                caminho do arquivo json contendo instruções
+        """
+
+        if not file.is_file():
+            return
+        
+        with file.open('r', encoding='utf-8') as f:
+            data = json.load(f)
+        if not data:
+            logger.error(f'os dados obtidos de {file.name} são inválidos')
+            return
+        
+        # transformar os dados do contexto num objeto
+        try:
+            context = Context.from_dict(data=data, file=file)
+        except ValueError as err:
+            logger.error(err)
+            return
+
+        # transformar as entries em um objeto
+        entries = {}
+        for key, raw_entry in data.get('entries', {}).items():
+            e = Entry.from_dict(
+                key=key,
+                data=dict,
+                context=context
+            )
+            entries[key] = e
+
+        mapping = Mapping(
+            context=context,
+            entries=entries
+        )
+        return mapping
 
 
 def handle_create_or_replace(entry: Entry, target: Target, hard_replace: bool, skip_symlinks: bool):
@@ -324,123 +453,6 @@ def replace(
             elif action == 'remove':
                 handle_remove(t)
 
-def resolve_context(data: dict, file: Path) -> Context:
-    """
-    resolve e valida o contexto a partir dos dados carregados de um json
-
-    args:
-    	data:
-    		dicionário com os dados do json
-
-    	file:
-    		caminho do arquivo json, usado para mensagens de erro
-    """
-
-    raw_context = data.get('context')
-    if not raw_context:
-        raise ValueError(f'contexto não definido ({file.name})')
-
-    id = raw_context.get('id')
-    if not id:
-        raise ValueError(f'id não definido ({file.name})')
-
-    # obter o parent do target e resolver o path
-    raw_target_parent = raw_context.get('target-parent')
-    if 'ROOT' not in raw_target_parent:
-        raise ValueError(f"'ROOT' precisa estar presente em target-parent ({id})")
-    
-    target_parent = Path(raw_target_parent.replace('ROOT', str(PACK_LOCAL)))
-    
-    # obter o parent do substituto e resolver o path
-    substitute_parent = None
-    raw_substitute_parent = raw_context.get('substitute-parent')
-    
-    if raw_substitute_parent:
-        if 'SUBSTITUTES' not in raw_substitute_parent:
-            raise ValueError(f"'SUBSTITUTES' precisa estar presente em substitute-parent ou ser completamente nulo ({id})")
-        
-        substitute_parent = Path(raw_substitute_parent.replace('SUBSTITUTES', str(SUBSTITUTES)))
-    
-    return Context(
-        id=id,
-        target_parent=target_parent,
-        substitute_parent=substitute_parent
-    )
-
-def resolve_mapping(json_file: Path) -> Mapping:
-    """
-    converte um arquivo json em um objeto mapping estruturado
-
-    args:
-    	json_file:
-    		caminho do arquivo json contendo instruções
-    """
-
-    if not json_file.is_file():
-        return
-    
-    with json_file.open('r', encoding='utf-8') as f:
-        data = json.load(f)
-    if not data:
-        logger.error(f'os dados obtidos de {json_file.name} são inválidos')
-        return
-    
-    # transformar os dados do contexto num objeto
-    try:
-        context = resolve_context(data, json_file)
-    except ValueError as err:
-        logger.error(err)
-        return
-
-    # transformar as entries em um objeto
-    entries = {}
-    for key, raw_entry in data.get('entries', {}).items():
-        # resolver o substitute
-        sbt_name = raw_entry.get('substitute')
-        substitute = None
-        
-        if sbt_name:
-            if not context.substitute_parent:
-                logger.warning(f'substitute definido, mas substitute-parent é inválido ({context.id})')
-                continue
-
-            sbt_path=context.substitute_parent / normalize_svg_name(sbt_name)
-            substitute = Substitute(name=sbt_name, path=sbt_path)
-        
-        # resolver os targets e adicionar eles numa lista
-        targets = []
-        for raw_target in raw_entry.get('targets', []):
-            icon = raw_target.get('icon')
-            action = raw_target.get('action')
-
-            if not icon or not action:
-                logger.error(f'target inválido em {context.id}')
-                continue
-            
-            path = context.target_parent / normalize_svg_name(icon)
-            targets.append(Target(
-                icon=icon,
-                action=action,
-                path=path
-            ))
-
-        # finalizar a criação da entry e adicionar ela na lista final
-        entry = Entry(
-            substitute=substitute,
-            targets=targets,
-            symlink_to=raw_entry.get('symlink-to'), # TODO: mudar pra link_target ou canonical ou master
-            changelog=raw_entry.get('changelog'),
-            sources=raw_entry.get('sources'),
-            key=key
-        )
-        entries[key] = entry
-
-    mapping = Mapping(
-        context=context,
-        entries=entries
-    )
-    return mapping
-
 def run(root: Path = PACK_LOCAL):
     """
     percorre todos os arquivos de instrução e executa o processo de replace para cada mapping
@@ -451,7 +463,7 @@ def run(root: Path = PACK_LOCAL):
     """
 
     for f in INSTRUCTIONS.iterdir():
-        mapping = resolve_mapping(f)
+        mapping = Mapping.from_file(f)
         if not mapping:
             continue
 
