@@ -8,24 +8,23 @@ from .globals import INSTRUCTIONS, PACK_REPO
 
 
 def make_hyperlink(url: str, text: str) -> str:
-    return f'[{text}](url)'
+    return f'[{text}]({url})'
 
 def resolve_table_writing(mapping: Mapping):
     doc, tag, text = Doc().tagtext()
 
     map_id = mapping.context.id
-    map_entries = mapping.entries
+    map_entries = mapping.entries.values()
 
-    # criar o campo expansível
+    # criar o campo expansível com a tabela
     with tag('details'):
         with tag('summary'):
             text(f'{map_id} (click to expand)')
 
-        # criar a tabela com borda, largura etc.
-        with tag('table', border='1', width='100%'):
+        with tag('table'):
             # cabeçalho
             with tag('tr'):
-                for header in ['Icon', 'Icon name', 'Source', 'Changes']:
+                for header in ['Entry', 'Source', 'Changes']:
                     with tag('th'): text(header)
 
             # criar um table row pra cada entrada do array de dicts
@@ -41,9 +40,9 @@ def resolve_table_writing(mapping: Mapping):
 
                     # doc.asis insere html dentro do html sem precisar escapar
                     with tag('td'):
-                        doc.asis(str(sources))
+                        doc.asis(str(sources) or '')
                     with tag('td'):
-                        doc.asis(changelog)
+                        doc.asis(changelog or '')
 
     # renderizar a tabela e retornar
     raw_html = doc.getvalue()
@@ -91,7 +90,8 @@ Those packs includes:
     # criar as tabelas
     tables = []
     for f in INSTRUCTIONS.rglob('*.json'):
-        table = resolve_table_writing(resolve_mapping(f))
+        mapping = resolve_table_writing(resolve_mapping(f))
+        tables.append(mapping)
     
     # condensar as informações junto com as tabelas em uma só string
     # e depois escrever o arquivo markdown final
@@ -100,9 +100,9 @@ Those packs includes:
         condensed += t
     condensed += LAST_CHUNK
 
-    # readme = PACK_REPO / 'README.md'
-    readme = Path('/mnt/seagate/workspace/coding/projetos/scripts/copykit/test.md')
+    readme = PACK_REPO / 'README.md'
     with open(readme, 'w') as f:
         f.write(condensed)
 
+# TODO: adicionar o "from scratch", formatar melhor as sources pra não serem só uma list com str
 run_documenter()

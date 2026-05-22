@@ -124,7 +124,7 @@ class Mapping:
     """
 
     context: Context
-    entries: dict[str, Entry]
+    entries: dict[str, Entry] # TODO: talvez key na Entry não seja necessário pela key já estar presente aqui
 
 
 def handle_create_or_replace(entry: Entry, target: Target, hard_replace: bool, skip_symlinks: bool):
