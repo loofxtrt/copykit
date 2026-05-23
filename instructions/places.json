@@ -63,7 +63,6 @@
                 { "action": "remove", "icon": "bookmark-missing" },
                 { "action": "remove", "icon": "application-x-gnome-saved-search" },
                 { "action": "remove", "icon": "certificate-server" },
-                { "action": "remove", "icon": "folder_2" },
                 { "action": "remove", "icon": "favorites" },
                 { "action": "remove", "icon": "folder_home2" },
                 { "action": "remove", "icon": "folder_man" },
@@ -113,8 +112,16 @@
         },
         "folder": {
             "substitute": "folder",
+            "symlink-to": "folder",
             "targets": [
-                { "action": "replace", "icon": "folder" }
+                { "action": "replace", "icon": "folder" },
+                { "action": "symlink", "icon": "folder_2" },
+                { "action": "symlink", "icon": "stock_folder" },
+                { "action": "symlink", "icon": "inode_directory" },
+                { "action": "symlink", "icon": "gtk_directory" },
+                { "action": "symlink", "icon": "gnome-folder" },
+                { "action": "symlink", "icon": "gnome-fs-directory" },
+                { "action": "symlink", "icon": "gnome-fs-directory-accept" }
             ],
             "changelog": "normalized the svg size to 64x64"
         },
@@ -235,16 +242,21 @@
         },
         "folder-open": {
             "substitute": "folder-open",
+            "symlink-to": "folder-open",
             "targets": [
-                { "action": "replace", "icon": "folder-open" }
+                { "action": "replace", "icon": "folder-open" },
+                { "action": "symlink", "icon": "stock_open" },
+                { "action": "symlink", "icon": "gnome-fs-directory-open" }
             ],
             "sources": ["FLUENT"],
             "changelog": "inspired by FLUENT folder-open icon"
         },
         "folder-visiting": {
             "substitute": "folder-visiting",
+            "symlink-to": "folder-visiting",
             "targets": [
-                { "action": "replace", "icon": "folder-visiting" }
+                { "action": "replace", "icon": "folder-visiting" },
+                { "action": "symlink", "icon": "gnome-fs-directory-visiting" }
             ]
         }
     }
