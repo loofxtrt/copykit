@@ -8,6 +8,10 @@ from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normali
 from . import logger
 
 
+ACTIVE_ROOT = PACK_LOCAL
+ACTIVE_ROOT = PACK_REMOTE
+
+
 @dataclass
 class Context:
     """
@@ -25,11 +29,16 @@ class Context:
     """
 
     id: str # pra identificação nos logs
-    target_parent: Path
-    substitute_parent: Optional[Path] # pode ser nulo se não precisar
+    data: dict
+    # raw_target_parent: Path
+    # raw_substitute_parent: Optional[Path] # pode ser nulo se não precisar
+
+    @property
+    def raw_context(self) -> dict:
+        return self.data['context']
 
     @classmethod
-    def from_dict(cls, data: dict, file: Path, root: Path) -> Context:
+    def from_dict(cls, data: dict, file: Path) -> Context:
         """
         resolve e valida o contexto a partir dos dados carregados de um json
 
@@ -40,37 +49,46 @@ class Context:
             file:
                 caminho do arquivo json, usado para mensagens de erro
         """
+        
+        raw_context = data['context']
 
-        raw_context = data.get('context')
         if not raw_context:
             raise ValueError(f'contexto não definido ({file.name})')
 
         id = raw_context.get('id')
         if not id:
             raise ValueError(f'id não definido ({file.name})')
-
-        # obter o parent do target e resolver o path
-        raw_target_parent = raw_context.get('target-parent')
-        if 'ROOT' not in raw_target_parent:
-            raise ValueError(f"'ROOT' precisa estar presente em target-parent ({id})")
-        
-        target_parent = Path(raw_target_parent.replace('ROOT', str(root)))
-        
-        # obter o parent do substituto e resolver o path
-        substitute_parent = None
-        raw_substitute_parent = raw_context.get('substitute-parent')
-        
-        if raw_substitute_parent:
-            if 'SUBSTITUTES' not in raw_substitute_parent:
-                raise ValueError(f"'SUBSTITUTES' precisa estar presente em substitute-parent ou ser completamente nulo ({id})")
-            
-            substitute_parent = Path(raw_substitute_parent.replace('SUBSTITUTES', str(SUBSTITUTES)))
         
         return cls(
             id=id,
-            target_parent=target_parent,
-            substitute_parent=substitute_parent
+            data=data
         )
+    
+    @property
+    def target_parent(self) -> Path | None:
+        # obter o parent do target e resolver o path
+        raw = self.raw_context.get('target-parent')
+
+        if not raw:
+            return None
+
+        if 'ROOT' not in raw:
+            raise ValueError(f"'ROOT' precisa estar presente em target-parent ({id})")
+        
+        return Path(raw.replace('ROOT', str(ACTIVE_ROOT)))
+
+    @property
+    def substitute_parent(self) -> Path | None:
+        # obter o parent do substituto e resolver o path
+        raw = self.raw_context.get('substitute-parent')
+        
+        if not raw:
+            return None
+        
+        if 'SUBSTITUTES' not in raw:
+            raise ValueError(f"'SUBSTITUTES' precisa estar presente em substitute-parent ou ser completamente nulo ({id})")
+        
+        return Path(raw.replace('SUBSTITUTES', str(SUBSTITUTES)))
 
 
 @dataclass
@@ -156,7 +174,7 @@ class Entry:
     @classmethod
     def from_dict(cls, data: dict, key: str, context: Context) -> Entry | None:
         # resolver o substitute
-        substitute_name = raw_entry.get('substitute')
+        substitute_name = data.get('substitute')
         substitute = None
         
         if substitute_name:
@@ -165,13 +183,13 @@ class Entry:
                 return
 
             substitute = Substitute(
-                name=sbt_name,
-                path=context.substitute_parent / normalize_svg_name(sbt_name)
+                name=substitute_name,
+                path=context.substitute_parent / normalize_svg_name(substitute_name)
             )
         
         # resolver os targets e adicionar eles numa lista
         targets = []
-        for raw_target in raw_entry.get('targets', []):
+        for raw_target in data.get('targets', []):
             icon = raw_target.get('icon')
             action = raw_target.get('action')
 
@@ -190,9 +208,9 @@ class Entry:
             key=key,
             substitute=substitute,
             targets=targets,
-            symlink_to=raw_entry.get('symlink-to'), # TODO: mudar pra link_target ou canonical ou master
-            changelog=raw_entry.get('changelog'),
-            sources=raw_entry.get('sources')
+            symlink_to=data.get('symlink-to'), # TODO: mudar pra link_target ou canonical ou master
+            changelog=data.get('changelog'),
+            sources=data.get('sources')
         )
 
 
@@ -244,7 +262,7 @@ class Mapping:
         for key, raw_entry in data.get('entries', {}).items():
             e = Entry.from_dict(
                 key=key,
-                data=dict,
+                data=raw_entry,
                 context=context
             )
             entries[key] = e
