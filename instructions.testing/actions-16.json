@@ -1,0 +1,63 @@
+{
+    "context": {
+        "id": "actions-16",
+        "target-parent": "ROOT/actions/16",
+        "substitute-parent": "SUBSTITUTES/actions/16"
+    },
+    "entries": {
+        "folder-open-recent": {
+            "targets": [
+                { "action": "remove", "icon": "folder-open-recent" }
+            ],
+            "changelog": "removed to make the icons on file managers (like dolphin) more consistent"
+        },
+        "restart": {
+            "targets": [
+                { "action": "symlink", "icon": "system-restart-symbolic" },
+                { "action": "symlink", "icon": "system-restart" }
+            ],
+            "symlink-to": "../symbolic/system-restart-symbolic"
+        },
+        "lock": {
+            "targets": [
+                { "action": "symlink", "icon": "system-lock-screen-symbolic" },
+                { "action": "symlink", "icon": "system-lock-screen" }
+            ],
+            "symlink-to": "../symbolic/system-lock-screen-symbolic"
+        },
+        "shutdown": {
+            "targets": [
+                { "action": "symlink", "icon": "system-shutdown-symbolic" },
+                { "action": "symlink", "icon": "system-shutdown" }
+            ],
+            "symlink-to": "../symbolic/system-shutdown-symbolic"
+        },
+        "suspend": {
+            "targets": [
+                { "action": "symlink", "icon": "system-suspend-symbolic" },
+                { "action": "symlink", "icon": "system-suspend" }
+            ],
+            "symlink-to": "../symbolic/system-suspend-symbolic"
+        },
+        "hibernate": {
+            "targets": [
+                { "action": "symlink", "icon": "system-hibernate-symbolic" },
+                { "action": "symlink", "icon": "system-suspend-hibernate" },
+                { "action": "symlink", "icon": "system-hibernate" }
+            ],
+            "symlink-to": "../symbolic/system-hibernate-symbolic"
+        },
+        "log-out": {
+            "targets": [
+                { "action": "symlink", "icon": "system-log-out"}
+            ],
+            "symlink-to": "../symbolic/system-log-out-symbolic"
+        },
+        "switch-user": {
+            "targets": [
+                { "action": "replace", "icon": "system-switch-user"}
+            ],
+            "substitute": "breeze_16_system-switch-user"
+        }
+    }
+}

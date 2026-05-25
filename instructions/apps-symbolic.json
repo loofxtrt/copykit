@@ -1,0 +1,14 @@
+{
+    "context": {
+        "id": "apps-symbolic",
+        "target-parent": "ROOT/apps/symbolic"
+    },
+    "entries": {
+        "desktop": {
+            "targets": [
+                { "action": "symlink", "icon": "preferences-desktop-symbolic" }
+            ],
+            "symlink-to": "../../places/symbolic/user-desktop-symbolic"
+        }
+    }
+}

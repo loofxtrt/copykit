@@ -1,0 +1,16 @@
+{
+    "context": {
+        "id": "places-symbolic",
+        "target-parent": "ROOT/places/symbolic",
+        "substitute-parent": "SUBSTITUTES/places/symbolic"
+    },
+    "entries": {
+        "desktop": {
+            "targets": [
+                { "action": "replace", "icon": "user-desktop-symbolic" }
+            ],
+            "substitute": "fluent_user-desktop-symbolic",
+            "sources": ["FLUENT"]
+        }
+    }
+}

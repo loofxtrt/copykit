@@ -1,0 +1,63 @@
+{
+    "context": {
+        "id": "places-22",
+        "target-parent": "ROOT/places/22",
+        "substitute-parent": "SUBSTITUTES/places/22"
+    },
+    "entries": {
+        "home": {
+            "substitute": "folder-home_22",
+            "symlink-to": "user-home",
+            "targets": [
+                { "action": "replace", "icon": "user-home" },
+                { "action": "symlink", "icon": "user-home-drag-accept" },
+                { "action": "symlink", "icon": "user-home-open" },
+                { "action": "symlink", "icon": "gnome-home" },
+                { "action": "symlink", "icon": "gnome-fs-home" },
+                { "action": "symlink", "icon": "folder-home" },
+                { "action": "symlink", "icon": "folder_home" }
+            ]
+        },
+        "pictures": {
+            "substitute": "folder-pictures_22",
+            "symlink-to": "folder-pictures",
+            "targets": [
+                { "action": "replace", "icon": "folder-pictures" },
+                { "action": "symlink", "icon": "user-pictures" },
+                { "action": "symlink", "icon": "folder-pictures-open" },
+                { "action": "symlink", "icon": "folder_pictures" },
+                { "action": "symlink", "icon": "user-images" },
+                { "action": "symlink", "icon": "folder-image" },
+                { "action": "symlink", "icon": "folder_home" }
+            ]
+        },
+        "downloads": {
+            "substitute": "folder-download_22",
+            "symlink-to": "folder-download",
+            "targets": [
+                { "action": "replace", "icon": "folder-download" },
+                { "action": "symlink", "icon": "folder-download-open" },
+                { "action": "symlink", "icon": "folder-downloads" }
+            ]
+        },
+        "videos": {
+            "substitute": "folder-videos_22",
+            "symlink-to": "folder-videos",
+            "targets": [
+                { "action": "replace", "icon": "folder-videos" },
+                { "action": "symlink", "icon": "folder-videos-alt" },
+                { "action": "symlink", "icon": "folder-video" }
+            ]
+        },
+        "music": {
+            "substitute": "folder-music_22",
+            "symlink-to": "folder-music",
+            "targets": [
+                { "action": "replace", "icon": "folder-music" },
+                { "action": "symlink", "icon": "folder-music-open" },
+                { "action": "symlink", "icon": "library-music" },
+                { "action": "symlink", "icon": "stock_music-library" }
+            ]
+        }
+    }
+}
