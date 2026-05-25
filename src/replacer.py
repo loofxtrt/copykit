@@ -369,7 +369,7 @@ def handle_remove(target: Target):
         logger.error(err)
 
 # TODO: param (flag) pra chamar ou não o processor e otimizar os svgs ao copiar eles
-def copy(substitute: Path, destination: Path, operation: str):
+def copy(substitute: Path, destination: Path, operation: str, ensure_parents: bool = True):
     """
     copia um arquivo substituto para o destino, removendo qualquer arquivo existente antes
 
@@ -378,10 +378,14 @@ def copy(substitute: Path, destination: Path, operation: str):
     		caminho do arquivo que será copiado
 
     	destination:
-    		caminho onde o arquivo será colocado
+    		caminho onde o arquivo será colocado. isso já inclui o nome do arquivo
+            não é só o parent de onde ele deve estar
 
     	operation:
     	    descrição textual da operação para logging. ex: 'criado', 'substituído'
+
+        ensure_parents:
+            garantir que a estrutura de diretórios pai exista, e criar caso não
     """
 
     try:
@@ -393,6 +397,11 @@ def copy(substitute: Path, destination: Path, operation: str):
                 logger.error(f'erro ao deletar {destination} para substituí-lo com {substitute}')
                 logger.error(err)
         
+        # criar a estrutura de dirs caso solicitado
+        if ensure_parents:
+            destination.parent.mkdir(exist_ok=True, parents=True)
+            logger.success(f'estrutura de diretórios criada para {destination}')
+
         shutil.copy2(substitute, destination)
         logger.success(f'arquivo {operation}: {destination}')
     except Exception as err:
@@ -418,7 +427,7 @@ def replace(
     		define se replace deve ocorrer mesmo sem validação do destino
     """
 
-    # validaação informações básicas do mapping
+    # validação informações básicas do mapping
     target_parent = mapping.context.target_parent
     substitute_parent = mapping.context.substitute_parent
     id = mapping.context.id
