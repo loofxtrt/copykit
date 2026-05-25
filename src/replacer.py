@@ -3,9 +3,10 @@ from dataclasses import dataclass
 from typing import List, Optional
 import json
 import shutil
+import argparse
 
 from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normalize_json_name, normalize_svg_name
-from . import logger
+from . import logger, processor
 
 
 ACTIVE_ROOT = PACK_LOCAL
@@ -162,6 +163,9 @@ class Entry:
             chave que identifica essa entry dentro do json de instruções, tipo "Discord"
             não tem função prática na substituição, mas é útil pra documentação
             é literalmente a chave de um dict, não é um valor definido dentro dele
+        
+        processing:
+            pós processamento que deve ser aplicado ao ícone
     """
 
     key: str
@@ -170,6 +174,7 @@ class Entry:
     symlink_to: Optional[str]
     changelog: Optional[str]
     sources: Optional[list]
+    processing: Optional[str]
 
     @classmethod
     def from_dict(cls, data: dict, key: str, context: Context) -> Entry | None:
@@ -210,7 +215,8 @@ class Entry:
             targets=targets,
             symlink_to=data.get('symlink-to'), # TODO: mudar pra link_target ou canonical ou master
             changelog=data.get('changelog'),
-            sources=data.get('sources')
+            sources=data.get('sources'),
+            processing=data.get('processing')
         )
 
 
@@ -317,6 +323,14 @@ def handle_create_or_replace(entry: Entry, target: Target, hard_replace: bool, s
         copy(substitute=substitute.path, destination=target.path, operation='substituído')
     elif target.action == 'create':
         copy(substitute=substitute.path, destination=target.path, operation='criado')
+
+    # aplicar processing
+    if entry.processing:
+        processor.run(
+            processing_id=entry.processing,
+            svg=target.path,
+            dest=target.path
+        )
 
 def handle_symlink(symlink_to: Path, target: Target):
     """
@@ -474,7 +488,7 @@ def replace(
             elif action == 'remove':
                 handle_remove(t)
 
-def run(root: Path = PACK_LOCAL):
+def run(root: Path):
     """
     percorre todos os arquivos de instrução e executa o processo de replace para cada mapping
 
@@ -490,8 +504,23 @@ def run(root: Path = PACK_LOCAL):
 
         replace(mapping)
 
-run(PACK_LOCAL)
-# run(PACK_REMOTE)
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--root',
+        '-r',
+        choices=['local', 'remote'],
+        default='local'
+    )
+    
+    args = parser.parse_args()
+    if args.root == 'local':
+        run(PACK_LOCAL)
+    elif args.root == 'remote':
+        run(PACK_REMOTE)
+
+if __name__ == '__main__':
+    main()
 
 # TODO: arrumar o PACK_LOCAL hardcoded em partes do código
 # TODO: opção pra remover todos os symlinks quebrados depois de uma remoção
