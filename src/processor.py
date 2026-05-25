@@ -1,6 +1,8 @@
 from pathlib import Path
 import subprocess
 
+from lxml import etree
+
 from . import logger
 
 def _svg_is_valid(file: Path) -> bool:
@@ -88,3 +90,47 @@ def recolor_directories(parent: Path, base_palette: dict, new_palette: dict):
         final = output / svg.name
         with final.open('w', encoding='utf-8'):
             final.write_text(data)
+
+def text_color_symbolics(svg: Path):
+    if not _svg_is_valid(svg):
+        return
+    
+    STYLE_CONTENT = """
+    .ColorScheme-Text {
+        color:#363636;
+    }
+    """.strip()
+
+    parser = etree.XMLParser(remove_blank_text=False)
+    tree = etree.parse(str(svg), parser)
+    root = tree.getroot()
+
+    defs = root.find('defs')
+    if defs is None:
+        defs = etree.Element('defs')
+        root.insert(0, defs)
+
+    style = defs.find("./style[@id='current-color-scheme']")
+
+    if style is None:
+        style = etree.SubElement(defs, 'style')
+        style.set('id', 'current-color-scheme')
+        style.set('type', 'text/css')
+
+    style.text = STYLE_CONTENT
+
+    for path in root.findall('.//path'):
+        existing_class = path.get('class', '')
+        classes = set(existing_class.split())
+        classes.add('ColorScheme-Text')
+        path.set('class', ' '.join(classes))
+        path.set('fill', 'currentColor')
+
+    tree.write(
+        str(svg.parent / (svg.stem + '.mono' + '.svg')),
+        encoding='utf-8',
+        xml_declaration=True,
+        pretty_print=True
+    )
+
+# text_color_symbolics(Path('/mnt/seagate/recursos/copydb/substitutos/actions/symbolic/qogir_system-shutdown-symbolic.svg'))
