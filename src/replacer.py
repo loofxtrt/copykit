@@ -505,6 +505,9 @@ def run(root: Path):
         replace(mapping)
 
 def main():
+    # TODO: remover active root e de fato usar o run(root)
+    global ACTIVE_ROOT
+
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '--root',
@@ -515,8 +518,10 @@ def main():
     
     args = parser.parse_args()
     if args.root == 'local':
+        ACTIVE_ROOT = PACK_LOCAL
         run(PACK_LOCAL)
     elif args.root == 'remote':
+        ACTIVE_ROOT = PACK_REMOTE
         run(PACK_REMOTE)
 
 if __name__ == '__main__':
