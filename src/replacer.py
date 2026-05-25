@@ -495,3 +495,4 @@ run(PACK_LOCAL)
 
 # TODO: arrumar o PACK_LOCAL hardcoded em partes do código
 # TODO: opção pra remover todos os symlinks quebrados depois de uma remoção
+# TODO: aviso de se um mapping não tem um substitute parent definido

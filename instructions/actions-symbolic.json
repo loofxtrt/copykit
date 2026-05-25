@@ -1,0 +1,19 @@
+{
+    "context": {
+        "id": "actions-symbolic",
+        "target-parent": "ROOT/actions/symbolic"
+    },
+    "entries": {
+        "help": {
+            "symlink-to": "../../actions/16/help-about",
+            "comment": "um desses é o que aparece no menu do plasma no help",
+            "targets": [
+                { "action": "symlink", "icon": "help-info-symbolic" },
+                { "action": "symlink", "icon": "help-contents-symbolic" },
+                { "action": "symlink", "icon": "help-faq-symbolic" },
+                { "action": "symlink", "icon": "help-about-symbolic" }
+            ],
+            "sources": ["FLUENT"]
+        }
+    }
+}

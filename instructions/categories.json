@@ -1,0 +1,184 @@
+{
+    "context": {
+        "id": "categories",
+        "target-parent": "ROOT/categories/symbolic",
+        "substitute-parent": "SUBSTITUTES/categories"
+    },
+    "entries": {
+        "all": {
+            "substitute": "fluent_applications-all-symbolic",
+            "symlink-to": "applications-all-symbolic",
+            "targets": [
+                { "action": "replace", "icon": "applications-all-symbolic" },
+                { "action": "symlink", "icon": "store-home-symbolic" }
+            ],
+            "sources": ["FLUENT"]
+        },
+        "development": {
+            "substitute": "fluent_applications-development-symbolic",
+            "symlink-to": "applications-development-symbolic",
+            "targets": [
+                { "action": "replace", "icon": "applications-development-symbolic" },
+                { "action": "symlink", "icon": "store-develop-symbolic" }
+            ],
+            "sources": ["FLUENT"]
+        },
+        "education-language": {
+            "substitute": "fluent_applications-education-language-symbolic",
+            "targets": [
+                { "action": "replace", "icon": "applications-education-language-symbolic" }
+            ],
+            "sources": ["FLUENT"]
+        },
+        "education-math": {
+            "substitute": "fluent_applications-education-mathematics-symbolic",
+            "targets": [
+                { "action": "replace", "icon": "applications-education-mathematics-symbolic" }
+            ],
+            "sources": ["FLUENT"]
+        },
+        "education-science": {
+            "substitute": "fluent_applications-education-science-symbolic",
+            "targets": [
+                { "action": "replace", "icon": "applications-education-science-symbolic" }
+            ],
+            "sources": ["FLUENT"]
+        },
+        "education": {
+            "substitute": "fluent_applications-education-symbolic",
+            "symlink-to": "applications-education-symbolic",
+            "targets": [
+                { "action": "replace", "icon": "applications-education-symbolic" },
+                { "action": "symlink", "icon": "store-learn-symbolic" }
+            ],
+            "sources": ["FLUENT"]
+        },
+        "engineering": {
+            "substitute": "fluent_applications-engineering-symbolic",
+            "targets": [
+                { "action": "replace", "icon": "applications-engineering-symbolic" }
+            ],
+            "sources": ["FLUENT"]
+        },
+        "games": {
+            "substitute": "fluent_applications-games-symbolic",
+            "symlink-to": "applications-games-symbolic",
+            "targets": [
+                { "action": "replace", "icon": "applications-games-symbolic" },
+                { "action": "symlink", "icon": "store-game-symbolic" }
+            ],
+            "sources": ["FLUENT"]
+        },
+        "graphics": {
+            "substitute": "fluent_applications-graphics-symbolic",
+            "symlink-to": "applications-graphics-symbolic",
+            "targets": [
+                { "action": "replace", "icon": "applications-graphics-symbolic" },
+                { "action": "symlink", "icon": "store-create-symbolic" }
+            ],
+            "sources": ["FLUENT"]
+        },
+        "internet": {
+            "substitute": "fluent_applications-internet-symbolic",
+            "symlink-to": "applications-internet-symbolic",
+            "targets": [
+                { "action": "replace", "icon": "applications-internet-symbolic" },
+                { "action": "symlink", "icon": "applications-network-symbolic" },
+                { "action": "symlink", "icon": "store-socialize-symbolic" }
+            ],
+            "sources": ["FLUENT"]
+        },
+        "multimedia": {
+            "substitute": "fluent_applications-multimedia-symbolic",
+            "symlink-to": "applications-multimedia-symbolic",
+            "targets": [
+                { "action": "replace", "icon": "applications-multimedia-symbolic" },
+                { "action": "symlink", "icon": "store-relax-symbolic" }
+            ],
+            "sources": ["FLUENT"]
+        },
+        "office": {
+            "substitute": "fluent_applications-office-symbolic",
+            "symlink-to": "applications-office-symbolic",
+            "targets": [
+                { "action": "replace", "icon": "applications-office-symbolic" },
+                { "action": "symlink", "icon": "store-work-symbolic" }
+            ],
+            "sources": ["FLUENT"]
+        },
+        "other": {
+            "substitute": "fluent_applications-other-symbolic",
+            "targets": [
+                { "action": "replace", "icon": "applications-other-symbolic" }
+            ],
+            "sources": ["FLUENT"]
+        },
+        "science": {
+            "substitute": "fluent_applications-science-symbolic",
+            "targets": [
+                { "action": "replace", "icon": "applications-science-symbolic" }
+            ],
+            "sources": ["FLUENT"]
+        },
+        "system": {
+            "substitute": "fluent_applications-system-symbolic",
+            "symlink-to": "applications-system-symbolic",
+            "targets": [
+                { "action": "replace", "icon": "applications-system-symbolic" },
+                { "action": "symlink", "icon": "preferences-system-symbolic" }
+            ],
+            "sources": ["FLUENT"]
+        },
+        "utilities": {
+            "substitute": "fluent_applications-utilities-symbolic",
+            "symlink-to": "applications-utilities-symbolic",
+            "targets": [
+                { "action": "replace", "icon": "applications-utilities-symbolic" },
+                { "action": "symlink", "icon": "store-utilities-symbolic" }
+            ],
+            "sources": ["FLUENT"]
+        },
+        "mass-remove-1": {
+            "comment": "tudo que não tinha no fluent foi removido daqui (mas pode ter no qogir)",
+            "targets": [
+                { "action": "remove", "icon": "audio-speaker-symbolic" },
+                { "action": "remove", "icon": "audio-speakers-symbolic" },
+                { "action": "remove", "icon": "credentials-preferences-symbolic" },
+                { "action": "remove", "icon": "goa-panel-symbolic" },
+                { "action": "remove", "icon": "preferences-desktop-online-accounts-symbolic" },
+                { "action": "remove", "icon": "emoji-activities-symbolic" },
+                { "action": "remove", "icon": "emoji-activity-symbolic" },
+                { "action": "remove", "icon": "emoji-body_symbolic" },
+                { "action": "remove", "icon": "emoji-food-symbolic" },
+                { "action": "remove", "icon": "emoji-nature-symbolic" },
+                { "action": "remove", "icon": "emoji-objects-symbolic" },
+                { "action": "remove", "icon": "emoji-people-symbolic" },
+                { "action": "remove", "icon": "emoji-recent-symbolic" },
+                { "action": "remove", "icon": "emoji-symbols-symbolic" },
+                { "action": "remove", "icon": "emoji-symbols_symbolic" },
+                { "action": "remove", "icon": "emoji-travel-symbolic" },
+                { "action": "remove", "icon": "emoji-travel_symbolic" },
+                { "action": "remove", "icon": "preferences-other-symbolic" },
+                { "action": "remove", "icon": "slideshow-symbolic" },
+                { "action": "remove", "icon": "applications-video-symbolic" },
+                { "action": "remove", "icon": "emoji-flags-symbolic" },
+                { "action": "remove", "icon": "emoji-flags_symbolic" },
+                { "action": "remove", "icon": "applications-accessibility-symbolic" }
+            ]
+        },
+        "mass-remove-3": {
+            "comment": "não tem nem no qogir nem no fluent, só no kora",
+            "targets": [
+                { "action": "remove", "icon": "payment-card-symbolic" },
+                { "action": "remove", "icon": "store-installed-symbolic" },
+                { "action": "remove", "icon": "store-updates-symbolic" }
+            ]
+        },
+        "help": {
+            "substitute": "fluent_help-about-symbolic",
+            "targets": [
+                { "action": "replace", "icon": "system-help-symbolic" }
+            ]
+        }
+    }
+}
