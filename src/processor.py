@@ -14,6 +14,7 @@ def _svg_is_valid(file: Path) -> bool:
 def optimize_svgs(parent: Path):
     """
     otimiza todos os svgs de um diretório via svgo
+    svgs otimizados são mais fáceis de recolorir
 
     args:
         parent:
@@ -39,7 +40,7 @@ def optimize_svgs(parent: Path):
 def recolor_directories(parent: Path, base_palette: dict, new_palette: dict):
     """
     substitui as cores de todos os svgs de um diretório
-    pensado pra ser usado com ícones de diretórios
+    pensado pra ser usado com ícones de diretórios JÁ OTIMIZADOS
 
     args:
         parent:

@@ -1,0 +1,58 @@
+{
+    "context": {
+        "id": "actions-symbolic",
+        "target-parent": "ROOT/actions/symbolic",
+        "substitute-parent": "SUBSTITUTES/actions/symbolic"
+    },
+    "entries": {
+        "restart": {
+            "targets": [
+                { "action": "replace", "icon": "system-restart-symbolic" }
+            ],
+            "substitute": "qogir_system-reboot-symbolic",
+            "sources": ["QOGIR"]
+        },
+        "lock": {
+            "targets": [
+                { "action": "replace", "icon": "system-lock-screen-symbolic" }
+            ],
+            "substitute": "qogir_system-lock-screen-symbolic",
+            "sources": ["QOGIR"]
+        },
+        "shutdown": {
+            "targets": [
+                { "action": "replace", "icon": "system-shutdown-symbolic" }
+            ],
+            "substitute": "qogir_system-shutdown-symbolic",
+            "sources": ["QOGIR"]
+        },
+        "suspend": {
+            "targets": [
+                { "action": "replace", "icon": "system-suspend-symbolic" }
+            ],
+            "substitute": "qogir_system-suspend-symbolic",
+            "sources": ["QOGIR"]
+        },
+        "hibernate": {
+            "targets": [
+                { "action": "replace", "icon": "system-hibernate-symbolic" }
+            ],
+            "substitute": "qogir_system-hibernate-symbolic",
+            "sources": ["QOGIR"]
+        },
+        "log-out": {
+            "targets": [
+                { "action": "replace", "icon": "system-log-out-symbolic" }
+            ],
+            "substitute": "qogir_system-log-out-rtl-symbolic",
+            "sources": ["QOGIR"]
+        },
+        "switch-user": {
+            "targets": [
+                { "action": "replace", "icon": "system-switch-user-symbolic" }
+            ],
+            "substitute": "qogir_system-switch-user-symbolic",
+            "sources": ["QOGIR"]
+        }
+    }
+}

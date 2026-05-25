@@ -126,7 +126,7 @@
             "changelog": "normalized the svg size to 64x64"
         },
         "folder-desktop": {
-            "substitute": "folder-desktop",
+            "substitute": "folder-desktop-2",
             "targets": [
                 { "action": "replace", "icon": "user-desktop" }
             ],

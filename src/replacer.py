@@ -368,6 +368,7 @@ def handle_remove(target: Target):
         logger.error(f'erro ao deletar {target.icon}')
         logger.error(err)
 
+# TODO: param (flag) pra chamar ou não o processor e otimizar os svgs ao copiar eles
 def copy(substitute: Path, destination: Path, operation: str):
     """
     copia um arquivo substituto para o destino, removendo qualquer arquivo existente antes
@@ -491,3 +492,4 @@ run(PACK_LOCAL)
 # run(PACK_REMOTE)
 
 # TODO: arrumar o PACK_LOCAL hardcoded em partes do código
+# TODO: opção pra remover todos os symlinks quebrados depois de uma remoção
