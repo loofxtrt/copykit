@@ -30,14 +30,14 @@
             "targets": [
                 { "action": "replace", "icon": "system-suspend-symbolic" }
             ],
-            "substitute": "qogir_system-suspend-symbolic",
+            "substitute": "qogir_system-hibernate-symbolic",
             "sources": ["QOGIR"]
         },
         "hibernate": {
             "targets": [
                 { "action": "replace", "icon": "system-hibernate-symbolic" }
             ],
-            "substitute": "qogir_system-hibernate-symbolic",
+            "substitute": "qogir_22_system-suspend-hibernate",
             "sources": ["QOGIR"]
         },
         "log-out": {

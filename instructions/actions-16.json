@@ -1,7 +1,8 @@
 {
     "context": {
         "id": "actions-16",
-        "target-parent": "ROOT/actions/16"
+        "target-parent": "ROOT/actions/16",
+        "substitute-parent": "SUBSTITUTES/actions/16"
     },
     "entries": {
         "folder-open-recent": {
@@ -54,9 +55,9 @@
         },
         "switch-user": {
             "targets": [
-                { "action": "symlink", "icon": "system-switch-user"}
+                { "action": "replace", "icon": "system-switch-user"}
             ],
-            "symlink-to": "../symbolic/system-switch-user-symbolic"
+            "substitute": "breeze_16_system-switch-user"
         }
     }
 }
