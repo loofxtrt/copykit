@@ -6,7 +6,7 @@
     },
     "entries": {
         "all": {
-            "substitute": "fluent_applications-all-symbolic",
+            "substitute": "fluent_22_applications-all-symbolic",
             "symlink-to": "applications-all-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-all-symbolic" },
@@ -15,7 +15,7 @@
             "sources": ["FLUENT"]
         },
         "development": {
-            "substitute": "fluent_applications-development-symbolic",
+            "substitute": "fluent_22_applications-development-symbolic",
             "symlink-to": "applications-development-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-development-symbolic" },
@@ -24,28 +24,28 @@
             "sources": ["FLUENT"]
         },
         "education-language": {
-            "substitute": "fluent_applications-education-language-symbolic",
+            "substitute": "fluent_22_applications-education-language-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-education-language-symbolic" }
             ],
             "sources": ["FLUENT"]
         },
         "education-math": {
-            "substitute": "fluent_applications-education-mathematics-symbolic",
+            "substitute": "fluent_22_applications-education-mathematics-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-education-mathematics-symbolic" }
             ],
             "sources": ["FLUENT"]
         },
         "education-science": {
-            "substitute": "fluent_applications-education-science-symbolic",
+            "substitute": "fluent_22_applications-education-science-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-education-science-symbolic" }
             ],
             "sources": ["FLUENT"]
         },
         "education": {
-            "substitute": "fluent_applications-education-symbolic",
+            "substitute": "fluent_22_applications-education-symbolic",
             "symlink-to": "applications-education-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-education-symbolic" },
@@ -54,14 +54,14 @@
             "sources": ["FLUENT"]
         },
         "engineering": {
-            "substitute": "fluent_applications-engineering-symbolic",
+            "substitute": "fluent_22_applications-engineering-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-engineering-symbolic" }
             ],
             "sources": ["FLUENT"]
         },
         "games": {
-            "substitute": "fluent_applications-games-symbolic",
+            "substitute": "fluent_22_applications-games-symbolic",
             "symlink-to": "applications-games-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-games-symbolic" },
@@ -70,7 +70,7 @@
             "sources": ["FLUENT"]
         },
         "graphics": {
-            "substitute": "fluent_applications-graphics-symbolic",
+            "substitute": "fluent_22_applications-graphics-symbolic",
             "symlink-to": "applications-graphics-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-graphics-symbolic" },
@@ -79,7 +79,7 @@
             "sources": ["FLUENT"]
         },
         "internet": {
-            "substitute": "fluent_applications-internet-symbolic",
+            "substitute": "fluent_22_applications-internet-symbolic",
             "symlink-to": "applications-internet-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-internet-symbolic" },
@@ -89,7 +89,7 @@
             "sources": ["FLUENT"]
         },
         "multimedia": {
-            "substitute": "fluent_applications-multimedia-symbolic",
+            "substitute": "fluent_22_applications-multimedia-symbolic",
             "symlink-to": "applications-multimedia-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-multimedia-symbolic" },
@@ -98,7 +98,7 @@
             "sources": ["FLUENT"]
         },
         "office": {
-            "substitute": "fluent_applications-office-symbolic",
+            "substitute": "fluent_22_applications-office-symbolic",
             "symlink-to": "applications-office-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-office-symbolic" },
@@ -107,21 +107,21 @@
             "sources": ["FLUENT"]
         },
         "other": {
-            "substitute": "fluent_applications-other-symbolic",
+            "substitute": "fluent_22_applications-other-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-other-symbolic" }
             ],
             "sources": ["FLUENT"]
         },
         "science": {
-            "substitute": "fluent_applications-science-symbolic",
+            "substitute": "fluent_22_applications-science-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-science-symbolic" }
             ],
             "sources": ["FLUENT"]
         },
         "system": {
-            "substitute": "fluent_applications-system-symbolic",
+            "substitute": "fluent_22_applications-system-symbolic",
             "symlink-to": "applications-system-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-system-symbolic" },
@@ -130,7 +130,7 @@
             "sources": ["FLUENT"]
         },
         "utilities": {
-            "substitute": "fluent_applications-utilities-symbolic",
+            "substitute": "fluent_22_applications-utilities-symbolic",
             "symlink-to": "applications-utilities-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-utilities-symbolic" },
@@ -175,7 +175,7 @@
             ]
         },
         "help": {
-            "substitute": "fluent_help-about-symbolic",
+            "substitute": "fluent_22_help-about-symbolic",
             "targets": [
                 { "action": "replace", "icon": "system-help-symbolic" }
             ]

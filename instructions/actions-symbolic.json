@@ -1,19 +1,44 @@
 {
     "context": {
         "id": "actions-symbolic",
-        "target-parent": "ROOT/actions/symbolic"
+        "target-parent": "ROOT/actions/symbolic",
+        "substitute-parent": "SUBSTITUTES/actions/symbolic"
     },
     "entries": {
         "help": {
-            "symlink-to": "../../actions/16/help-about",
             "comment": "um desses é o que aparece no menu do plasma no help",
+            "substitute": "fluent_22_help-about",
+            "symlink-to": "help-info-symbolic",
             "targets": [
-                { "action": "symlink", "icon": "help-info-symbolic" },
+                { "action": "replace", "icon": "help-info-symbolic" },
                 { "action": "symlink", "icon": "help-contents-symbolic" },
                 { "action": "symlink", "icon": "help-faq-symbolic" },
                 { "action": "symlink", "icon": "help-about-symbolic" }
             ],
             "sources": ["FLUENT"]
+        },
+        "bookmarks": {
+            "substitute": "fluent_22_bookmark-new",
+            "targets": [
+                { "action": "replace", "icon": "ephy-bookmarks-symbolic" }
+            ],
+            "sources": ["FLUENT"]
+        },
+        "suspend": {
+            "targets": [
+                { "action": "replace", "icon": "system-suspend-symbolic" }
+            ],
+            "substitute": "qogir_system-hibernate-symbolic",
+            "sources": ["QOGIR"],
+            "processing": "text_color"
+        },
+        "shutdown": {
+            "targets": [
+                { "action": "replace", "icon": "system-shutdown-symbolic" }
+            ],
+            "substitute": "qogir_system-shutdown-symbolic",
+            "sources": ["QOGIR"],
+            "processing": "text_color"
         }
     }
 }
