@@ -91,7 +91,9 @@ def recolor_directories(parent: Path, base_palette: dict, new_palette: dict):
         with final.open('w', encoding='utf-8'):
             final.write_text(data)
 
-def text_color_symbolics(svg: Path):
+def text_color_symbolics(svg: Path, dest: Path):
+    # TODO: documentação
+
     if not _svg_is_valid(svg):
         return
     
@@ -127,10 +129,14 @@ def text_color_symbolics(svg: Path):
         path.set('fill', 'currentColor')
 
     tree.write(
-        str(svg.parent / (svg.stem + '.mono' + '.svg')),
+        str(dest),
         encoding='utf-8',
         xml_declaration=True,
         pretty_print=True
     )
+
+def run(processing_id: str, svg: Path, dest: Path):
+    if processing_id == 'text_color':
+        text_color_symbolics(svg, dest)
 
 # text_color_symbolics(Path('/mnt/seagate/recursos/copydb/substitutos/actions/symbolic/qogir_system-shutdown-symbolic.svg'))

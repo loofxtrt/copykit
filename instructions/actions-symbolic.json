@@ -23,22 +23,6 @@
                 { "action": "replace", "icon": "ephy-bookmarks-symbolic" }
             ],
             "sources": ["FLUENT"]
-        },
-        "suspend": {
-            "targets": [
-                { "action": "replace", "icon": "system-suspend-symbolic" }
-            ],
-            "substitute": "qogir_system-hibernate-symbolic",
-            "sources": ["QOGIR"],
-            "processing": "text_color"
-        },
-        "shutdown": {
-            "targets": [
-                { "action": "replace", "icon": "system-shutdown-symbolic" }
-            ],
-            "substitute": "qogir_system-shutdown-symbolic",
-            "sources": ["QOGIR"],
-            "processing": "text_color"
         }
     }
 }

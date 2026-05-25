@@ -5,7 +5,7 @@
         "substitute-parent": "SUBSTITUTES/actions/16"
     },
     "entries": {
-        "folder-open-recent": {
+        "folder open recent": {
             "targets": [
                 { "action": "remove", "icon": "folder-open-recent" }
             ],

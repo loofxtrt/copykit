@@ -1,0 +1,89 @@
+{
+    "context": {
+        "id": "actions-16",
+        "target-parent": "ROOT/actions/16",
+        "substitute-parent": "SUBSTITUTES/actions/16"
+    },
+    "entries": {
+        "folder-open-recent": {
+            "targets": [
+                { "action": "remove", "icon": "folder-open-recent" }
+            ],
+            "changelog": "removed to make the icons on file managers (like dolphin) more consistent"
+        },
+        "help": {
+            "comment": "identificados pesquisando por 'help' e 'info' no icon explorer",
+            "symlink-to": "../../actions/symbolic/help-info-symbolic",
+            "targets": [
+                { "action": "symlink", "icon": "help-about" },
+                { "action": "symlink", "icon": "help-whatsthis" },
+                { "action": "symlink", "icon": "help-info" },
+                { "action": "symlink", "icon": "help-hint" },
+                { "action": "symlink", "icon": "help-feedback" },
+                { "action": "symlink", "icon": "kt-info-widget" },
+                { "action": "symlink", "icon": "kdocumentinfo" },
+                { "action": "symlink", "icon": "itmages-information" },
+                { "action": "symlink", "icon": "gtk-info" },
+                { "action": "symlink", "icon": "exifinfo" },
+                { "action": "symlink", "icon": "documentinfo" },
+                { "action": "symlink", "icon": "dialog-information" },
+                { "action": "symlink", "icon": "cvc-info" }
+            ]
+        },
+        "bookmarks": {
+            "symlink-to": "../../actions/symbolic/ephy-bookmarks-symbolic",
+            "targets": [
+                { "action": "symlink", "icon": "bookmarks" },
+                { "action": "symlink", "icon": "bookmark" }
+            ]
+        },
+        "restart": {
+            "targets": [
+                { "action": "symlink", "icon": "system-restart-symbolic" },
+                { "action": "symlink", "icon": "system-restart" }
+            ],
+            "symlink-to": "../symbolic/system-restart-symbolic"
+        },
+        "lock": {
+            "targets": [
+                { "action": "symlink", "icon": "system-lock-screen-symbolic" },
+                { "action": "symlink", "icon": "system-lock-screen" }
+            ],
+            "symlink-to": "../symbolic/system-lock-screen-symbolic"
+        },
+        "shutdown": {
+            "targets": [
+                { "action": "symlink", "icon": "system-shutdown-symbolic" },
+                { "action": "symlink", "icon": "system-shutdown" }
+            ],
+            "symlink-to": "../symbolic/system-shutdown-symbolic"
+        },
+        "suspend": {
+            "targets": [
+                { "action": "symlink", "icon": "system-suspend-symbolic" },
+                { "action": "symlink", "icon": "system-suspend" }
+            ],
+            "symlink-to": "../symbolic/system-suspend-symbolic"
+        },
+        "hibernate": {
+            "targets": [
+                { "action": "symlink", "icon": "system-hibernate-symbolic" },
+                { "action": "symlink", "icon": "system-suspend-hibernate" },
+                { "action": "symlink", "icon": "system-hibernate" }
+            ],
+            "symlink-to": "../symbolic/system-hibernate-symbolic"
+        },
+        "log-out": {
+            "targets": [
+                { "action": "symlink", "icon": "system-log-out"}
+            ],
+            "symlink-to": "../symbolic/system-log-out-symbolic"
+        },
+        "switch-user": {
+            "targets": [
+                { "action": "symlink", "icon": "system-switch-user"}
+            ],
+            "symlink-to": "../symbolic/system-switch-user-symbolic"
+        }
+    }
+}

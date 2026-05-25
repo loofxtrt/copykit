@@ -5,7 +5,7 @@
         "substitute-parent": "SUBSTITUTES/places"
     },
     "entries": {
-        "mass-remove": {
+        "mass remove": {
             "targets": [
                 { "action": "remove", "icon": "folder-3dprint" },
                 { "action": "remove", "icon": "folder-go" },
@@ -94,7 +94,7 @@
             ],
             "changelog": "removed to simplify maintance"
         },
-        "mass-remove-colors": {
+        "mass remove colors": {
             "targets": [
                 { "action": "remove", "icon": "folder-black" },
                 { "action": "remove", "icon": "folder-blue" },
@@ -125,7 +125,7 @@
             ],
             "changelog": "normalized the svg size to 64x64"
         },
-        "folder-desktop": {
+        "folder desktop": {
             "substitute": "folder-desktop-2",
             "targets": [
                 { "action": "replace", "icon": "user-desktop" }
@@ -133,7 +133,7 @@
             "sources": ["FLATERY"],
             "changelog": "inspired by FLATERY user-desktop"
         },
-        "folder-pictures": {
+        "folder pictures": {
             "substitute": "folder-pictures",
             "symlink-to": "folder-pictures",
             "targets": [
@@ -144,7 +144,7 @@
             "sources": ["PAPIRUS"],
             "changelog": "changed glyph to PAPIRUS folder-pictures glyph"
         },
-        "folder-home": {
+        "folder home": {
             "substitute": "folder-home",
             "symlink-to": "user-home",
             "targets": [
@@ -154,14 +154,14 @@
             "sources": ["PAPIRUS"],
             "changelog": "changed glyph to PAPIRUS user-home glyph"
         },
-        "folder-videos": {
+        "folder videos": {
             "substitute": "folder-videos",
             "targets": [
                 { "action": "replace", "icon": "folder-videos" }
             ],
             "sources": ["SCRATCH"]
         },
-        "folder-music": {
+        "folder music": {
             "substitute": "folder-music",
             "symlink-to": "folder",
             "targets": [
@@ -170,7 +170,7 @@
                 { "action": "symlink", "icon": "stock_music-library" }
             ]
         },
-        "folder-download": {
+        "folder downloads": {
             "substitute": "folder-download",
             "targets": [
                 { "action": "replace", "icon": "folder-download" }
@@ -178,14 +178,14 @@
             "sources": ["SCRATCH", "BREEZE"],
             "changelog": "modified BREEZE folder-download arrow"
         },
-        "folder-documents": {
+        "folder documents": {
             "substitute": "folder-documents",
             "symlink-to": "folder",
             "targets": [
                 { "action": "symlink", "icon": "folder-documents" }
             ]
         },
-        "folder-templates": {
+        "folder templates": {
             "substitute": "folder-templates",
             "symlink-to": "folder-templates",
             "targets": [
@@ -195,7 +195,7 @@
             "sources": ["MARWAITA"],
             "changelog": "changed glyph to MARWAITA folder-templates glyph"
         },
-        "folder-publicshare": {
+        "folder publicshare": {
             "substitute": "folder-publicshare",
             "symlink-to": "folder-publicshare",
             "targets": [
@@ -205,14 +205,14 @@
             "sources": ["https://www.svgrepo.com/svg/451439/walking"],
             "changelog": "replaced the original figure with a stickman to match the user-share folder icon"
         },
-        "user-share": {
+        "user share": {
             "substitute": "folder-user-share",
             "targets": [
                 { "action": "replace", "icon": "user-share" }
             ],
             "changelog": "changed the stickmen color to match the other folder icons, also unifying them all in a single path to make the transparency of the glyph work"
         },
-        "folder-remote": {
+        "folder remote": {
             "substitute": "folder-remote",
             "targets": [
                 { "action": "replace", "icon": "folder-remote" }
@@ -220,7 +220,7 @@
             "sources": ["ADWAITA"],
             "changelog": "added a bottom connection cable from ADWAITA folder-remote"
         },
-        "folder-network": {
+        "folder network": {
             "substitute": "folder-network",
             "symlink-to": "folder-network",
             "targets": [
@@ -233,14 +233,14 @@
                 { "action": "symlink", "icon": "repository" }
             ]
         },
-        "folder-drag-accept": {
+        "folder drag accept": {
             "substitute": "folder-drag-accept",
             "targets": [
                 { "action": "replace", "icon": "folder-drag-accept" }
             ],
             "changelog": "removed the secondary gradient to make it compatible with recoloring"
         },
-        "folder-open": {
+        "folder open": {
             "substitute": "folder-open",
             "symlink-to": "folder-open",
             "targets": [
@@ -251,7 +251,7 @@
             "sources": ["FLUENT"],
             "changelog": "inspired by FLUENT folder-open icon"
         },
-        "folder-visiting": {
+        "folder visiting": {
             "substitute": "folder-visiting",
             "symlink-to": "folder-visiting",
             "targets": [

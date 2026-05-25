@@ -1,0 +1,15 @@
+OTHERS_ROWS = [
+    {
+        'display_name': 'Settings',
+        'icon_name': 'preferences-system',
+        'icon_source': make_hyperlink('https://www.svgrepo.com/svg/362053/cog', 'SVG Repo'),
+        'icon_changes': 'added gradients and modified proportions'
+        #'icon_source': f'{infinity} and {reversal}',
+        #'icon_changes': f'remade based on a fusion of {infinity} and {reversal} gear icon'
+    },
+    {
+        'display_name': 'EndeavourOS',
+        'icon_name': 'endeavouros',
+        'icon_source': make_hyperlink('https://github.com/endeavouros-team/EndeavourOS-Development?tab=readme-ov-file', 'original EndeavourOS SVG')
+    }
+]

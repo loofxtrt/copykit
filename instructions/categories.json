@@ -23,21 +23,21 @@
             ],
             "sources": ["FLUENT"]
         },
-        "education-language": {
+        "education language": {
             "substitute": "fluent_22_applications-education-language-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-education-language-symbolic" }
             ],
             "sources": ["FLUENT"]
         },
-        "education-math": {
+        "education math": {
             "substitute": "fluent_22_applications-education-mathematics-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-education-mathematics-symbolic" }
             ],
             "sources": ["FLUENT"]
         },
-        "education-science": {
+        "education science": {
             "substitute": "fluent_22_applications-education-science-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-education-science-symbolic" }
@@ -138,7 +138,7 @@
             ],
             "sources": ["FLUENT"]
         },
-        "mass-remove-1": {
+        "mass remove 1": {
             "comment": "tudo que não tinha no fluent foi removido daqui (mas pode ter no qogir)",
             "targets": [
                 { "action": "remove", "icon": "audio-speaker-symbolic" },
@@ -166,7 +166,7 @@
                 { "action": "remove", "icon": "applications-accessibility-symbolic" }
             ]
         },
-        "mass-remove-3": {
+        "mass remove 2": {
             "comment": "não tem nem no qogir nem no fluent, só no kora",
             "targets": [
                 { "action": "remove", "icon": "payment-card-symbolic" },
