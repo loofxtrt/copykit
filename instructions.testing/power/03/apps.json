@@ -574,6 +574,18 @@
                 { "action": "symlink", "icon": "org.musicbrainz.Picard" }
             ],
             "changelog": "remade the icon based on the dmanager icon shape from KORA and drop picked the colors and inside shapes from PAPIRUS"
+        },
+        "Powers deletion": {
+            "targets": [
+                { "action": "remove", "icon": "system-log-out" },
+                { "action": "remove", "icon": "system-shutdown" },
+                { "action": "remove", "icon": "system-suspend" },
+                { "action": "remove", "icon": "system-hibernate" },
+                { "action": "remove", "icon": "system-reboot" },
+                { "action": "remove", "icon": "system-lock-screen" },
+                { "action": "remove", "icon": "system-switch-user" },
+                { "action": "remove", "icon": "system-config-boot" }
+            ]
         }
     }
 }

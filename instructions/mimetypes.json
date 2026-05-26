@@ -34,6 +34,134 @@
             "substitute": "zip",
             "sources": ["YOSAMAX", "QOGIR"],
             "changelog": "changed colors, simplified the tape, added QOGIR details on top of it"
+        },
+        "android": {
+            "substitute": "android",
+            "symlink-to": "android-package-archive",
+            "targets": [
+                { "action": "replace", "icon": "android-package-archive" }
+            ]
+        },
+        "audio": {
+            "substitute": "audio-3-papirus",
+            "symlink-to": "audio-mp3",
+            "targets": [
+                { "action": "replace", "icon": "audio-mp3" },
+                { "action": "symlink", "icon": "audio-flac" },
+                { "action": "symlink", "icon": "application-audio" },
+                { "action": "symlink", "icon": "audio-wav" }
+            ],
+            "sources": ["colors from PAPIRUS"]
+        },
+        "playlist": {
+            "substitute": "playlist-2-papirus",
+            "symlink-to": "application-audio-playlist",
+            "targets": [
+                { "action": "replace", "icon": "application-audio-playlist" },
+                { "action": "symlink", "icon": "audio-x-smart-playlist" }
+            ],
+            "sources": ["colors from PAPIRUS"]
+        },
+        "bitwig project": {
+            "substitute": "bitwig-project",
+            "symlink-to": "application-bitwig-project",
+            "targets": [
+                { "action": "replace", "icon": "application-bitwig-project" }
+            ]
+        },
+        "bitwig project folder": {
+            "substitute": "bitwig-project-folder",
+            "symlink-to": "application-bitwig-project-folder",
+            "targets": [
+                { "action": "replace", "icon": "application-bitwig-project-folder" }
+            ]
+        },
+        "bitwig template": {
+            "substitute": "bitwig-template",
+            "symlink-to": "application-bitwig-template",
+            "targets": [
+                { "action": "replace", "icon": "application-bitwig-template" }
+            ]
+        },
+        "bitwig preset": {
+            "substitute": "bitwig-preset",
+            "symlink-to": "application-bitwig-preset",
+            "targets": [
+                { "action": "replace", "icon": "application-bitwig-preset" }
+            ]
+        },
+        "image": {
+            "substitute": "image-3-papirus",
+            "symlink-to": "application-images",
+            "targets": [
+                { "action": "replace", "icon": "application-images" },
+                { "action": "symlink", "icon": "application-image-tiff" },
+                { "action": "symlink", "icon": "application-image-tga" },
+                { "action": "symlink", "icon": "application-image-png" },
+                { "action": "symlink", "icon": "application-image-jxl" },
+                { "action": "symlink", "icon": "application-image-jpg" },
+                { "action": "symlink", "icon": "application-image-gif" },
+                { "action": "symlink", "icon": "application-image-exr" },
+                { "action": "symlink", "icon": "application-image-bmp" },
+                { "action": "symlink", "icon": "application-image-avif" }
+            ]
+        },
+        "markdown": {
+            "substitute": "markdown-2",
+            "symlink-to": "text-markdown",
+            "targets": [
+                { "action": "replace", "icon": "text-markdown" }
+            ],
+            "sources": ["glyphs from MOREWAITA, colors from KORA"]
+        },
+        "svg": {
+            "substitute": "svg",
+            "symlink-to": "application-vector",
+            "targets": [
+                { "action": "replace", "icon": "application-vector" }
+            ],
+            "sources": ["glyphs from FAIRYWREN, colors from BREEZE"]
+        },
+        "blank": {
+            "substitute": "blank",
+            "symlink-to": "application-blank",
+            "targets": [
+                { "action": "replace", "icon": "application-blank" }
+            ],
+            "sources": ["colors from KORA"]
+        },
+        "document": {
+            "substitute": "document",
+            "symlink-to": "application-document",
+            "targets": [
+                { "action": "replace", "icon": "application-document" }
+            ],
+            "sources": ["colors and glyphs from KORA"]
+        },
+        "xml": {
+            "substitute": "xml",
+            "symlink-to": "text-xml",
+            "targets": [
+                { "action": "replace", "icon": "text-xml" },
+                { "action": "symlink", "icon": "application-x-osm+xml" }
+            ],
+            "sources": ["glyphs from KORA, glyphs from breeze"]
+        },
+        "executable": {
+            "substitute": "executable",
+            "symlink-to": "application-executable",
+            "targets": [
+                { "action": "replace", "icon": "application-executable" }
+            ],
+            "sources": ["colors and glyphs from KORA"]
+        },
+        "json": {
+            "substitute": "json",
+            "symlink-to": "application-json",
+            "targets": [
+                { "action": "replace", "icon": "application-json" }
+            ],
+            "sources": ["official json logo"]
         }
     }
 }
