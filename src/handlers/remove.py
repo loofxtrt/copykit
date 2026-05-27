@@ -1,10 +1,13 @@
 from pathlib import Path
 
 from ..models import Target
-from .. import logger
+# from .. import logger
 
 
-def handle_remove(target: Target):
+def handle_remove(
+    target: Target,
+    logger: EntryLogger
+    ):
     """
     remove o arquivo ou symlink do target, se existir
 

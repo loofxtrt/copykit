@@ -2,10 +2,18 @@ from pathlib import Path
 import shutil
 
 from ..models import Target, Entry
-from .. import logger, processor
+from ..logger import EntryLogger
+from .. import processor
+# from .. import logger, processor
 
 
-def handle_create_or_replace(entry: Entry, target: Target, hard_replace: bool, skip_symlinks: bool):
+def handle_create_or_replace(
+    entry: Entry,
+    target: Target,
+    hard_replace: bool,
+    skip_symlinks: bool,
+    logger: EntryLogger
+    ):
     """
     lida com ações de criação ou substituição de arquivos a partir de um substituto
 
@@ -45,9 +53,9 @@ def handle_create_or_replace(entry: Entry, target: Target, hard_replace: bool, s
                 logger.skip(f'symlink pulado: {target.icon}')
                 return
     
-        _copy(substitute=substitute.path, destination=target.path, operation='substituído')
+        _copy(substitute=substitute.path, destination=target.path, operation='substituído', logger=logger)
     elif target.action == 'create':
-        _copy(substitute=substitute.path, destination=target.path, operation='criado')
+        _copy(substitute=substitute.path, destination=target.path, operation='criado', logger=logger)
 
     # aplicar processing
     if entry.processing:
@@ -59,7 +67,12 @@ def handle_create_or_replace(entry: Entry, target: Target, hard_replace: bool, s
 
 # TODO: param (flag) pra chamar ou não o processor e otimizar os svgs ao copiar eles
 # TODO: param pra ensure_parents?
-def _copy(substitute: Path, destination: Path, operation: str):
+def _copy(
+    substitute: Path,
+    destination: Path,
+    operation: str,
+    logger: EntryLogger
+    ):
     """
     copia um arquivo substituto para o destino, removendo qualquer arquivo existente antes
 

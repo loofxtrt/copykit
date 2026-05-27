@@ -4,6 +4,36 @@ from rich.markup import escape
 from rich.panel import Panel
 
 
+class EntryLogger():
+    def __init__(self, title: str):
+        self.title = title
+        print(title)
+
+    def warning(self, message):
+        print(f'    {message}')
+
+    def error(self, message):
+        print(f'    {message}')
+
+    def info(self, message):
+        print(f'    {message}')
+
+    def skip(self, message):
+        print(f'    {message}')
+
+    def success(self, message):
+        print(f'    {message}')
+
+    def symlink(self, message):
+        print(f'    {message}')
+
+    def debug(self, message):
+        print(f'    {message}')
+
+    def critical(self, message):
+        print(f'    {message}')
+
+
 def message_formatter(message, level: str = 'info', with_background: bool = False):
     lvl_colors = {
         'warning': 'yellow',

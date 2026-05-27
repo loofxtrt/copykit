@@ -2,10 +2,14 @@ from pathlib import Path
 
 from ..models import Target
 from ..globals import normalize_svg_name
-from .. import logger
+# from .. import logger
 
 
-def handle_symlink(canonical: Path, target: Target):
+def handle_symlink(
+    canonical: Path,
+    target: Target,
+    logger: EntryLogger
+    ):
     """
     cria um symlink apontando para o arquivo master previamente definido
 

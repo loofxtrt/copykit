@@ -8,6 +8,7 @@ import argparse
 from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normalize_json_name, normalize_svg_name
 from .models import Entry, Target, Mapping, Context, Substitute
 from .handlers import remove, replace, symlink
+from .logger import EntryLogger
 from . import logger, processor
 
 
@@ -58,6 +59,9 @@ def handle_mapping(
         if not targets:
             logger.error(f'nenhum target encontrado para substituir em {id}')
             continue
+        
+        # criar o logger dessa entry específica
+        entry_logger = EntryLogger(entry.key)
 
         # reconstruir o caminho do ícone e fazer as mudanças
         for t in targets:
@@ -65,28 +69,41 @@ def handle_mapping(
             icon = t.icon
 
             if not icon:
-                logger.error(f'target sem ícone em {id}')
+                entry_logger.error(f'target sem ícone em {id}')
                 continue
 
             if not action:
-                logger.error(f'ação não definida para {icon}')
+                entry_logger.error(f'ação não definida para {icon}')
                 continue
 
             if action in ('create', 'replace'):
                 # o caminho do ícone substituto só precisa ser reconstruído quando a action exigir ele
                 # por isso esse if action in() é necessário, pra que outras acções que não precisem dele
                 # não façam toda entrada dos json obrigatoriamente ter um campo substitute
-                replace.handle_create_or_replace(entry, t, hard_replace, skip_symlinks)
+                replace.handle_create_or_replace(
+                    entry=entry,
+                    target=t,
+                    hard_replace=hard_replace,
+                    skip_symlinks=skip_symlinks,
+                    logger=entry_logger
+                )
             elif action == 'symlink':
                 canonical = entry.canonical
 
                 if canonical:
-                    logger.info(f'canonical definido como {canonical}')
-                    symlink.handle_symlink(canonical, t)
+                    entry_logger.info(f'canonical definido como {canonical}')
+                    symlink.handle_symlink(
+                        canonical=canonical,
+                        target=t,
+                        logger=entry_logger
+                    )
                 else:
-                    logger.info(f'canonical não definido para {id}')
+                    entry_logger.info(f'canonical não definido para {id}')
             elif action == 'remove':
-                remove.handle_remove(t)
+                remove.handle_remove(
+                    target=t,
+                    logger=entry_logger
+                )
 
 def run(root: Path):
     """
@@ -131,3 +148,4 @@ if __name__ == '__main__':
 # TODO: arrumar o PACK_LOCAL hardcoded em partes do código
 # TODO: opção pra remover todos os symlinks quebrados depois de uma remoção
 # TODO: aviso de se um mapping não tem um substitute parent definido
+# TODO: remover código morto
