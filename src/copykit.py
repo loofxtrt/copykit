@@ -108,6 +108,8 @@ def handle_mapping(
                     logger=entry_logger
                 )
         
+        # IMPORTANTE
+        # fechar o ambiente vivo desse logger quando terminar o processamento
         entry_logger.close()
 
 def run(root: Path):
@@ -154,3 +156,4 @@ if __name__ == '__main__':
 # TODO: opção pra remover todos os symlinks quebrados depois de uma remoção
 # TODO: aviso de se um mapping não tem um substitute parent definido
 # TODO: remover código morto
+# TODO: fazer entry logger ser um arg da classe entry em vez de arg

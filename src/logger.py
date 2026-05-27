@@ -6,6 +6,19 @@ from rich.live import Live
 from rich.style import Style
 
 
+COLOR_MAP = {
+        'warning': 'yellow',
+        'info': 'default',
+        'debug': 'green',
+        'error': 'red',
+        'critical': 'red',
+        'success': 'green',
+        'skip': 'default',
+        'symlink': 'blue',
+        'normal': 'default'
+    }
+
+
 class EntryLogger():
     def __init__(self, title: str):
         self.title = title
@@ -13,6 +26,9 @@ class EntryLogger():
 
         self.console = Console()
 
+        # cria o ambiente vivo
+        # IMPORTANTE: deve ser manualmente parado quando o logger for morto
+        # se não bugs acontecem. ex: logs cortados por outros
         self.live = Live(
             self._render_panel(),
             console=self.console,
@@ -20,19 +36,43 @@ class EntryLogger():
         )
         self.live.start()
 
-    def _render_panel(self):
+    def _render_panel(self, level: str | None = None):
+        """
+        renderiza um painel representando o estado atual do logger
+        baseado em todas as mensagens salvas na memória
+        
+        args:
+            level:
+                o nível da última mensagem que foi passada pro logger
+                é usado pra redefinir a cor da borda do painel enquanto ele acontece
+                
+                pode ser none porque ele precisa ser chamado no init, que não passa um level
+        """
+
         return Panel(
-            Group(*self.messages),
-            title=self.title
+            Group(*self.messages), # desempacota lista de mensagens uma por uma
+            title=Text(self.title, style='bold'),
+            border_style=get_level_color(level),
+            title_align='left'
         )
     
     def _handle_message(self, message: str, level: str):
+        """
+        formata uma nova mensagem, insere ela na memória
+        e renderiza o estado atual do logger
+        """
+
         formatted = format_message(message, level)
         self.messages.append(formatted)
 
-        self.live.update(self._render_panel())
+        self.live.update(self._render_panel(level))
 
     def close(self):
+        """
+        termina o ambiente vivo quando ele não for mais necessário
+        chamar isso é responsabilidade de quem criou uma instância dessa classe
+        """
+
         self.live.stop()
 
     def warning(self, message):
@@ -60,34 +100,50 @@ class EntryLogger():
         self._handle_message(message, 'critical')
 
 
+def get_level_color(level: str | None) -> str:
+    """
+    obtém a cor equivalente a um nível de logging
+    se nenhum nível foi passado, se assume que é um texto normal
+    """
+
+    return COLOR_MAP.get(level.lower() if level else '', 'normal')
+
 def format_message(
     message: str,
     level: str,
     level_bold: bool = False,
     level_upper: bool = False,
     ) -> Text:
-    # TODO: documentação
-    color_map = {
-        'warning': 'yellow',
-        'info': 'default',
-        'debug': 'green',
-        'error': 'red',
-        'critical': 'red',
-        'success': 'green',
-        'skip': 'default',
-        'symlink': 'blue',
-        'normal': 'default'
-    }
-    color = color_map.get(level.lower(), 'normal')
+    """
+    formata uma mensagem de log em um objeto Text do rich
+
+    args:
+        message:
+            texto da mensagem de log
+
+        level:
+            nível da mensagem de log (ex: 'info', 'error', 'warning').
+            é usado para definir cor e rotular cada mensagem
+
+        level_bold:
+            se deve ou não aplicar negrito no texto do level
+
+        level_upper:
+            se deve ou não passar o texto do level pra UPPERCASE
+    """
+
+    color = get_level_color(level)
     
     # identificar o level mais longo possível
     # pra ajustar o padding de acordo com ele
-    longest = max(color_map.keys(), key=len)
+    longest = max(COLOR_MAP.keys(), key=len)
     
+    # estilizar o texto do level
     level_text = level.upper() if level_upper else level
     level_text = level_text.ljust(len(longest))
     level_style = Style(color=color, bold=level_bold)
 
+    # construir o texto final
     text = Text()
     text.append_text(
         Text(level_text, level_style)
@@ -99,6 +155,7 @@ def format_message(
 
     return text
 
+# TODO: extinguir esse logger antigo
 def message_formatter(message, level: str = 'info', with_background: bool = False):
     lvl_colors = {
         'warning': 'yellow',
