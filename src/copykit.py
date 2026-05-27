@@ -54,13 +54,14 @@ def handle_mapping(
     if not entries:
         logger.error(f'nenhuma entry presente em {id}')
         return
+    
     for entry in mapping.entries.values():
+        entry_logger = EntryLogger(entry.key) # criar o logger dessa entry específica
+        
         targets = entry.targets
         if not targets:
-            logger.error(f'nenhum target encontrado para substituir em {id}')
+            entry_logger.error(f'nenhum target encontrado para substituir em {id}')
             continue
-        
-        entry_logger = EntryLogger(entry.key) # criar o logger dessa entry específica
         
         canonical = entry.canonical
         if canonical:

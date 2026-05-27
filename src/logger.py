@@ -3,6 +3,7 @@ from rich.text import Text
 from rich.markup import escape
 from rich.panel import Panel
 from rich.live import Live
+from rich.style import Style
 
 
 class EntryLogger():
@@ -59,7 +60,13 @@ class EntryLogger():
         self._handle_message(message, 'critical')
 
 
-def format_message(message: str, level: str) -> Text:
+def format_message(
+    message: str,
+    level: str,
+    level_bold: bool = False,
+    level_upper: bool = False,
+    ) -> Text:
+    # TODO: documentação
     color_map = {
         'warning': 'yellow',
         'info': 'default',
@@ -76,11 +83,14 @@ def format_message(message: str, level: str) -> Text:
     # identificar o level mais longo possível
     # pra ajustar o padding de acordo com ele
     longest = max(color_map.keys(), key=len)
-    level_text = level.upper().ljust(len(longest))
     
+    level_text = level.upper() if level_upper else level
+    level_text = level_text.ljust(len(longest))
+    level_style = Style(color=color, bold=level_bold)
+
     text = Text()
     text.append_text(
-        Text(level_text, style=f'bold {color}')
+        Text(level_text, level_style)
     )
     text.append(' ')
     text.append_text(

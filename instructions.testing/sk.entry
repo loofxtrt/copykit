@@ -1,7 +1,7 @@
 "SKlauncher": {
     "substitute": "sklauncher",
     "targets": [
-        { "action": "replace", "icon": "sklauncher" }
+        { "action": "create", "icon": "sklauncher" }
     ],
     "sources": ["remade from scratch based on version of the logo: https://www.patreon.com/cw/skmedix"]
 }
