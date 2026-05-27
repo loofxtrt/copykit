@@ -60,8 +60,11 @@ def handle_mapping(
             logger.error(f'nenhum target encontrado para substituir em {id}')
             continue
         
-        # criar o logger dessa entry específica
-        entry_logger = EntryLogger(entry.key)
+        entry_logger = EntryLogger(entry.key) # criar o logger dessa entry específica
+        
+        canonical = entry.canonical
+        if canonical:
+            entry_logger.info(f'canonical definido como {canonical}')
 
         # reconstruir o caminho do ícone e fazer as mudanças
         for t in targets:
@@ -77,6 +80,7 @@ def handle_mapping(
                 continue
 
             if action in ('create', 'replace'):
+                # TODO: comentário desatualizado
                 # o caminho do ícone substituto só precisa ser reconstruído quando a action exigir ele
                 # por isso esse if action in() é necessário, pra que outras acções que não precisem dele
                 # não façam toda entrada dos json obrigatoriamente ter um campo substitute
@@ -88,17 +92,15 @@ def handle_mapping(
                     logger=entry_logger
                 )
             elif action == 'symlink':
-                canonical = entry.canonical
-
-                if canonical:
-                    entry_logger.info(f'canonical definido como {canonical}')
-                    symlink.handle_symlink(
-                        canonical=canonical,
-                        target=t,
-                        logger=entry_logger
-                    )
-                else:
+                if not canonical:
                     entry_logger.info(f'canonical não definido para {id}')
+                    continue
+
+                symlink.handle_symlink(
+                    canonical=canonical,
+                    target=t,
+                    logger=entry_logger
+                )
             elif action == 'remove':
                 remove.handle_remove(
                     target=t,
