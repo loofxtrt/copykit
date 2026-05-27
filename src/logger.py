@@ -25,38 +25,64 @@ class EntryLogger():
             title=self.title
         )
     
-    def _handle_message(self, message):
-        textified = Text(f'    {message}')
-        self.messages.append(textified)
+    def _handle_message(self, message: str, level: str):
+        formatted = format_message(message, level)
+        self.messages.append(formatted)
+
         self.live.update(self._render_panel())
 
     def close(self):
         self.live.stop()
 
     def warning(self, message):
-        self._handle_message(message)
+        self._handle_message(message, 'warning')
 
     def error(self, message):
-        self._handle_message(message)
+        self._handle_message(message, 'error')
 
     def info(self, message):
-        self._handle_message(message)
+        self._handle_message(message, 'info')
 
     def skip(self, message):
-        self._handle_message(message)
+        self._handle_message(message, 'skip')
 
     def success(self, message):
-        self._handle_message(message)
+        self._handle_message(message, 'success')
 
     def symlink(self, message):
-        self._handle_message(message)
+        self._handle_message(message, 'symlink')
 
     def debug(self, message):
-        self._handle_message(message)
+        self._handle_message(message, 'debug')
 
     def critical(self, message):
-        self._handle_message(message)
+        self._handle_message(message, 'critical')
 
+
+def format_message(message: str, level: str) -> Text:
+    color_map = {
+        'warning': 'yellow',
+        'info': 'blue',
+        'debug': 'green',
+        'error': 'red',
+        'critical': 'red',
+        'success': 'green',
+        'skip': 'blue',
+        'symlink': 'blue',
+        'normal': 'default'
+    }
+    color = color_map.get(level.lower(), 'normal')
+    
+    text = Text()
+    text.append_text(
+        Text(level.upper(), style=f'bold {color}')
+    )
+    text.append(' ')
+    text.append_text(
+        Text(message, overflow='fold')
+    )
+
+    return text
 
 def message_formatter(message, level: str = 'info', with_background: bool = False):
     lvl_colors = {
