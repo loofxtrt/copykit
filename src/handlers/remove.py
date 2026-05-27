@@ -20,7 +20,7 @@ def handle_remove(
         target.path.unlink()
         logger.success(f'{target.icon} deletado')
     except FileNotFoundError:
-        logger.skip(f'{target.icon} não precisa ser deletado porque já não existe')
+        logger.info(f'{target.icon} não precisa ser deletado porque já não existe')
     except Exception as err:
         logger.error(f'erro ao deletar {target.icon}')
         logger.error(err)

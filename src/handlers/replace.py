@@ -50,7 +50,7 @@ def handle_create_or_replace(
                 return
             
             if target.path.is_symlink() and skip_symlinks:
-                logger.skip(f'symlink pulado: {target.icon}')
+                logger.info(f'symlink pulado: {target.icon}')
                 return
     
         _copy(substitute=substitute.path, destination=target.path, operation='substituído', logger=logger)

@@ -308,7 +308,7 @@
             "sources": ["KORA", "MARWAITA"],
             "changelog": "switched the colors to the ones present in kvantum from MARWAITA"
         },
-        "Cmake": {
+        "CMake": {
             "substitute": "kora_cmake",
             "canonical": "cmake",
             "targets": [

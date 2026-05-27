@@ -1,6 +1,6 @@
 {
     "context": {
-        "id": "places-symbolic",
+        "id": "places:symbolic",
         "target_parent": "ROOT/places/symbolic",
         "substitute_parent": "SUBSTITUTES/places/symbolic"
     },

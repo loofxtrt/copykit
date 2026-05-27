@@ -1,6 +1,6 @@
 {
     "context": {
-        "id": "actions-symbolic",
+        "id": "actions:symbolic",
         "target_parent": "ROOT/actions/symbolic",
         "substitute_parent": "SUBSTITUTES/actions/symbolic"
     },

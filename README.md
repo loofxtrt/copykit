@@ -1,2 +1,4 @@
-python3 -m src.replacer
-python3 .dev/verify.py
+convenção não fixa de ids/logging  
+pai:pai:pai:filho  
+actions:16  
+actions:symbolic

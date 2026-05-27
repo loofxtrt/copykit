@@ -56,7 +56,11 @@ def handle_mapping(
         return
     
     for entry in mapping.entries.values():
-        entry_logger = EntryLogger(entry.key) # criar o logger dessa entry específica
+        # criar o logger dessa entry específica
+        entry_logger = EntryLogger(
+            title=entry.key,
+            prefix=f'{id}:'
+        )
         
         targets = entry.targets
         if not targets:

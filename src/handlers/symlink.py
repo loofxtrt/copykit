@@ -16,9 +16,11 @@ def handle_symlink(
     args:
     	canonical:
     		caminho do arquivo que será referenciado pelo symlink
+            ex: 'blender.svg'
 
     	target:
     		target que define onde o symlink será criado
+            ex: copycat/apps/scalable/blender-2.svg
     """
     
     # symlink depende de um arquivo base previamente definido
@@ -39,4 +41,4 @@ def handle_symlink(
         logger.error(f'{link} não foi criado como um symlink válido')
         return
 
-    logger.symlink(f'symlink {link} criado para {target.path}')
+    logger.symlink(f'criado symlink apontando para {canonical} -> {link}')

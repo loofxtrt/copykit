@@ -15,6 +15,7 @@ class Context:
     args:
     	id:
     		identificador usado principalmente para logs e rastreamento
+            NÃO precisa ser idêntico ao nome do arquivo json que contém ele
 
     	target_parent:
     		diretório base onde os targets estão localizados

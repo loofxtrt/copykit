@@ -1,6 +1,6 @@
 {
     "context": {
-        "id": "apps-symbolic",
+        "id": "apps:symbolic",
         "target_parent": "ROOT/apps/symbolic"
     },
     "entries": {
