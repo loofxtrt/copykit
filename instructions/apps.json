@@ -574,13 +574,6 @@
                 { "action": "symlink", "icon": "org.musicbrainz.Picard" }
             ],
             "changelog": "remade the icon based on the dmanager icon shape from KORA and drop picked the colors and inside shapes from PAPIRUS"
-        },
-        "SKlauncher": {
-            "substitute": "sklauncher",
-            "targets": [
-                { "action": "replace", "icon": "sklauncher" }
-            ],
-            "sources": ["remade from scratch based on version of the logo: https://www.patreon.com/cw/skmedix"]
         }
     }
 }
