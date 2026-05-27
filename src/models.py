@@ -54,12 +54,12 @@ class Context:
         if not raw_context:
             raise ValueError(f'contexto não definido ({file.name})')
 
-        id = raw_context.get('id')
-        if not id:
+        _id = raw_context.get('id')
+        if not _id:
             raise ValueError(f'id não definido ({file.name})')
         
         return cls(
-            id=id,
+            id=_id,
             data=data,
             active_root=active_root
         )
@@ -73,7 +73,7 @@ class Context:
             return None
 
         if 'ROOT' not in raw:
-            raise ValueError(f"'ROOT' precisa estar presente em target_parent ({id})")
+            raise ValueError(f"'ROOT' precisa estar presente em target_parent ({self.id})")
         
         return Path(raw.replace('ROOT', str(self.active_root)))
 
@@ -86,7 +86,7 @@ class Context:
             return None
         
         if 'SUBSTITUTES' not in raw:
-            raise ValueError(f"'SUBSTITUTES' precisa estar presente em substitute_parent ou ser completamente nulo ({id})")
+            raise ValueError(f"'SUBSTITUTES' precisa estar presente em substitute_parent ou ser completamente nulo ({self.id})")
         
         return Path(raw.replace('SUBSTITUTES', str(SUBSTITUTES)))
 

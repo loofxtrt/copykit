@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from ..models import Target
+from ..logger import EntryLogger
 # from .. import logger
 
 

@@ -2,6 +2,7 @@ from pathlib import Path
 
 from ..models import Target
 from ..globals import normalize_svg_name
+from ..logger import EntryLogger
 # from .. import logger
 
 
