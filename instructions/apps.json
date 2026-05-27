@@ -1,13 +1,13 @@
 {
     "context": {
         "id": "apps",
-        "target-parent": "ROOT/apps/scalable",
-        "substitute-parent": "SUBSTITUTES/apps"
+        "target_parent": "ROOT/apps/scalable",
+        "substitute_parent": "SUBSTITUTES/apps"
     },
     "entries": {
         "Discord": {
             "substitute": "kora_discord",
-            "symlink-to": "discord",
+            "canonical": "discord",
             "targets": [
                 { "action": "replace", "icon": "discord" },
                 { "action": "symlink", "icon": "discord-bin" },
@@ -20,7 +20,7 @@
         },
         "Discord Canary": {
             "substitute": "kora_discord-canary",
-            "symlink-to": "discord-canary",
+            "canonical": "discord-canary",
             "targets": [
                 { "action": "replace", "icon": "discord-canary" },
                 { "action": "symlink", "icon": "com.discordapp.DiscordCanary" }
@@ -38,7 +38,7 @@
         },
         "Spotify": {
             "substitute": "marwaita_spotify",
-            "symlink-to": "spotify",
+            "canonical": "spotify",
             "targets": [
                 { "action": "replace", "icon": "spotify" },
                 { "action": "symlink", "icon": "com.spotify.Client" },
@@ -52,7 +52,7 @@
         },
         "OBS": {
             "substitute": "kora_obs",
-            "symlink-to": "obs",
+            "canonical": "obs",
             "targets": [
                 { "action": "replace", "icon": "obs" },
                 { "action": "symlink", "icon": "com.obsproject.Studio" }
@@ -62,7 +62,7 @@
         },
         "Krita": {
             "substitute": "marwaita_krita",
-            "symlink-to": "krita",
+            "canonical": "krita",
             "targets": [
                 { "action": "replace", "icon": "krita" },
                 { "action": "symlink", "icon": "calligrakrita" },
@@ -73,7 +73,7 @@
         },
         "GIMP": {
             "substitute": "breeze-dark_gimp",
-            "symlink-to": "gimp",
+            "canonical": "gimp",
             "targets": [
                 { "action": "replace", "icon": "gimp" },
                 { "action": "symlink", "icon": "org.gimp.GIMP" }
@@ -83,7 +83,7 @@
         },
         "Godot": {
             "substitute": "plasmax_godot",
-            "symlink-to": "godot",
+            "canonical": "godot",
             "targets": [
                 { "action": "replace", "icon": "godot" },
                 { "action": "symlink", "icon": "godot-mono" },
@@ -96,7 +96,7 @@
         },
         "Inkscape": {
             "substitute": "plasmax_inkscape",
-            "symlink-to": "inkscape",
+            "canonical": "inkscape",
             "targets": [
                 { "action": "replace", "icon": "inkscape" },
                 { "action": "symlink", "icon": "inkscape-logo" },
@@ -108,7 +108,7 @@
         },
         "Blender": {
             "substitute": "blender",
-            "symlink-to": "blender",
+            "canonical": "blender",
             "targets": [
                 { "action": "replace", "icon": "blender" },
                 { "action": "symlink", "icon": "Blender" },
@@ -120,7 +120,7 @@
         },
         "Obsidian": {
             "substitute": "kora_obsidian",
-            "symlink-to": "obsidian",
+            "canonical": "obsidian",
             "targets": [
                 { "action": "replace", "icon": "obsidian" },
                 { "action": "symlink", "icon": "md.obsidian.Obsidian" },
@@ -129,7 +129,7 @@
         },
         "Steam": {
             "substitute": "marwaita_steam",
-            "symlink-to": "steam",
+            "canonical": "steam",
             "targets": [
                 { "action": "replace", "icon": "steam" },
                 { "action": "symlink", "icon": "steam-icon" },
@@ -144,7 +144,7 @@
         },
         "Aseprite": {
             "substitute": "aseprite",
-            "symlink-to": "aseprite",
+            "canonical": "aseprite",
             "targets": [
                 { "action": "replace", "icon": "aseprite" },
                 { "action": "symlink", "icon": "lutris_aseprite" }
@@ -153,7 +153,7 @@
         },
         "Bitwig": {
             "substitute": "kora_bitwig",
-            "symlink-to": "bitwig",
+            "canonical": "bitwig",
             "targets": [
                 { "action": "replace", "icon": "bitwig" },
                 { "action": "symlink", "icon": "bitwig-studio" },
@@ -172,7 +172,7 @@
         },
         "EndeavourOS": {
             "substitute": "endeavouros",
-            "symlink-to": "endeavouros",
+            "canonical": "endeavouros",
             "targets": [
                 { "action": "replace", "icon": "endeavouros" },
                 { "action": "symlink", "icon": "distributor-logo-endeavouros" },
@@ -182,7 +182,7 @@
         },
         "DB Browser for SQLite": {
             "substitute": "sqlitebrowser",
-            "symlink-to": "sqlitebrowser",
+            "canonical": "sqlitebrowser",
             "targets": [
                 { "action": "replace", "icon": "sqlitebrowser" },
                 { "action": "symlink", "icon": "org.sqlitebrowser.sqlitebrowser" },
@@ -192,7 +192,7 @@
         },
         "Audacity": {
             "substitute": "audacity",
-            "symlink-to": "audacity",
+            "canonical": "audacity",
             "targets": [
                 { "action": "replace", "icon": "audacity" },
                 { "action": "symlink", "icon": "org.audacityteam.Audacity" },
@@ -205,7 +205,7 @@
         },
         "VSCodium": {
             "substitute": "codium",
-            "symlink-to": "vscodium",
+            "canonical": "vscodium",
             "targets": [
                 { "action": "replace", "icon": "vscodium" },
                 { "action": "symlink", "icon": "com.vscodium.codium" }
@@ -214,7 +214,7 @@
         },
         "AppImageLauncher": {
             "substitute": "flat-remix-blue-dark_appimagelauncher",
-            "symlink-to": "appimagelauncher",
+            "canonical": "appimagelauncher",
             "targets": [
                 { "action": "replace", "icon": "appimagelauncher" },
                 { "action": "symlink", "icon": "AppImageLauncher" }
@@ -224,7 +224,7 @@
         },
         "Android Studio": {
             "substitute": "morewaita_android-studio",
-            "symlink-to": "android-studio",
+            "canonical": "android-studio",
             "targets": [
                 { "action": "replace", "icon": "android-studio" },
                 { "action": "symlink", "icon": "android-studio-beta" },
@@ -236,7 +236,7 @@
         },
         "Android Studio Canary": {
             "substitute": "morewaita_android-studio-canary",
-            "symlink-to": "android-studio-canary",
+            "canonical": "android-studio-canary",
             "targets": [
                 { "action": "replace", "icon": "android-studio-canary" },
                 { "action": "symlink", "icon": "androidstudio-preview" }
@@ -254,7 +254,7 @@
         },
         "Ark": {
             "substitute": "qogir_ark",
-            "symlink-to": "ark",
+            "canonical": "ark",
             "targets": [
                 { "action": "replace", "icon": "ark" },
                 { "action": "symlink", "icon": "org.kde.ark" },
@@ -273,7 +273,7 @@
         },
         "Github Desktop": {
             "substitute": "kora_github-desktop",
-            "symlink-to": "github-desktop",
+            "canonical": "github-desktop",
             "targets": [
                 { "action": "replace", "icon": "github-desktop" },
                 { "action": "symlink", "icon": "appimagekit-github-desktop" },
@@ -284,7 +284,7 @@
         },
         "Color Picker": {
             "substitute": "marwaita_color-picker",
-            "symlink-to": "color-picker",
+            "canonical": "color-picker",
             "targets": [
                 { "action": "replace", "icon": "color-picker" },
                 { "action": "symlink", "icon": "gcolor3" },
@@ -310,7 +310,7 @@
         },
         "Cmake": {
             "substitute": "kora_cmake",
-            "symlink-to": "cmake",
+            "canonical": "cmake",
             "targets": [
                 { "action": "replace", "icon": "cmake" },
                 { "action": "symlink", "icon": "cmake-gui" },
@@ -322,7 +322,7 @@
         },
         "Minecraft": {
             "substitute": "kora_minecraft",
-            "symlink-to": "minecraft",
+            "canonical": "minecraft",
             "targets": [
                 { "action": "replace", "icon": "minecraft" },
                 { "action": "symlink", "icon": "com.mojang.Minecraft" },
@@ -331,7 +331,7 @@
         },
         "Librewolf": {
             "substitute": "librewolf",
-            "symlink-to": "librewolf",
+            "canonical": "librewolf",
             "targets": [
                 { "action": "replace", "icon": "librewolf" },
                 { "action": "symlink", "icon": "appimagekit-librewolf" },
@@ -343,7 +343,7 @@
         },
         "MPV": {
             "substitute": "breeze-dark_mpv",
-            "symlink-to": "mpv",
+            "canonical": "mpv",
             "targets": [
                 { "action": "replace", "icon": "mpv" },
                 { "action": "symlink", "icon": "mplayer" },
@@ -366,7 +366,7 @@
         },
         "Libresprite": {
             "substitute": "libresprite",
-            "symlink-to": "libresprite",
+            "canonical": "libresprite",
             "targets": [
                 { "action": "replace", "icon": "libresprite" },
                 { "action": "symlink", "icon": "com.github.libresprite.LibreSprite" }
@@ -375,7 +375,7 @@
         },
         "Roblox Player": {
             "substitute": "roblox-player",
-            "symlink-to": "io.github.vinegarhq.Vinegar.player",
+            "canonical": "io.github.vinegarhq.Vinegar.player",
             "targets": [
                 { "action": "replace", "icon": "io.github.vinegarhq.Vinegar.player" },
                 { "action": "symlink", "icon": "net.brinkervii.grapejuice.robloxplayer" },
@@ -385,7 +385,7 @@
         },
         "Roblox Studio": {
             "substitute": "roblox-studio",
-            "symlink-to": "io.github.vinegarhq.Vinegar.studio",
+            "canonical": "io.github.vinegarhq.Vinegar.studio",
             "targets": [
                 { "action": "replace", "icon": "io.github.vinegarhq.Vinegar.studio" },
                 { "action": "symlink", "icon": "grapejuice-roblox-studio" },
@@ -403,7 +403,7 @@
         },
         "Vinegar": {
             "substitute": "roblox-vinegar",
-            "symlink-to": "io.github.vinegarhq.Vinegar",
+            "canonical": "io.github.vinegarhq.Vinegar",
             "targets": [
                 { "action": "replace", "icon": "io.github.vinegarhq.Vinegar" },
                 { "action": "symlink", "icon": "org.vinegarhq.Vinegar" }
@@ -428,7 +428,7 @@
         },
         "BlueMail": {
             "substitute": "papirus_bluemail",
-            "symlink-to": "bluemail",
+            "canonical": "bluemail",
             "targets": [
                 { "action": "replace", "icon": "bluemail" },
                 { "action": "symlink", "icon": "net.blix.BlueMail" }
@@ -438,7 +438,7 @@
         },
         "Mail apps": {
             "substitute": "papirus_internet-mail",
-            "symlink-to": "mail_generic",
+            "canonical": "mail_generic",
             "targets": [
                 { "action": "create", "icon": "mail_generic" },
                 { "action": "symlink", "icon": "mail-generic" },
@@ -497,7 +497,7 @@
         },
         "Calculator": {
             "substitute": "calculator",
-            "symlink-to": "accessories-calculator",
+            "canonical": "accessories-calculator",
             "targets": [
                 { "action": "replace", "icon": "accessories-calculator" },
                 { "action": "symlink", "icon": "calculator" },
@@ -519,7 +519,7 @@
         },
         "Filelight": {
             "substitute": "breeze-dark_filelight",
-            "symlink-to": "filelight",
+            "canonical": "filelight",
             "targets": [
                 { "action": "replace", "icon": "filelight" },
                 { "action": "symlink", "icon": "org.kde.filelight" }
@@ -529,7 +529,7 @@
         },
         "Flycast": {
             "substitute": "kora_flycast",
-            "symlink-to": "flycast",
+            "canonical": "flycast",
             "targets": [
                 { "action": "replace", "icon": "flycast" },
                 { "action": "symlink", "icon": "org.flycast.Flycast" }
@@ -539,7 +539,7 @@
         },
         "qBittorrent": {
             "substitute": "kora_qbittorrent",
-            "symlink-to": "qbittorrent",
+            "canonical": "qbittorrent",
             "targets": [
                 { "action": "replace", "icon": "qbittorrent" },
                 { "action": "symlink", "icon": "org.qbittorrent.qBittorrent" }
@@ -549,7 +549,7 @@
         },
         "Bitwarden": {
             "substitute": "kora_bitwarden",
-            "symlink-to": "bitwarden",
+            "canonical": "bitwarden",
             "targets": [
                 { "action": "replace", "icon": "bitwarden" },
                 { "action": "symlink", "icon": "appimagekit-bitwarden" },
@@ -560,7 +560,7 @@
         },
         "SteamLink": {
             "substitute": "kora_steamlink",
-            "symlink-to": "steamlink",
+            "canonical": "steamlink",
             "targets": [
                 { "action": "replace", "icon": "steamlink" },
                 { "action": "symlink", "icon": "com.valvesoftware.SteamLink" }
@@ -568,7 +568,7 @@
         },
         "MusicBrainz Picard": {
             "substitute": "picard",
-            "symlink-to": "picard",
+            "canonical": "picard",
             "targets": [
                 { "action": "replace", "icon": "picard" },
                 { "action": "symlink", "icon": "org.musicbrainz.Picard" }

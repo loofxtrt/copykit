@@ -1,14 +1,14 @@
 {
     "context": {
         "id": "actions-symbolic",
-        "target-parent": "ROOT/actions/symbolic",
-        "substitute-parent": "SUBSTITUTES/actions/symbolic"
+        "target_parent": "ROOT/actions/symbolic",
+        "substitute_parent": "SUBSTITUTES/actions/symbolic"
     },
     "entries": {
         "help": {
             "comment": "um desses é o que aparece no menu do plasma no help",
             "substitute": "fluent_22_help-about",
-            "symlink-to": "help-info-symbolic",
+            "canonical": "help-info-symbolic",
             "targets": [
                 { "action": "replace", "icon": "help-info-symbolic" },
                 { "action": "symlink", "icon": "help-contents-symbolic" },

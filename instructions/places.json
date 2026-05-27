@@ -1,8 +1,8 @@
 {
     "context": {
         "id": "places",
-        "target-parent": "ROOT/places/scalable",
-        "substitute-parent": "SUBSTITUTES/places"
+        "target_parent": "ROOT/places/scalable",
+        "substitute_parent": "SUBSTITUTES/places"
     },
     "entries": {
         "mass remove": {
@@ -112,7 +112,7 @@
         },
         "folder": {
             "substitute": "folder",
-            "symlink-to": "folder",
+            "canonical": "folder",
             "targets": [
                 { "action": "replace", "icon": "folder" },
                 { "action": "symlink", "icon": "folder_2" },
@@ -135,7 +135,7 @@
         },
         "folder pictures": {
             "substitute": "folder-pictures",
-            "symlink-to": "folder-pictures",
+            "canonical": "folder-pictures",
             "targets": [
                 { "action": "replace", "icon": "folder-pictures" },
                 { "action": "symlink", "icon": "folder-image" },
@@ -146,7 +146,7 @@
         },
         "folder home": {
             "substitute": "folder-home",
-            "symlink-to": "user-home",
+            "canonical": "user-home",
             "targets": [
                 { "action": "replace", "icon": "user-home" },
                 { "action": "symlink", "icon": "user-home-open" }
@@ -163,7 +163,7 @@
         },
         "folder music": {
             "substitute": "folder-music",
-            "symlink-to": "folder",
+            "canonical": "folder",
             "targets": [
                 { "action": "symlink", "icon": "folder-music" },
                 { "action": "symlink", "icon": "folder-music-open" },
@@ -180,14 +180,14 @@
         },
         "folder documents": {
             "substitute": "folder-documents",
-            "symlink-to": "folder",
+            "canonical": "folder",
             "targets": [
                 { "action": "symlink", "icon": "folder-documents" }
             ]
         },
         "folder templates": {
             "substitute": "folder-templates",
-            "symlink-to": "folder-templates",
+            "canonical": "folder-templates",
             "targets": [
                 { "action": "replace", "icon": "folder-templates" },
                 { "action": "symlink", "icon": "folder-templates-open" }
@@ -197,7 +197,7 @@
         },
         "folder publicshare": {
             "substitute": "folder-publicshare",
-            "symlink-to": "folder-publicshare",
+            "canonical": "folder-publicshare",
             "targets": [
                 { "action": "replace", "icon": "folder-publicshare" },
                 { "action": "symlink", "icon": "folder-publicshare-open" }
@@ -222,7 +222,7 @@
         },
         "folder network": {
             "substitute": "folder-network",
-            "symlink-to": "folder-network",
+            "canonical": "folder-network",
             "targets": [
                 { "action": "replace", "icon": "folder-network" },
                 { "action": "symlink", "icon": "network" },
@@ -242,7 +242,7 @@
         },
         "folder open": {
             "substitute": "folder-open",
-            "symlink-to": "folder-open",
+            "canonical": "folder-open",
             "targets": [
                 { "action": "replace", "icon": "folder-open" },
                 { "action": "symlink", "icon": "stock_open" },
@@ -253,7 +253,7 @@
         },
         "folder visiting": {
             "substitute": "folder-visiting",
-            "symlink-to": "folder-visiting",
+            "canonical": "folder-visiting",
             "targets": [
                 { "action": "replace", "icon": "folder-visiting" },
                 { "action": "symlink", "icon": "gnome-fs-directory-visiting" }

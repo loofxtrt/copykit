@@ -1,13 +1,13 @@
 {
     "context": {
         "id": "categories",
-        "target-parent": "ROOT/categories/symbolic",
-        "substitute-parent": "SUBSTITUTES/categories"
+        "target_parent": "ROOT/categories/symbolic",
+        "substitute_parent": "SUBSTITUTES/categories"
     },
     "entries": {
         "all": {
             "substitute": "fluent_22_applications-all-symbolic",
-            "symlink-to": "applications-all-symbolic",
+            "canonical": "applications-all-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-all-symbolic" },
                 { "action": "symlink", "icon": "store-home-symbolic" }
@@ -16,7 +16,7 @@
         },
         "development": {
             "substitute": "fluent_22_applications-development-symbolic",
-            "symlink-to": "applications-development-symbolic",
+            "canonical": "applications-development-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-development-symbolic" },
                 { "action": "symlink", "icon": "store-develop-symbolic" }
@@ -46,7 +46,7 @@
         },
         "education": {
             "substitute": "fluent_22_applications-education-symbolic",
-            "symlink-to": "applications-education-symbolic",
+            "canonical": "applications-education-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-education-symbolic" },
                 { "action": "symlink", "icon": "store-learn-symbolic" }
@@ -62,7 +62,7 @@
         },
         "games": {
             "substitute": "fluent_22_applications-games-symbolic",
-            "symlink-to": "applications-games-symbolic",
+            "canonical": "applications-games-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-games-symbolic" },
                 { "action": "symlink", "icon": "store-game-symbolic" }
@@ -71,7 +71,7 @@
         },
         "graphics": {
             "substitute": "fluent_22_applications-graphics-symbolic",
-            "symlink-to": "applications-graphics-symbolic",
+            "canonical": "applications-graphics-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-graphics-symbolic" },
                 { "action": "symlink", "icon": "store-create-symbolic" }
@@ -80,7 +80,7 @@
         },
         "internet": {
             "substitute": "fluent_22_applications-internet-symbolic",
-            "symlink-to": "applications-internet-symbolic",
+            "canonical": "applications-internet-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-internet-symbolic" },
                 { "action": "symlink", "icon": "applications-network-symbolic" },
@@ -90,7 +90,7 @@
         },
         "multimedia": {
             "substitute": "fluent_22_applications-multimedia-symbolic",
-            "symlink-to": "applications-multimedia-symbolic",
+            "canonical": "applications-multimedia-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-multimedia-symbolic" },
                 { "action": "symlink", "icon": "store-relax-symbolic" }
@@ -99,7 +99,7 @@
         },
         "office": {
             "substitute": "fluent_22_applications-office-symbolic",
-            "symlink-to": "applications-office-symbolic",
+            "canonical": "applications-office-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-office-symbolic" },
                 { "action": "symlink", "icon": "store-work-symbolic" }
@@ -122,7 +122,7 @@
         },
         "system": {
             "substitute": "fluent_22_applications-system-symbolic",
-            "symlink-to": "applications-system-symbolic",
+            "canonical": "applications-system-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-system-symbolic" },
                 { "action": "symlink", "icon": "preferences-system-symbolic" }
@@ -131,7 +131,7 @@
         },
         "utilities": {
             "substitute": "fluent_22_applications-utilities-symbolic",
-            "symlink-to": "applications-utilities-symbolic",
+            "canonical": "applications-utilities-symbolic",
             "targets": [
                 { "action": "replace", "icon": "applications-utilities-symbolic" },
                 { "action": "symlink", "icon": "store-utilities-symbolic" }

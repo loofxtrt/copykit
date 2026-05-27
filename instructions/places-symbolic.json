@@ -1,8 +1,8 @@
 {
     "context": {
         "id": "places-symbolic",
-        "target-parent": "ROOT/places/symbolic",
-        "substitute-parent": "SUBSTITUTES/places/symbolic"
+        "target_parent": "ROOT/places/symbolic",
+        "substitute_parent": "SUBSTITUTES/places/symbolic"
     },
     "entries": {
         "desktop": {

@@ -1,8 +1,8 @@
 {
     "context": {
         "id": "actions-16",
-        "target-parent": "ROOT/actions/16",
-        "substitute-parent": "SUBSTITUTES/actions/16"
+        "target_parent": "ROOT/actions/16",
+        "substitute_parent": "SUBSTITUTES/actions/16"
     },
     "entries": {
         "folder open recent": {
@@ -13,7 +13,7 @@
         },
         "help": {
             "comment": "identificados pesquisando por 'help' e 'info' no icon explorer",
-            "symlink-to": "../../actions/symbolic/help-info-symbolic",
+            "canonical": "../../actions/symbolic/help-info-symbolic",
             "targets": [
                 { "action": "symlink", "icon": "help-about" },
                 { "action": "symlink", "icon": "help-whatsthis" },
@@ -31,7 +31,7 @@
             ]
         },
         "bookmarks": {
-            "symlink-to": "../../actions/symbolic/ephy-bookmarks-symbolic",
+            "canonical": "../../actions/symbolic/ephy-bookmarks-symbolic",
             "targets": [
                 { "action": "symlink", "icon": "bookmarks" },
                 { "action": "symlink", "icon": "bookmark" }

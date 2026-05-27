@@ -68,26 +68,26 @@ class Context:
     @property
     def target_parent(self) -> Path | None:
         # obter o parent do target e resolver o path
-        raw = self.raw_context.get('target-parent')
+        raw = self.raw_context.get('target_parent')
 
         if not raw:
             return None
 
         if 'ROOT' not in raw:
-            raise ValueError(f"'ROOT' precisa estar presente em target-parent ({id})")
+            raise ValueError(f"'ROOT' precisa estar presente em target_parent ({id})")
         
         return Path(raw.replace('ROOT', str(ACTIVE_ROOT)))
 
     @property
     def substitute_parent(self) -> Path | None:
         # obter o parent do substituto e resolver o path
-        raw = self.raw_context.get('substitute-parent')
+        raw = self.raw_context.get('substitute_parent')
         
         if not raw:
             return None
         
         if 'SUBSTITUTES' not in raw:
-            raise ValueError(f"'SUBSTITUTES' precisa estar presente em substitute-parent ou ser completamente nulo ({id})")
+            raise ValueError(f"'SUBSTITUTES' precisa estar presente em substitute_parent ou ser completamente nulo ({id})")
         
         return Path(raw.replace('SUBSTITUTES', str(SUBSTITUTES)))
 
@@ -150,7 +150,7 @@ class Entry:
     	targets:
     		lista de targets que serão processados
         
-        symlink_to:
+        canonical:
             pra onde o symlink deve apontar. só é necessário se a action do target for 'symlink' 
 
         changelog:
@@ -171,7 +171,7 @@ class Entry:
     key: str
     substitute: Optional[Substitute] # pode ser nulo se não precisar
     targets: List[Target]
-    symlink_to: Optional[str]
+    canonical: Optional[str]
     changelog: Optional[str]
     sources: Optional[list]
     processing: Optional[str]
@@ -184,7 +184,7 @@ class Entry:
         
         if substitute_name:
             if not context.substitute_parent:
-                logger.warning(f'substitute definido, mas substitute-parent é inválido ({context.id})')
+                logger.warning(f'substitute definido, mas substitute_parent é inválido ({context.id})')
                 return
 
             substitute = Substitute(
@@ -213,7 +213,7 @@ class Entry:
             key=key,
             substitute=substitute,
             targets=targets,
-            symlink_to=data.get('symlink-to'), # TODO: mudar pra link_target ou canonical ou master
+            canonical=data.get('canonical'),
             changelog=data.get('changelog'),
             sources=data.get('sources'),
             processing=data.get('processing')
@@ -332,12 +332,12 @@ def handle_create_or_replace(entry: Entry, target: Target, hard_replace: bool, s
             dest=target.path
         )
 
-def handle_symlink(symlink_to: Path, target: Target):
+def handle_symlink(canonical: Path, target: Target):
     """
     cria um symlink apontando para o arquivo master previamente definido
 
     args:
-    	symlink_to:
+    	canonical:
     		caminho do arquivo que será referenciado pelo symlink
 
     	target:
@@ -345,8 +345,8 @@ def handle_symlink(symlink_to: Path, target: Target):
     """
     
     # symlink depende de um arquivo base previamente definido
-    if not symlink_to:
-        logger.error(f'erro ao criar o symlink. um symlink-to ainda não foi definido para {target.icon}')
+    if not canonical:
+        logger.error(f'erro ao criar o symlink. um canonical ainda não foi definido para {target.icon}')
         return
     
     # deletar o antigo arquivo/symlink que possivelmente existe no destino do symlink novo
@@ -355,8 +355,8 @@ def handle_symlink(symlink_to: Path, target: Target):
         link.unlink()
 
     # criar o symlink
-    symlink_to = normalize_svg_name(symlink_to)
-    link.symlink_to(symlink_to)
+    canonical = normalize_svg_name(canonical)
+    link.symlink_to(canonical)
 
     if not link.exists() or not link.is_file():
         logger.error(f'{link} não foi criado como um symlink válido')
@@ -478,13 +478,13 @@ def replace(
                 # não façam toda entrada dos json obrigatoriamente ter um campo substitute
                 handle_create_or_replace(entry, t, hard_replace, skip_symlinks)
             elif action == 'symlink':
-                symlink_to = entry.symlink_to
+                canonical = entry.canonical
 
-                if symlink_to:
-                    logger.info(f'symlink-to definido como {symlink_to}')
-                    handle_symlink(symlink_to, t)
+                if canonical:
+                    logger.info(f'canonical definido como {canonical}')
+                    handle_symlink(canonical, t)
                 else:
-                    logger.info(f'symlink-to não definido para {id}')
+                    logger.info(f'canonical não definido para {id}')
             elif action == 'remove':
                 handle_remove(t)
 

@@ -1,8 +1,8 @@
 {
     "context": {
         "id": "mimetypes",
-        "target-parent": "ROOT/mimetypes/scalable",
-        "substitute-parent": "SUBSTITUTES/mimetypes"
+        "target_parent": "ROOT/mimetypes/scalable",
+        "substitute_parent": "SUBSTITUTES/mimetypes"
     },
     "entries": {
         "zip": {
@@ -30,21 +30,21 @@
                 { "action": "symlink", "icon": "application-x-thz" },
                 { "action": "symlink", "icon": "application-x-tzo" }
             ],
-            "symlink-to": "zip",
+            "canonical": "zip",
             "substitute": "zip",
             "sources": ["YOSAMAX", "QOGIR"],
             "changelog": "changed colors, simplified the tape, added QOGIR details on top of it"
         },
         "android": {
             "substitute": "android",
-            "symlink-to": "android-package-archive",
+            "canonical": "android-package-archive",
             "targets": [
                 { "action": "replace", "icon": "android-package-archive" }
             ]
         },
         "audio": {
             "substitute": "audio-3-papirus",
-            "symlink-to": "audio-mp3",
+            "canonical": "audio-mp3",
             "targets": [
                 { "action": "replace", "icon": "audio-mp3" },
                 { "action": "symlink", "icon": "audio-flac" },
@@ -55,7 +55,7 @@
         },
         "playlist": {
             "substitute": "playlist-2-papirus",
-            "symlink-to": "application-audio-playlist",
+            "canonical": "application-audio-playlist",
             "targets": [
                 { "action": "replace", "icon": "application-audio-playlist" },
                 { "action": "symlink", "icon": "audio-x-smart-playlist" }
@@ -64,35 +64,35 @@
         },
         "bitwig project": {
             "substitute": "bitwig-project",
-            "symlink-to": "application-bitwig-project",
+            "canonical": "application-bitwig-project",
             "targets": [
                 { "action": "replace", "icon": "application-bitwig-project" }
             ]
         },
         "bitwig project folder": {
             "substitute": "bitwig-project-folder",
-            "symlink-to": "application-bitwig-project-folder",
+            "canonical": "application-bitwig-project-folder",
             "targets": [
                 { "action": "replace", "icon": "application-bitwig-project-folder" }
             ]
         },
         "bitwig template": {
             "substitute": "bitwig-template",
-            "symlink-to": "application-bitwig-template",
+            "canonical": "application-bitwig-template",
             "targets": [
                 { "action": "replace", "icon": "application-bitwig-template" }
             ]
         },
         "bitwig preset": {
             "substitute": "bitwig-preset",
-            "symlink-to": "application-bitwig-preset",
+            "canonical": "application-bitwig-preset",
             "targets": [
                 { "action": "replace", "icon": "application-bitwig-preset" }
             ]
         },
         "image": {
             "substitute": "image-3-papirus",
-            "symlink-to": "application-images",
+            "canonical": "application-images",
             "targets": [
                 { "action": "replace", "icon": "application-images" },
                 { "action": "symlink", "icon": "application-image-tiff" },
@@ -108,7 +108,7 @@
         },
         "markdown": {
             "substitute": "markdown-2",
-            "symlink-to": "text-markdown",
+            "canonical": "text-markdown",
             "targets": [
                 { "action": "replace", "icon": "text-markdown" }
             ],
@@ -116,7 +116,7 @@
         },
         "svg": {
             "substitute": "svg",
-            "symlink-to": "application-vector",
+            "canonical": "application-vector",
             "targets": [
                 { "action": "replace", "icon": "application-vector" }
             ],
@@ -124,7 +124,7 @@
         },
         "blank": {
             "substitute": "blank",
-            "symlink-to": "application-blank",
+            "canonical": "application-blank",
             "targets": [
                 { "action": "replace", "icon": "application-blank" }
             ],
@@ -132,7 +132,7 @@
         },
         "document": {
             "substitute": "document",
-            "symlink-to": "application-document",
+            "canonical": "application-document",
             "targets": [
                 { "action": "replace", "icon": "application-document" }
             ],
@@ -140,7 +140,7 @@
         },
         "xml": {
             "substitute": "xml",
-            "symlink-to": "text-xml",
+            "canonical": "text-xml",
             "targets": [
                 { "action": "replace", "icon": "text-xml" },
                 { "action": "symlink", "icon": "application-x-osm+xml" }
@@ -149,7 +149,7 @@
         },
         "executable": {
             "substitute": "executable",
-            "symlink-to": "application-executable",
+            "canonical": "application-executable",
             "targets": [
                 { "action": "replace", "icon": "application-executable" }
             ],
@@ -157,7 +157,7 @@
         },
         "json": {
             "substitute": "json",
-            "symlink-to": "application-json",
+            "canonical": "application-json",
             "targets": [
                 { "action": "replace", "icon": "application-json" }
             ],
