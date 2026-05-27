@@ -104,6 +104,8 @@ def handle_mapping(
                     target=t,
                     logger=entry_logger
                 )
+        
+        entry_logger.close()
 
 def run(root: Path):
     """

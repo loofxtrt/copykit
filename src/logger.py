@@ -1,37 +1,61 @@
-from rich.console import Console
+from rich.console import Console, Group
 from rich.text import Text
 from rich.markup import escape
 from rich.panel import Panel
+from rich.live import Live
 
 
 class EntryLogger():
     def __init__(self, title: str):
         self.title = title
-        print(title)
+        self.messages = []
+
+        self.console = Console()
+
+        self.live = Live(
+            self._render_panel(),
+            console=self.console,
+            refresh_per_second=10
+        )
+        self.live.start()
+
+    def _render_panel(self):
+        return Panel(
+            Group(*self.messages),
+            title=self.title
+        )
+    
+    def _handle_message(self, message):
+        textified = Text(f'    {message}')
+        self.messages.append(textified)
+        self.live.update(self._render_panel())
+
+    def close(self):
+        self.live.stop()
 
     def warning(self, message):
-        print(f'    {message}')
+        self._handle_message(message)
 
     def error(self, message):
-        print(f'    {message}')
+        self._handle_message(message)
 
     def info(self, message):
-        print(f'    {message}')
+        self._handle_message(message)
 
     def skip(self, message):
-        print(f'    {message}')
+        self._handle_message(message)
 
     def success(self, message):
-        print(f'    {message}')
+        self._handle_message(message)
 
     def symlink(self, message):
-        print(f'    {message}')
+        self._handle_message(message)
 
     def debug(self, message):
-        print(f'    {message}')
+        self._handle_message(message)
 
     def critical(self, message):
-        print(f'    {message}')
+        self._handle_message(message)
 
 
 def message_formatter(message, level: str = 'info', with_background: bool = False):
