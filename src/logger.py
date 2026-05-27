@@ -9,19 +9,28 @@ from rich.style import Style
 COLOR_MAP = {
         'warning': 'yellow',
         'info': 'default',
-        'debug': 'green',
+        'debug': 'cyan',
         'error': 'red',
-        'critical': 'red',
         'success': 'green',
-        'skip': 'default',
         'symlink': 'blue',
         'normal': 'default'
     }
 
 
 class EntryLogger():
-    def __init__(self, title: str):
+    def __init__(self, title: str, prefix: str | None = None):
+        """
+        args:
+            title:
+                título principal do painel
+            
+            prefix:
+                prefixo opcional que vem antes do título
+                ex: 'lorem:' -> lorem:ipsum
+        """
+
         self.title = title
+        self.prefix = prefix
         self.messages = []
 
         self.console = Console()
@@ -49,9 +58,17 @@ class EntryLogger():
                 pode ser none porque ele precisa ser chamado no init, que não passa um level
         """
 
+        # formatar o título e adicionar o prefixo se ele existir
+        title = Text()
+        
+        if self.prefix:
+            title.append(self.prefix)
+        
+        title.append_text(Text(self.title, style='bold'))
+
         return Panel(
             Group(*self.messages), # desempacota lista de mensagens uma por uma
-            title=Text(self.title, style='bold'),
+            title=title,
             border_style=get_level_color(level),
             title_align='left'
         )
@@ -84,9 +101,6 @@ class EntryLogger():
     def info(self, message):
         self._handle_message(message, 'info')
 
-    def skip(self, message):
-        self._handle_message(message, 'skip')
-
     def success(self, message):
         self._handle_message(message, 'success')
 
@@ -95,9 +109,6 @@ class EntryLogger():
 
     def debug(self, message):
         self._handle_message(message, 'debug')
-
-    def critical(self, message):
-        self._handle_message(message, 'critical')
 
 
 def get_level_color(level: str | None) -> str:
