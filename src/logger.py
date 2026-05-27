@@ -62,20 +62,25 @@ class EntryLogger():
 def format_message(message: str, level: str) -> Text:
     color_map = {
         'warning': 'yellow',
-        'info': 'blue',
+        'info': 'default',
         'debug': 'green',
         'error': 'red',
         'critical': 'red',
         'success': 'green',
-        'skip': 'blue',
+        'skip': 'default',
         'symlink': 'blue',
         'normal': 'default'
     }
     color = color_map.get(level.lower(), 'normal')
     
+    # identificar o level mais longo possível
+    # pra ajustar o padding de acordo com ele
+    longest = max(color_map.keys(), key=len)
+    level_text = level.upper().ljust(len(longest))
+    
     text = Text()
     text.append_text(
-        Text(level.upper(), style=f'bold {color}')
+        Text(level_text, style=f'bold {color}')
     )
     text.append(' ')
     text.append_text(
