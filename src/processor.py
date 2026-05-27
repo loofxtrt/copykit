@@ -5,6 +5,7 @@ from lxml import etree
 
 from . import logger
 
+
 def _svg_is_valid(file: Path) -> bool:
     if not file.is_file():
         return False
@@ -137,6 +138,7 @@ def text_color_symbolics(svg: Path, dest: Path):
 
 def run(processing_id: str, svg: Path, dest: Path):
     if processing_id == 'text_color':
-        text_color_symbolics(svg, dest)
+        pass
+        # text_color_symbolics(svg, dest)
 
 # text_color_symbolics(Path('/mnt/seagate/recursos/copydb/substitutos/actions/symbolic/qogir_system-shutdown-symbolic.svg'))
