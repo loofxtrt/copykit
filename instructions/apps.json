@@ -574,6 +574,17 @@
                 { "action": "symlink", "icon": "org.musicbrainz.Picard" }
             ],
             "changelog": "remade the icon based on the dmanager icon shape from KORA and drop picked the colors and inside shapes from PAPIRUS"
+        },
+        "KRename": {
+            "substitute": "papirus_krename",
+            "canonical": "krename",
+            "targets": [
+                { "action": "replace", "icon": "krename" },
+                { "action": "symlink", "icon": "org.kde.krename" },
+                { "action": "symlink", "icon": "gprename" }
+            ],
+            "changelog": "remade the icon based on the dmanager icon shape from KORA and drop picked the colors and inside shapes from PAPIRUS",
+            "sources": ["shapes and red colors from PAPIRUS krename", "blue colors from KORA's krename"]
         }
     }
 }
