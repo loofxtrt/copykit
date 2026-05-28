@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 from typing import List, Optional
 import json
 
-from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normalize_json_name, normalize_svg_name
+from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normalize_json_name, normalize_svg_name, read_json
 from . import logger
 
 
@@ -298,8 +298,7 @@ class Mapping:
         if not file.is_file():
             raise ValueError(f'{file.resolve} não é um arquivo válido')
         
-        with file.open('r', encoding='utf-8') as f:
-            data = json.load(f)
+        data = read_json(file)
         if not data:
             logger.error(f'os dados obtidos de {file.name} são inválidos')
             return

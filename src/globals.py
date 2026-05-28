@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 
 
 PACK_LOCAL = Path('/mnt/seagate/symlinks/kde-user-icons/copycat')
@@ -22,3 +23,7 @@ def normalize_svg_name(name: str) -> str:
 
 def normalize_json_name(name: str) -> str:
     return _normalize_file_name(name, 'json')
+
+def read_json(file: Path) -> dict:
+    with file.open('r', encoding='utf-8') as f:
+        return json.load(f)
