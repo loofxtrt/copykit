@@ -16,6 +16,9 @@ from . import logger, processor
 # ACTIVE_ROOT = PACK_REMOTE
 
 
+
+
+
 def handle_mapping(
     mapping: Mapping,
     skip_symlinks: bool = True,
@@ -137,12 +140,19 @@ def main():
     # global ACTIVE_ROOT
 
     parser = argparse.ArgumentParser()
-    parser.add_argument(
+    subparsers = parser.add_subparsers(
+        dest='command',
+        required=True
+    )
+
+    parser_apply = subparsers.add_parser('apply')
+    parser_apply.add_argument(
         '--root',
         '-r',
         choices=['local', 'remote'],
         default='local'
     )
+    parser_apply.set_defaults(func)
     
     args = parser.parse_args()
     if args.root == 'local':

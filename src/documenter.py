@@ -114,4 +114,3 @@ Those packs includes:
         f.write(condensed)
 
 # TODO: adicionar o "from scratch", formatar melhor as sources pra não serem só uma list com str
-run_documenter()
