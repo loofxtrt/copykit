@@ -28,7 +28,7 @@ class Context:
 
     id: str # pra identificação nos logs
     data: dict
-    active_root: Path
+    active_root: Optional[Path]
     # raw_target_parent: Path
     # raw_substitute_parent: Optional[Path] # pode ser nulo se não precisar
 
@@ -37,7 +37,12 @@ class Context:
         return self.data['context']
 
     @classmethod
-    def from_dict(cls, data: dict, file: Path, active_root: Path) -> Context:
+    def from_dict(
+        cls,
+        data: dict,
+        file: Path,
+        active_root: Path | None = None
+        ) -> Context:
         """
         resolve e valida o contexto a partir dos dados carregados de um json
 
@@ -66,6 +71,9 @@ class Context:
     
     @property
     def target_parent(self) -> Path | None:
+        if not self.active_root:
+            return None
+        
         # obter o parent do target e resolver o path
         raw = self.raw_context.get('target_parent')
 
@@ -106,13 +114,18 @@ class Target:
 
     	path:
     		caminho absoluto do arquivo no sistema
+            é opcional porque depende da cadeia de classes que contêm o active_root
+            que em alguns casos pode não estar presente
     """
     
     icon: str # equivalente à name, TODO: talvez mudar pra name
     action: str
-    path: Path
+    path: Optional[path]
 
     def is_valid(self) -> bool:
+        if not self.path:
+            return False
+
         return self.path.exists() and self.path.is_file()
 
 
@@ -201,7 +214,11 @@ class Entry:
                 logger.error(f'target inválido em {context.id}')
                 continue
             
-            path = context.target_parent / normalize_svg_name(icon)
+            target_parent = context.target_parent
+            path = None
+            if target_parent:
+                path = context.target_parent / normalize_svg_name(icon)
+
             targets.append(Target(
                 icon=icon,
                 action=action,
@@ -237,7 +254,11 @@ class Mapping:
     entries: dict[str, Entry] # TODO: talvez key na Entry não seja necessário pela key já estar presente aqui
 
     @classmethod
-    def from_file(cls, file: Path, active_root: Path) -> Mapping | None:
+    def from_file(
+        cls,
+        file: Path,
+        active_root: Path | None = None
+        ) -> Mapping | None:
         """
         converte um arquivo json em um objeto mapping estruturado
 

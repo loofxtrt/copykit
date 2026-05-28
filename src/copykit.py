@@ -183,3 +183,4 @@ if __name__ == '__main__':
 # TODO: aviso de se um mapping não tem um substitute parent definido
 # TODO: remover código morto
 # TODO: fazer entry logger ser um arg da classe entry em vez de arg
+# TODO: melhorar segurança em relação a root opcional

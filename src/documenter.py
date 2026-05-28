@@ -38,11 +38,12 @@ def resolve_table_writing(mapping: Mapping):
                     # formatar as sources
                     sources_text = ''
                     if sources:
-                        source = sources.get('source')
-                        assets = sources.get('assets')
-                        used = sources.get('used')
+                        for s in sources:
+                            source = s.get('source')
+                            assets = s.get('assets')
+                            used = s.get('used')
 
-                        sources_text = f'{source}:{str(assets)}:{used}'
+                            sources_text += f'@source: `{source}` assets: `{str(assets)}` used: `{used}`'
 
                     with tag('td'):
                         text(key)
