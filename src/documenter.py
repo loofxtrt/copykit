@@ -3,7 +3,7 @@ from pathlib import Path
 from xml.dom import minidom
 from yattag import Doc
 
-from .replacer import Mapping, resolve_mapping # TODO: import velho
+from .models import Mapping
 from .globals import INSTRUCTIONS, PACK_REPO
 
 

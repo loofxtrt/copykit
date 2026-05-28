@@ -9,6 +9,7 @@ from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normali
 from .models import Entry, Target, Mapping, Context, Substitute
 from .handlers import remove, replace, symlink
 from .logger import EntryLogger
+from .documenter import run_documenter
 from . import logger, processor
 
 
@@ -16,8 +17,40 @@ from . import logger, processor
 # ACTIVE_ROOT = PACK_REMOTE
 
 
+class Parser(argparse.ArgumentParser):
+    # TODO: documentação
+    
+    def __init__(self):
+        super().__init__()
 
+        self.subparsers = self.add_subparsers(
+            dest='command',
+            required=True
+        )
+        
+        # apply
+        parser_apply = self.subparsers.add_parser('apply')
+        parser_apply.add_argument(
+            '--root',
+            '-r',
+            choices=['local', 'remote'],
+            default='local'
+        )
+        parser_apply.set_defaults(func=self.cmd_apply)
 
+        # docs
+        parser_docs = self.subparsers.add_parser('docs')
+        parser_docs.set_defaults(func=self.cmd_docs)
+
+    def cmd_apply(self, args):
+        if args.root == 'local':
+            run_copykit(PACK_LOCAL)
+        elif args.root == 'remote':
+            # run_copykit(PACK_REMOTE)
+            pass
+    
+    def cmd_docs(self, args):
+        run_documenter()
 
 def handle_mapping(
     mapping: Mapping,
@@ -119,7 +152,7 @@ def handle_mapping(
         # fechar o ambiente vivo desse logger quando terminar o processamento
         entry_logger.close()
 
-def run(root: Path):
+def run_copykit(root: Path):
     """
     percorre todos os arquivos de instrução e executa o processo de replace para cada mapping
 
@@ -139,29 +172,9 @@ def main():
     # # TODO: remover active root e de fato usar o run(root)
     # global ACTIVE_ROOT
 
-    parser = argparse.ArgumentParser()
-    subparsers = parser.add_subparsers(
-        dest='command',
-        required=True
-    )
-
-    parser_apply = subparsers.add_parser('apply')
-    parser_apply.add_argument(
-        '--root',
-        '-r',
-        choices=['local', 'remote'],
-        default='local'
-    )
-    parser_apply.set_defaults(func)
-    
+    parser = Parser()
     args = parser.parse_args()
-    if args.root == 'local':
-        # ACTIVE_ROOT = PACK_LOCAL
-        run(PACK_LOCAL)
-    elif args.root == 'remote':
-        # ACTIVE_ROOT = PACK_REMOTE
-        # run(PACK_REMOTE)
-        pass
+    args.func(args)
 
 if __name__ == '__main__':
     main()
