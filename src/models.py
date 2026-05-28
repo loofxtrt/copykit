@@ -1,5 +1,5 @@
 from pathlib import Path
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Optional
 import json
 
@@ -14,27 +14,37 @@ class Context:
 
     args:
     	id:
-    		identificador usado principalmente para logs e rastreamento
+    		identificador usado principalmente pra logs
             NÃO precisa ser idêntico ao nome do arquivo json que contém ele
 
-    	target_parent:
-    		diretório base onde os targets estão localizados
+    	data:
+            dados brutos do CONTEXTO. isso NÃO inclui um mapping inteiro,
+            só a parte que fica contida dentro da chove context
+        
+        active_root:
+            raíz do icon pack alvo
 
-    	substitute_parent:
-    		diretório base onde os substitutos estão localizados, pode ser nulo
+        target_parent:
+            raíz onde os targets devem começar a serem procurados
+            se o target for 'blender' e o target_parent for 'apps/scalable',
+            apps/scalable vai ser varrido até encontrar apps/scalable/blender.svg
+        
+        substitute_parent:
+            mesma lógica do target_parent, mas pros substitutos
+            'novo-blender', 'substitutos' -> substitutos/blender.svg
     """
 
-    # TODO: atualizar documentação
-
-    id: str # pra identificação nos logs
+    id: str
     data: dict
     active_root: Optional[Path]
-    # raw_target_parent: Path
-    # raw_substitute_parent: Optional[Path] # pode ser nulo se não precisar
+    target_parent: Optional[Path] = field(init=False)
+    substitute_parent: Optional[Path] = field(init=False)
 
-    @property
-    def raw_context(self) -> dict:
-        return self.data['context']
+    def __post_init__(self):
+        # TODO: erros melhores nos dois
+        # TODO: wrapper intermediário pros dois?
+        self.target_parent = self._resolve_target_parent()
+        self.substitute_parent = self._resolve_substitute_parent()
 
     @classmethod
     def from_dict(
@@ -47,19 +57,12 @@ class Context:
         resolve e valida o contexto a partir dos dados carregados de um json
 
         args:
-            data:
-                dicionário com os dados do json
-
             file:
-                caminho do arquivo json, usado para mensagens de erro
+                caminho do arquivo json que contém os dados
+                só é usado para mensagens de erro enquanto o id do mapping não for resolvido
         """
-        
-        raw_context = data['context']
 
-        if not raw_context:
-            raise ValueError(f'contexto não definido ({file.name})')
-
-        _id = raw_context.get('id')
+        _id = data.get('id')
         if not _id:
             raise ValueError(f'id não definido ({file.name})')
         
@@ -69,13 +72,12 @@ class Context:
             active_root=active_root
         )
     
-    @property
-    def target_parent(self) -> Path | None:
+    def _resolve_target_parent(self) -> Path | None:
+        # obter o parent do target e resolver o path
         if not self.active_root:
             return None
         
-        # obter o parent do target e resolver o path
-        raw = self.raw_context.get('target_parent')
+        raw = self.data.get('target_parent')
 
         if not raw:
             return None
@@ -85,10 +87,10 @@ class Context:
         
         return Path(raw.replace('ROOT', str(self.active_root)))
 
-    @property
-    def substitute_parent(self) -> Path | None:
+    def _resolve_substitute_parent(self) -> Path | None:
         # obter o parent do substituto e resolver o path
-        raw = self.raw_context.get('substitute_parent')
+        # TODO: fazer SUBSTITUTES ser param
+        raw = self.data.get('substitute_parent')
         
         if not raw:
             return None
@@ -109,8 +111,17 @@ class Target:
     		nome lógico do ícone, usado para identificação e construção do caminho
 
     	action:
-    		ação que será aplicada ao target (create, replace, symlink, remove)
-            se for remove, não precisa ter substitute
+    		ação que será aplicada ao target. pode ser:
+            - create, replace
+                na prática não têm diferença. create só serve pra deixar claro
+                que um ícone não existia no pack original e foi criado sobre ele
+
+            - symlink
+                cria um symlink apontando pra um outro arquivo já existente. não requer substitute
+                isso requer um canonical previamente definido na Entry que possui esse Target
+            
+            - remove
+                deleta um arquivo. não requer substitute
 
     	path:
     		caminho absoluto do arquivo no sistema
@@ -148,6 +159,26 @@ class Substitute:
     def is_valid(self) -> bool:
         return self.path.exists() and self.path.is_file()
 
+    @classmethod
+    def from_dict(
+        cls,
+        data: dict,
+        context: Context
+        ) -> Substitute | None:
+        name = data.get('substitute')
+        
+        if not name:
+            return None
+
+        if not context.substitute_parent:
+            logger.warning(f'o nome de um substitute ({name}) foi definido, mas substitute_parent é inválido ({context.id})')
+            return None
+
+        return cls(
+            name=name,
+            path=context.substitute_parent / normalize_svg_name(name)
+        )
+
 
 @dataclass
 class Entry:
@@ -157,13 +188,14 @@ class Entry:
     args:
     	substitute:
     		substituto associado aos targets,
-            pode ser nulo para ações que não precisam dele, tipo remoções
+            pode ser nulo para ações que não precisam dele, tipo remoções ou criação de symlinks
 
     	targets:
     		lista de targets que serão processados
         
         canonical:
-            pra onde o symlink deve apontar. só é necessário se a action do target for 'symlink' 
+            pra onde o symlink deve apontar. só é necessário se a action do target for 'symlink'
+            isso geralmente deve ser um caminho relativo, tipo 'blender.svg' ou '../blender.svg'
 
         changelog:
             mudanças que foram feitas no ícone
@@ -189,22 +221,16 @@ class Entry:
     processing: Optional[str]
 
     @classmethod
-    def from_dict(cls, data: dict, key: str, context: Context) -> Entry | None:
+    def from_dict(
+        cls,
+        data: dict,
+        key: str,
+        context: Context
+        ) -> Entry | None:
         # resolver o substitute
-        substitute_name = data.get('substitute')
-        substitute = None
+        substitute = Substitute.from_dict(data=data, context=context)
         
-        if substitute_name:
-            if not context.substitute_parent:
-                logger.warning(f'substitute definido, mas substitute_parent é inválido ({context.id})')
-                return
-
-            substitute = Substitute(
-                name=substitute_name,
-                path=context.substitute_parent / normalize_svg_name(substitute_name)
-            )
-        
-        # resolver os targets e adicionar eles numa lista
+        # resolver os targets
         targets = []
         for raw_target in data.get('targets', []):
             icon = raw_target.get('icon')
@@ -214,11 +240,13 @@ class Entry:
                 logger.error(f'target inválido em {context.id}')
                 continue
             
+            # resolver o path completo do target com base no contexto
             target_parent = context.target_parent
             path = None
             if target_parent:
                 path = context.target_parent / normalize_svg_name(icon)
 
+            # adicionar o target resolvido à lista
             targets.append(Target(
                 icon=icon,
                 action=action,
@@ -267,10 +295,8 @@ class Mapping:
                 caminho do arquivo json contendo instruções
         """
 
-        # TODO: atualizar documentação
-
         if not file.is_file():
-            return
+            raise ValueError(f'{file.resolve} não é um arquivo válido')
         
         with file.open('r', encoding='utf-8') as f:
             data = json.load(f)
@@ -281,12 +307,12 @@ class Mapping:
         # transformar os dados do contexto num objeto
         try:
             context = Context.from_dict(
-                data=data,
+                data=data.get('context'),
                 file=file,
                 active_root=active_root
             )
         except ValueError as err:
-            logger.error(err)
+            logger.error(f'erro ao resolver o contexto de {file.name}: {err}')
             return
 
         # transformar as entries em um objeto
@@ -299,6 +325,7 @@ class Mapping:
             )
             entries[key] = e
 
+        # criar o mapping
         mapping = Mapping(
             context=context,
             entries=entries

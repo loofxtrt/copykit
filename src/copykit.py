@@ -178,9 +178,7 @@ def main():
 if __name__ == '__main__':
     main()
 
-# TODO: arrumar o PACK_LOCAL hardcoded em partes do código
 # TODO: opção pra remover todos os symlinks quebrados depois de uma remoção
 # TODO: aviso de se um mapping não tem um substitute parent definido
 # TODO: remover código morto
-# TODO: fazer entry logger ser um arg da classe entry em vez de arg
 # TODO: melhorar segurança em relação a root opcional
