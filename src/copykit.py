@@ -13,22 +13,25 @@ from .documenter import run_documenter
 from . import logger, processor
 
 
-# ACTIVE_ROOT = PACK_LOCAL
-# ACTIVE_ROOT = PACK_REMOTE
-
-
-class Parser(argparse.ArgumentParser):
+class CLI:
     # TODO: documentação
     
     def __init__(self):
-        super().__init__()
+        self.parser = argparse.ArgumentParser()
 
-        self.subparsers = self.add_subparsers(
+        self.subparsers = self.parser.add_subparsers(
             dest='command',
             required=True
         )
-        
-        # apply
+
+        self._register_apply()
+        self._register_docs()
+
+    def execute(self):
+        args = self.parser.parse_args()
+        args.func(args)
+
+    def _register_apply(self):
         parser_apply = self.subparsers.add_parser('apply')
         parser_apply.add_argument(
             '--root',
@@ -37,11 +40,11 @@ class Parser(argparse.ArgumentParser):
             default='local'
         )
         parser_apply.set_defaults(func=self.cmd_apply)
-
-        # docs
+    
+    def _register_docs(self):
         parser_docs = self.subparsers.add_parser('docs')
         parser_docs.set_defaults(func=self.cmd_docs)
-
+    
     def cmd_apply(self, args):
         if args.root == 'local':
             run_copykit(PACK_LOCAL)
@@ -51,6 +54,7 @@ class Parser(argparse.ArgumentParser):
     
     def cmd_docs(self, args):
         run_documenter()
+
 
 def handle_mapping(
     mapping: Mapping,
@@ -169,12 +173,7 @@ def run_copykit(root: Path):
         handle_mapping(mapping)
 
 def main():
-    # # TODO: remover active root e de fato usar o run(root)
-    # global ACTIVE_ROOT
-
-    parser = Parser()
-    args = parser.parse_args()
-    args.func(args)
+    CLI().execute()
 
 if __name__ == '__main__':
     main()
