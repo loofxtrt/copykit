@@ -172,7 +172,7 @@ class Entry:
     targets: List[Target]
     canonical: Optional[str]
     changelog: Optional[str]
-    sources: Optional[list]
+    sources: Optional[dict]
     processing: Optional[str]
 
     @classmethod
@@ -214,7 +214,7 @@ class Entry:
             targets=targets,
             canonical=data.get('canonical'),
             changelog=data.get('changelog'),
-            sources=data.get('sources'),
+            sources=data.get('sources', {}),
             processing=data.get('processing')
         )
 

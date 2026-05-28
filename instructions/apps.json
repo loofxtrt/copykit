@@ -15,7 +15,16 @@
                 { "action": "symlink", "icon": "solstice-discord-discord" },
                 { "action": "symlink", "icon": "com.discordapp.Discord" }
             ],
-            "sources": ["KORA"],
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/discord" ]
+                },
+                {
+                    "source": "original logo",
+                    "used": "burple colors"
+                }
+            ],
             "changelog": "edited SVG to make the color closer to the official Discord burple"
         },
         "Discord Canary": {
@@ -25,7 +34,12 @@
                 { "action": "replace", "icon": "discord-canary" },
                 { "action": "symlink", "icon": "com.discordapp.DiscordCanary" }
             ],
-            "sources": ["KORA"],
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/discord" ]
+                }
+            ],
             "changelog": "background shape changed to be like regular Discord"
         },
         "Discord Development": {
@@ -33,7 +47,12 @@
             "targets": [
                 { "action": "replace", "icon": "discord-development" }
             ],
-            "sources": ["KORA"],
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/discord" ]
+                }
+            ],
             "changelog": "modified to match size and style of other Discord variants"
         },
         "Spotify": {
@@ -47,7 +66,12 @@
                 { "action": "symlink", "icon": "solstice-spotify-spotify" },
                 { "action": "symlink", "icon": "spotify-qt" }
             ],
-            "sources": ["MARWAITA"],
+            "sources": [
+                {
+                    "source": "MARWAITA",
+                    "assets": [ "apps/scalable/spotify" ]
+                }
+            ],
             "changelog": "added a subtle gradient"
         },
         "OBS": {
@@ -57,7 +81,12 @@
                 { "action": "replace", "icon": "obs" },
                 { "action": "symlink", "icon": "com.obsproject.Studio" }
             ],
-            "sources": ["KORA"],
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/obs" ]
+                }
+            ],
             "changelog": "edited SVG to make it darker"
         },
         "Krita": {
@@ -69,7 +98,12 @@
                 { "action": "symlink", "icon": "calligrakrita2" },
                 { "action": "symlink", "icon": "org.kde.krita" }
             ],
-            "sources": ["MARWAITA"]
+            "sources": [
+                {
+                    "source": "MARWAITA",
+                    "assets": [ "apps/scalable/krita" ]
+                }
+            ]
         },
         "GIMP": {
             "substitute": "breeze-dark_gimp",
@@ -78,7 +112,12 @@
                 { "action": "replace", "icon": "gimp" },
                 { "action": "symlink", "icon": "org.gimp.GIMP" }
             ],
-            "sources": ["BREEZE"],
+            "sources": [
+                {
+                    "source": "BREEZE",
+                    "assets": [ "apps/scalable/gimp" ]
+                }
+            ],
             "changelog": "edited SVG to make it bigger"
         },
         "Godot": {
@@ -91,7 +130,12 @@
                 { "action": "symlink", "icon": "org.godotengine.Godot" },
                 { "action": "symlink", "icon": "org.godotengine.Godot3" }
             ],
-            "sources": ["PLASMAX"],
+            "sources": [
+                {
+                    "source": "PLASMAX",
+                    "assets": [ "64x64/apps/godot" ]
+                }
+            ],
             "changelog": "edited SVG to make the tones match"
         },
         "Inkscape": {
@@ -103,7 +147,12 @@
                 { "action": "symlink", "icon": "org.inkscape.Inkscape" },
                 { "action": "symlink", "icon": "org.inkscape.Inkscape-symbolic" }
             ],
-            "sources": ["PLASMAX"],
+            "sources": [
+                {
+                    "source": "PLASMAX",
+                    "assets": [ "64x64/apps/inkscape" ]
+                }
+            ],
             "changelog": "edited SVG to make it darker"
         },
         "Blender": {
@@ -115,7 +164,12 @@
                 { "action": "symlink", "icon": "blender-symbolic" },
                 { "action": "symlink", "icon": "org.blender.Blender" }
             ],
-            "sources": ["https://commons.wikimedia.org/wiki/File:Blender_logo_no_text.svg"],
+            "sources": [
+                {
+                    "source": "original logo",
+                    "assets": [ "https://commons.wikimedia.org/wiki/File:Blender_logo_no_text.svg" ]
+                }
+            ],
             "changelog": "added a subtle gradient"
         },
         "Obsidian": {
@@ -125,6 +179,12 @@
                 { "action": "replace", "icon": "obsidian" },
                 { "action": "symlink", "icon": "md.obsidian.Obsidian" },
                 { "action": "symlink", "icon": "appimagekit-obsidian" }
+            ],
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/obsidian" ]
+                }
             ]
         },
         "Steam": {
@@ -139,7 +199,12 @@
                 { "action": "symlink", "icon": "steamskinmanager" },
                 { "action": "symlink", "icon": "com.valvesoftware.Steam" }
             ],
-            "sources": ["MARWAITA"],
+            "sources": [
+                {
+                    "source": "MARWAITA",
+                    "assets": [ "apps/scalable/steam" ]
+                }
+            ],
             "changelog": "inverted the gradient direction"
         },
         "Aseprite": {
@@ -149,7 +214,11 @@
                 { "action": "replace", "icon": "aseprite" },
                 { "action": "symlink", "icon": "lutris_aseprite" }
             ],
-            "sources": ["SCRATCH"]
+            "sources": [
+                {
+                    "source": "made from scratch"
+                }
+            ]
         },
         "Bitwig": {
             "substitute": "kora_bitwig",
@@ -159,7 +228,17 @@
                 { "action": "symlink", "icon": "bitwig-studio" },
                 { "action": "symlink", "icon": "com.bitwig.BitwigStudio" }
             ],
-            "sources": ["KORA"],
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/bitwig" ]
+                },
+                {
+                    "source": "KORA",
+                    "assets": [ "mimetypes/scalable/application-bitwig-preset" ],
+                    "used": "colors and proportions"
+                }
+            ],
             "changelog": "adjusted to match the colors and proportions of Bitwig mimetypes"
         },
         "PureRef": {
@@ -167,7 +246,12 @@
             "targets": [
                 { "action": "replace", "icon": "pureref" }
             ],
-            "sources": ["KORA"],
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/pureref" ]
+                }
+            ],
             "changelog": "edited SVG to make it darker"
         },
         "EndeavourOS": {
@@ -178,7 +262,12 @@
                 { "action": "symlink", "icon": "distributor-logo-endeavouros" },
                 { "action": "symlink", "icon": "endeavouros-icon" }
             ],
-            "sources": ["https://github.com/endeavouros-team/EndeavourOS-Development?tab=readme-ov-file"]
+            "sources": [
+                {
+                    "source": "original logo",
+                    "assets": [ "https://github.com/endeavouros-team/EndeavourOS-Development?tab=readme-ov-file" ]
+                }
+            ]
         },
         "DB Browser for SQLite": {
             "substitute": "sqlitebrowser",
@@ -188,7 +277,12 @@
                 { "action": "symlink", "icon": "org.sqlitebrowser.sqlitebrowser" },
                 { "action": "symlink", "icon": "sqliteman" }
             ],
-            "sources": ["https://www.svgrepo.com/svg/28272/database-analysing"]
+            "sources": [
+                {
+                    "source": "svgrepo.com",
+                    "assets": [ "https://www.svgrepo.com/svg/28272/database-analysing" ]
+                }
+            ]
         },
         "Audacity": {
             "substitute": "audacity",
@@ -200,7 +294,12 @@
                 { "action": "symlink", "icon": "audacity16" },
                 { "action": "symlink", "icon": "audacity32" }
             ],
-            "sources": ["https://fr.wikipedia.org/wiki/Fichier:Audacity_Logo.svg#/media/Fichier:Audacity_Logo_nofilter.svg"],
+            "sources": [
+                {
+                    "source": "original logo",
+                    "assets": [ "https://fr.wikipedia.org/wiki/Fichier:Audacity_Logo.svg#/media/Fichier:Audacity_Logo_nofilter.svg" ]
+                }
+            ],
             "changelog": "adjusted colors, added gradients and normalized clip groups"
         },
         "VSCodium": {
@@ -210,7 +309,12 @@
                 { "action": "replace", "icon": "vscodium" },
                 { "action": "symlink", "icon": "com.vscodium.codium" }
             ],
-            "sources": ["https://github.com/VSCodium/icons/blob/main/icons/linux/nobg/blue1/paulo22s.png"]
+            "sources": [
+                {
+                    "source": "original logo",
+                    "assets": [ "https://github.com/VSCodium/icons/blob/main/icons/linux/nobg/blue1/paulo22s.png" ]
+                }
+            ]
         },
         "AppImageLauncher": {
             "substitute": "flat-remix-blue-dark_appimagelauncher",
@@ -219,7 +323,12 @@
                 { "action": "replace", "icon": "appimagelauncher" },
                 { "action": "symlink", "icon": "AppImageLauncher" }
             ],
-            "sources": ["FLATREMIX"],
+            "sources": [
+                {
+                    "source": "FLATREMIX",
+                    "assets": [ "apps/scalable/appimagelauncher" ]
+                }
+            ],
             "changelog": "modified colors and shapes"
         },
         "Android Studio": {
@@ -231,7 +340,12 @@
                 { "action": "symlink", "icon": "androidstudio" },
                 { "action": "symlink", "icon": "com.google.AndroidStudio" }
             ],
-            "sources": ["MOREWAITA"],
+            "sources": [
+                {
+                    "source": "MOREWAITA",
+                    "assets": [ "apps/scalable/android-studio" ]
+                }
+            ],
             "changelog": "removed bottom highlight and added gradients"
         },
         "Android Studio Canary": {
@@ -241,16 +355,36 @@
                 { "action": "replace", "icon": "android-studio-canary" },
                 { "action": "symlink", "icon": "androidstudio-preview" }
             ],
-            "sources": ["MOREWAITA"],
+            "sources": [
+                {
+                    "source": "MOREWAITA",
+                    "assets": [ "apps/scalable/android-studio-canary" ]
+                }
+            ],
             "changelog": "removed bottom highlight and added gradients"
         },
         "btop++": {
             "substitute": "kora_btop",
             "targets": [
-                { "action": "replace", "icon": "btop" }
+                { "action": "create", "icon": "btop" }
             ],
-            "sources": ["SCRATCH", "KORA", "MOREWAITA"],
-            "changelog": "remade the B manually, used KORA system monitor background and MOREWAITA colors"
+            "sources": [
+                {
+                    "source": "SCRATCH",
+                    "used": "manual recreation of the B letter"
+                },
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/utilities-system-monitor" ],
+                    "used": "base background"
+                },
+                {
+                    "source": "MOREWAITA",
+                    "assets": [ "apps/scalable/btop" ],
+                    "used": "colors"
+                }
+            ],
+            "changelog": "remade the B manually and fused with other assets"
         },
         "Ark": {
             "substitute": "qogir_ark",
@@ -268,8 +402,19 @@
                 { "action": "symlink", "icon": "xarchiver" },
                 { "action": "symlink", "icon": "file-roller" }
             ],
-            "sources": ["QOGIR", "KORA"],
-            "changelog": "made the colors match with the zip mimetypes and replaced the original zipper with the one present in application-x-sogouskin from KORA)"
+            "sources": [
+                {
+                    "source": "QOGIR",
+                    "assets": [ "scalable/apps/ark" ],
+                    "used": "base shape"
+                },
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/application-x-sogouskin", "mimetypes/scalable/zip" ],
+                    "used": "zipper and colors"
+                }
+            ],
+            "changelog": "made the colors match the original zip mimetype from KORA and changed the zipper"
         },
         "Github Desktop": {
             "substitute": "kora_github-desktop",
@@ -279,7 +424,12 @@
                 { "action": "symlink", "icon": "appimagekit-github-desktop" },
                 { "action": "symlink", "icon": "io.github.shiftey.Desktop" }
             ],
-            "sources": ["KORA"],
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/github-desktop" ]
+                }
+            ],
             "changelog": "adjusted colors"
         },
         "Color Picker": {
@@ -298,6 +448,12 @@
                 { "action": "symlink", "icon": "nl.hjdskes.gcolor3" },
                 { "action": "symlink", "icon": "nl.hjdskes.gcolor3-symbolic" },
                 { "action": "symlink", "icon": "org.kde.plasma.colorpicker" }
+            ],
+            "sources": [
+                {
+                    "source": "MARWAITA",
+                    "assets": [ "apps/scalable/color-picker" ]
+                }
             ]
         },
         "Kvantum": {
@@ -305,8 +461,19 @@
             "targets": [
                 { "action": "replace", "icon": "kvantum" }
             ],
-            "sources": ["KORA", "MARWAITA"],
-            "changelog": "switched the colors to the ones present in kvantum from MARWAITA"
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/kvantum" ],
+                    "used": "base shape"
+                },
+                {
+                    "source": "MARWAITA",
+                    "assets": [ "apps/scalable/kvantum" ],
+                    "used": "colors"
+                }
+            ],
+            "changelog": "switched the colors to the ones in MARWAITA"
         },
         "CMake": {
             "substitute": "kora_cmake",
@@ -317,7 +484,12 @@
                 { "action": "symlink", "icon": "CMakeSetup" },
                 { "action": "symlink", "icon": "CMakeSetup32" }
             ],
-            "sources": ["KORA"],
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/cmake" ]
+                }
+            ],
             "changelog": "removed background and added gradients"
         },
         "Minecraft": {
@@ -327,6 +499,12 @@
                 { "action": "replace", "icon": "minecraft" },
                 { "action": "symlink", "icon": "com.mojang.Minecraft" },
                 { "action": "symlink", "icon": "minecraft-launcher" }
+            ],
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/minecraft" ]
+                }
             ]
         },
         "Librewolf": {
@@ -338,7 +516,12 @@
                 { "action": "symlink", "icon": "io.gitlab.LibreWolf" },
                 { "action": "symlink", "icon": "io.gitlab.librewolf-community" }
             ],
-            "sources": ["https://www.reddit.com/r/LibreWolf/comments/t9c84n/icon_update/"],
+            "sources": [
+                {
+                    "source": "alternative logo",
+                    "assets": [ "https://www.reddit.com/r/LibreWolf/comments/t9c84n/icon_update/" ]
+                }
+            ],
             "changelog": "vectorized the original image"
         },
         "MPV": {
@@ -353,7 +536,12 @@
                 { "action": "symlink", "icon": "mpv-icon-8bit-64x64" },
                 { "action": "symlink", "icon": "mpv-symbolic"}
             ],
-            "sources": ["BREEZE"],
+            "sources": [
+                {
+                    "source": "BREEZE",
+                    "assets": [ "apps/scalable/mpv" ]
+                }
+            ],
             "changelog": "removed some shadows, changed the play button and added gradients"
         },
         "Proton Calendar": {
@@ -361,7 +549,12 @@
             "targets": [
                 { "action": "replace", "icon": "protoncalendar" }
             ],
-            "sources": ["KORA"],
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/protoncalendar" ]
+                }
+            ],
             "changelog": "removed background to match other Proton applications"
         },
         "Libresprite": {
@@ -371,7 +564,11 @@
                 { "action": "replace", "icon": "libresprite" },
                 { "action": "symlink", "icon": "com.github.libresprite.LibreSprite" }
             ],
-            "sources": ["SCRATCH"]
+            "sources": [
+                {
+                    "source": "SCRATCH"
+                }
+            ]
         },
         "Roblox Player": {
             "substitute": "roblox-player",
@@ -381,7 +578,11 @@
                 { "action": "symlink", "icon": "net.brinkervii.grapejuice.robloxplayer" },
                 { "action": "symlink", "icon": "grapejuice-roblox-player" }
             ],
-            "sources": ["SCRATCH"]
+            "sources": [
+                {
+                    "source": "SCRATCH"
+                }
+            ]
         },
         "Roblox Studio": {
             "substitute": "roblox-studio",
@@ -392,14 +593,22 @@
                 { "action": "symlink", "icon": "net.brinkervii.grapejuice.robloxstudio" },
                 { "action": "symlink", "icon": "org.vinegarhq.Vinegar.studio" }
             ],
-            "sources": ["SCRATCH"]
+            "sources": [
+                {
+                    "source": "SCRATCH"
+                }
+            ]
         },
         "Sober": {
             "substitute": "roblox-sober",
             "targets": [
                 { "action": "create", "icon": "org.vinegarhq.Sober" }
             ],
-            "sources": ["SCRATCH"]
+            "sources": [
+                {
+                    "source": "SCRATCH"
+                }
+            ]
         },
         "Vinegar": {
             "substitute": "roblox-vinegar",
@@ -408,7 +617,17 @@
                 { "action": "replace", "icon": "io.github.vinegarhq.Vinegar" },
                 { "action": "symlink", "icon": "org.vinegarhq.Vinegar" }
             ],
-            "sources": ["SCRATCH", "https://www.svgrepo.com/svg/443560/brand-winehq"],
+            "sources": [
+                {
+                    "source": "SCRATCH",
+                    "used": "base shape"
+                },
+                {
+                    "source": "svgrepo.com",
+                    "assets": [ "https://www.svgrepo.com/svg/443560/brand-winehq" ],
+                    "used": "wine overlay"
+                }
+            ],
             "changelog": "added the wine icon on top of it"
         },
         "Java 21 OpenJDK": {
@@ -416,14 +635,24 @@
             "targets": [
                 { "action": "create", "icon": "java21-openjdk" }
             ],
-            "sources": ["KORA"]
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/java" ]
+                }
+            ]
         },
         "AnimeEffects": {
             "substitute": "animeeffects",
             "targets": [
                 { "action": "create", "icon": "AnimeEffects" }
             ],
-            "sources": ["https://github.com/AnimeEffectsDevs/AnimeEffects"],
+            "sources": [
+                {
+                    "source": "original logo",
+                    "assets": [ "https://github.com/AnimeEffectsDevs/AnimeEffects" ]
+                }
+            ],
             "changelog": "vectorized the original image"
         },
         "BlueMail": {
@@ -433,7 +662,17 @@
                 { "action": "replace", "icon": "bluemail" },
                 { "action": "symlink", "icon": "net.blix.BlueMail" }
             ],
-            "sources": ["PAPIRUS"],
+            "sources": [
+                {
+                    "source": "PAPIRUS",
+                    "assets": [ "64x64/apps/bluemail" ],
+                    "used":"base shape"
+                },
+                {
+                    "source": "original logo",
+                    "used": "colors"
+                }
+            ],
             "changelog": "changed colors to be closer to the original logo and added gradients"
         },
         "Mail apps": {
@@ -478,13 +717,30 @@
                 { "action": "symlink", "icon": "internet_mail" },
                 { "action": "symlink", "icon": "org.claws_mail.Claws-Mail" }
             ],
-            "sources": ["PAPIRUS"],
-            "changelog": "changed colors to match KORA original mail icons and added gradients. @ symbol taken from the icon application-mbox from KORA"
+            "sources": [
+                {
+                    "source": "PAPIRUS",
+                    "assets": [ "64x64/apps/internet-mail" ],
+                    "used":"base shape"
+                },
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/mail_generic", "mimetypes/scalable/application-mbox" ],
+                    "used":"colors and @ symbol"
+                }
+            ],
+            "changelog": "changed colors and added gradients"
         },
         "Merkuro Mail": {
             "substitute": "kora_merkuro-mail",
             "targets": [
                 { "action": "replace", "icon": "org.kde.merkuro.mail" }
+            ],
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/org.kde.merkuro.mail" ]
+                }
             ]
         },
         "Vesktop": {
@@ -492,8 +748,18 @@
             "targets": [
                 { "action": "replace", "icon": "dev.vencord.Vesktop" }
             ],
-            "sources": ["KORA", "https://github.com/Vencord/Vesktop", "https://vencord.dev/"],
-            "changelog": "fused the original logo with the with the base shape of the icon agentdesktop from KORA and used the alternative logo to recreate the Z pattern in the C letter"
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/agentdesktop" ],
+                    "used": "base shape"
+                },
+                {
+                    "source": "alternative logo",
+                    "assets": [ "https://github.com/Vencord/Vesktop", "https://vencord.dev/" ]
+                }
+            ],
+            "changelog": "used the alternative logo to recreate the Z pattern in the C letter"
         },
         "Calculator": {
             "substitute": "calculator",
@@ -514,7 +780,12 @@
                 { "action": "symlink", "icon": "xcalc" },
                 { "action": "symlink", "icon": "xfce4-calculator-plugin" }
             ],
-            "sources": ["www.svgrepo.com/svg/362041/calculator"],
+            "sources": [
+                {
+                    "source": "svgrepo.com",
+                    "assets": [ "www.svgrepo.com/svg/362041/calculator" ]
+                }
+            ],
             "changelog": "changed colors (taken from the icon calculator from BREEZE) and added gradients"
         },
         "Filelight": {
@@ -524,7 +795,12 @@
                 { "action": "replace", "icon": "filelight" },
                 { "action": "symlink", "icon": "org.kde.filelight" }
             ],
-            "sources": ["BREEZE"],
+            "sources": [
+                {
+                    "source": "BREEZE",
+                    "assets": [ "apps/48/filelight" ]
+                }
+            ],
             "changelog": "added gradients and removed some shadows"
         },
         "Flycast": {
@@ -534,7 +810,12 @@
                 { "action": "replace", "icon": "flycast" },
                 { "action": "symlink", "icon": "org.flycast.Flycast" }
             ],
-            "sources": ["KORA"],
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/flycast" ]
+                }
+            ],
             "changelog": "removed background, increased logo size and added gradients"
         },
         "qBittorrent": {
@@ -544,7 +825,17 @@
                 { "action": "replace", "icon": "qbittorrent" },
                 { "action": "symlink", "icon": "org.qbittorrent.qBittorrent" }
             ],
-            "sources": ["KORA", "https://commons.wikimedia.org/wiki/File:New_qBittorrent_Logo.svg"],
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/qbittorrent" ]
+                },
+                {
+                    "source": "original logo",
+                    "assets": [ "https://commons.wikimedia.org/wiki/File:New_qBittorrent_Logo.svg" ],
+                    "used": "colors"
+                }
+            ],
             "changelog": "changed the colors to match the original logo and removed rounded ends"
         },
         "Bitwarden": {
@@ -555,7 +846,12 @@
                 { "action": "symlink", "icon": "appimagekit-bitwarden" },
                 { "action": "symlink", "icon": "com.bitwarden.desktop" }
             ],
-            "sources": ["KORA"],
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "64x64/apps/bitwarden" ]
+                }
+            ],
             "changelog": "removed background and increased logo size"
         },
         "SteamLink": {
@@ -564,6 +860,12 @@
             "targets": [
                 { "action": "replace", "icon": "steamlink" },
                 { "action": "symlink", "icon": "com.valvesoftware.SteamLink" }
+            ],
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/steamlink" ]
+                }
             ]
         },
         "MusicBrainz Picard": {
@@ -573,7 +875,19 @@
                 { "action": "replace", "icon": "picard" },
                 { "action": "symlink", "icon": "org.musicbrainz.Picard" }
             ],
-            "changelog": "remade the icon based on the dmanager icon shape from KORA and drop picked the colors and inside shapes from PAPIRUS"
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/dmanager" ],
+                    "used": "base shape"
+                },
+                {
+                    "source": "PAPIRUS",
+                    "assets": [ "apps/scalable/picard" ],
+                    "used": "colors and inner shapes"
+                }
+            ],
+            "changelog": "remade the icon based on a KORA shape and picked the colors and inner shapes from PAPIRUS"
         },
         "KRename": {
             "substitute": "papirus_krename",
@@ -584,7 +898,18 @@
                 { "action": "symlink", "icon": "gprename" }
             ],
             "changelog": "remade the icon based on the dmanager icon shape from KORA and drop picked the colors and inside shapes from PAPIRUS",
-            "sources": ["shapes and red colors from PAPIRUS krename", "blue colors from KORA's krename"]
+            "sources": [
+                {
+                    "source": "PAPIRUS",
+                    "assets": [ "64x64/apps/krename" ],
+                    "used": "shapes and red colors"
+                },
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/krename" ],
+                    "used": "blue colors and the idea of semi-transparent letters"
+                }
+            ]
         }
     }
 }

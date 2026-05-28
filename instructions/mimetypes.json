@@ -32,7 +32,18 @@
             ],
             "canonical": "zip",
             "substitute": "zip",
-            "sources": ["YOSAMAX", "QOGIR"],
+            "sources": [
+                {
+                    "source": "YOSAMAX",
+                    "assets": [ "mimetypes/scalable/zip" ],
+                    "used": "base shape"
+                },
+                {
+                    "source": "QOGIR",
+                    "assets": [ "scalable/apps/ark" ],
+                    "used": "top details"
+                }
+            ],
             "changelog": "changed colors, simplified the tape, added QOGIR details on top of it"
         },
         "android": {
@@ -51,7 +62,13 @@
                 { "action": "symlink", "icon": "application-audio" },
                 { "action": "symlink", "icon": "audio-wav" }
             ],
-            "sources": ["colors from PAPIRUS"]
+            "sources": [
+                {
+                    "source": "PAPIRUS",
+                    "assets": [ "64x64/mimetypes/audio-ac3" ],
+                    "used": "colors"
+                }
+            ]
         },
         "playlist": {
             "substitute": "playlist-2-papirus",
@@ -60,7 +77,13 @@
                 { "action": "replace", "icon": "application-audio-playlist" },
                 { "action": "symlink", "icon": "audio-x-smart-playlist" }
             ],
-            "sources": ["colors from PAPIRUS"]
+            "sources": [
+                {
+                    "source": "PAPIRUS",
+                    "assets": [ "64x64/mimetypes/playlist" ],
+                    "used": "colors"
+                }
+            ]
         },
         "bitwig project": {
             "substitute": "bitwig-project",
@@ -104,6 +127,13 @@
                 { "action": "symlink", "icon": "application-image-exr" },
                 { "action": "symlink", "icon": "application-image-bmp" },
                 { "action": "symlink", "icon": "application-image-avif" }
+            ],
+            "sources": [
+                {
+                    "source": "PAPIRUS",
+                    "assets": [ "64x64/mimetypes/image-x-tiff" ],
+                    "used": "colors and symbol"
+                }
             ]
         },
         "markdown": {
@@ -112,7 +142,18 @@
             "targets": [
                 { "action": "replace", "icon": "text-markdown" }
             ],
-            "sources": ["glyphs from MOREWAITA, colors from KORA"]
+            "sources": [
+                {
+                    "source": "MOREWAITA",
+                    "assets": [ "scalable/mimetypes/text-x-markdown" ],
+                    "used": "symbols"
+                },
+                {
+                    "source": "KORA",
+                    "assets": [ "scalable/mimetypes/application-document" ],
+                    "used": "colors"
+                }
+            ]
         },
         "svg": {
             "substitute": "svg",
@@ -120,7 +161,18 @@
             "targets": [
                 { "action": "replace", "icon": "application-vector" }
             ],
-            "sources": ["glyphs from FAIRYWREN, colors from BREEZE"]
+            "sources": [
+                {
+                    "source": "FAIRYWREN",
+                    "assets": [ "mimetypes/image-x-svg+xml" ],
+                    "used": "symbols"
+                },
+                {
+                    "source": "BREEZE",
+                    "assets": [ "mimetypes/64/x-office-drawing" ],
+                    "used": "colors"
+                }
+            ]
         },
         "blank": {
             "substitute": "blank",
@@ -128,7 +180,13 @@
             "targets": [
                 { "action": "replace", "icon": "application-blank" }
             ],
-            "sources": ["colors from KORA"]
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "mimetypes/scalable/application-blank" ],
+                    "used": "colors"
+                }
+            ]
         },
         "document": {
             "substitute": "document",
@@ -136,7 +194,13 @@
             "targets": [
                 { "action": "replace", "icon": "application-document" }
             ],
-            "sources": ["colors and glyphs from KORA"]
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "scalable/mimetypes/application-document" ],
+                    "used": "colors and symbol"
+                }
+            ]
         },
         "xml": {
             "substitute": "xml",
@@ -145,7 +209,18 @@
                 { "action": "replace", "icon": "text-xml" },
                 { "action": "symlink", "icon": "application-x-osm+xml" }
             ],
-            "sources": ["glyphs from KORA, glyphs from breeze"]
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "scalable/mimetypes/text-xml" ],
+                    "used": "symbols"
+                },
+                {
+                    "source": "BREEZE",
+                    "assets": [ "mimetypes/64/text-xml" ],
+                    "used": "colors"
+                }
+            ]
         },
         "executable": {
             "substitute": "executable",
@@ -153,7 +228,13 @@
             "targets": [
                 { "action": "replace", "icon": "application-executable" }
             ],
-            "sources": ["colors and glyphs from KORA"]
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "scalable/mimetypes/application-document" ],
+                    "used": "colors and symbol"
+                }
+            ]
         },
         "json": {
             "substitute": "json",
@@ -161,7 +242,12 @@
             "targets": [
                 { "action": "replace", "icon": "application-json" }
             ],
-            "sources": ["official json logo"]
+            "sources": [
+                {
+                    "source": "original logo",
+                    "assets": [ "https://commons.wikimedia.org/wiki/File:JSON_vector_logo.svg" ]
+                }
+            ]
         }
     }
 }

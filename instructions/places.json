@@ -130,8 +130,7 @@
             "targets": [
                 { "action": "replace", "icon": "user-desktop" }
             ],
-            "sources": ["FLATERY"],
-            "changelog": "inspired by FLATERY user-desktop"
+            "changelog": "changed symbol"
         },
         "folder pictures": {
             "substitute": "folder-pictures",
@@ -141,7 +140,13 @@
                 { "action": "symlink", "icon": "folder-image" },
                 { "action": "symlink", "icon": "folder-pictures-open" }
             ],
-            "sources": ["PAPIRUS"],
+            "sources": [
+                {
+                    "source": "PAPIRUS",
+                    "assets": "64x64/places/folder-pictures",
+                    "used": "symbol"
+                }
+            ],
             "changelog": "changed glyph to PAPIRUS folder-pictures glyph"
         },
         "folder home": {
@@ -151,15 +156,25 @@
                 { "action": "replace", "icon": "user-home" },
                 { "action": "symlink", "icon": "user-home-open" }
             ],
-            "sources": ["PAPIRUS"],
-            "changelog": "changed glyph to PAPIRUS user-home glyph"
+            "sources": [
+                {
+                    "source": "PAPIRUS",
+                    "assets": "64x64/places/folder_home",
+                    "used": "symbol"
+                }
+            ],
+            "changelog": "changed glyph to PAPIRUS home symbol"
         },
         "folder videos": {
             "substitute": "folder-videos",
             "targets": [
                 { "action": "replace", "icon": "folder-videos" }
             ],
-            "sources": ["SCRATCH"]
+            "sources": [
+                {
+                    "source": "made from scratch"
+                }
+            ]
         },
         "folder music": {
             "substitute": "folder-music",
@@ -175,8 +190,14 @@
             "targets": [
                 { "action": "replace", "icon": "folder-download" }
             ],
-            "sources": ["SCRATCH", "BREEZE"],
-            "changelog": "modified BREEZE folder-download arrow"
+            "sources": [
+                {
+                    "source": "BREEZE",
+                    "assets": [ "places/64/folder-download" ],
+                    "used": "download arrow"
+                }
+            ],
+            "changelog": "remade BREEZE arrow to make it filled"
         },
         "folder documents": {
             "substitute": "folder-documents",
@@ -192,8 +213,14 @@
                 { "action": "replace", "icon": "folder-templates" },
                 { "action": "symlink", "icon": "folder-templates-open" }
             ], 
-            "sources": ["MARWAITA"],
-            "changelog": "changed glyph to MARWAITA folder-templates glyph"
+            "sources": [
+                {
+                    "source": "MARWAITA",
+                    "assets": [ "scalable/places/folder-templates" ],
+                    "used": "symbol"
+                }
+            ],
+            "changelog": "changed symbol to use the one from MARWAITA"
         },
         "folder publicshare": {
             "substitute": "folder-publicshare",
@@ -202,7 +229,12 @@
                 { "action": "replace", "icon": "folder-publicshare" },
                 { "action": "symlink", "icon": "folder-publicshare-open" }
             ],
-            "sources": ["https://www.svgrepo.com/svg/451439/walking"],
+            "sources": [
+                {
+                    "source": "svgrepo.com",
+                    "assets": [ "https://www.svgrepo.com/svg/451439/walking" ]
+                }
+            ],
             "changelog": "replaced the original figure with a stickman to match the user-share folder icon"
         },
         "user share": {
@@ -217,8 +249,14 @@
             "targets": [
                 { "action": "replace", "icon": "folder-remote" }
             ],
-            "sources": ["ADWAITA"],
-            "changelog": "added a bottom connection cable from ADWAITA folder-remote"
+            "sources": [
+                {
+                    "source": "ADWAITA",
+                    "assets": [ "scalable/places/folder-remote" ],
+                    "used": "connection cable"
+                }
+            ],
+            "changelog": "added a bottom connection cable"
         },
         "folder network": {
             "substitute": "folder-network",
@@ -248,8 +286,14 @@
                 { "action": "symlink", "icon": "stock_open" },
                 { "action": "symlink", "icon": "gnome-fs-directory-open" }
             ],
-            "sources": ["FLUENT"],
-            "changelog": "inspired by FLUENT folder-open icon"
+            "sources": [
+                {
+                    "source": "FLUENT",
+                    "assets": [ "scalable/places/default-folder-open" ],
+                    "used": "reference"
+                }
+            ],
+            "changelog": "remade the icon inspired by FLUENT"
         },
         "folder visiting": {
             "substitute": "folder-visiting",

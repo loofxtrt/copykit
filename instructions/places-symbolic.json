@@ -10,7 +10,12 @@
                 { "action": "replace", "icon": "user-desktop-symbolic" }
             ],
             "substitute": "fluent_user-desktop-symbolic",
-            "sources": ["FLUENT"]
+            "sources": [
+                {
+                    "source": "FLUENT",
+                    "assets": [ "32/actions/user-desktop-symbolic" ]
+                }
+            ]
         }
     }
 }

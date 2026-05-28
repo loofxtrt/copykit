@@ -35,12 +35,21 @@ def resolve_table_writing(mapping: Mapping):
                     sources = e.sources
                     changelog = e.changelog
 
+                    # formatar as sources
+                    sources_text = ''
+                    if sources:
+                        source = sources.get('source')
+                        assets = sources.get('assets')
+                        used = sources.get('used')
+
+                        sources_text = f'{source}:{str(assets)}:{used}'
+
                     with tag('td'):
                         text(key)
 
                     # doc.asis insere html dentro do html sem precisar escapar
                     with tag('td'):
-                        doc.asis(str(sources) or '')
+                        doc.asis(sources_text)
                     with tag('td'):
                         doc.asis(changelog or '')
 

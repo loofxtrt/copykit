@@ -15,14 +15,24 @@
                 { "action": "symlink", "icon": "help-faq-symbolic" },
                 { "action": "symlink", "icon": "help-about-symbolic" }
             ],
-            "sources": ["FLUENT"]
+            "sources": [
+                {
+                    "source": "FLUENT",
+                    "assets": [ "22/actions/help-about" ]
+                }
+            ]
         },
         "bookmarks": {
             "substitute": "fluent_22_bookmark-new",
             "targets": [
                 { "action": "replace", "icon": "ephy-bookmarks-symbolic" }
             ],
-            "sources": ["FLUENT"]
+            "sources": [
+                {
+                    "source": "FLUENT",
+                    "assets": [ "22/actions/bookmark-new" ]
+                }
+            ]
         }
     }
 }
