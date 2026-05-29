@@ -151,7 +151,7 @@ class CLI:
             # TODO: substitute exige path e isso quebra pq não dá pra serializar
             #       e faz ele nunca nem ser escrito no json
             new_entry = Entry.from_dict(data=data, key=key, context=mapping.context)
-            mapping.entries[key] = new_entry
+            mapping.insert_entry(key=key, entry=new_entry)
         elif args.mode == 'target':
             icon = input('icon: ')
             action = input('action: ')
@@ -160,22 +160,22 @@ class CLI:
                 logger.error('impossível continuar sem um icon e action pro novo target')
                 return
 
-            targets = mapping.entries[key].targets or []
-            targets.append(Target(icon=icon, action=action))
+            target = Target(icon=icon, action=action)
+            mapping.entries[key].insert_target(target)
         elif args.mode == 'source':
             source = input('source: ')
             used = input('used: ')
-            single_asset = input('(single) asset: ') # single pra não ter que tratar lista no cli
+            single_asset = input('(single) asset: ') # single temporário pra não ter que tratar lista no cli
             
-            data = {
-                'source': source
-            }
-            if used:
-                data['used'] = used
+            assets = None
             if single_asset:
-                data['assets'].append(single_asset)
+                assets = [single_asset]
 
-            mapping.entries[key].sources.append(data)
+            mapping.entries[key].insert_source(
+                source=source,
+                assets=assets,
+                used=used
+            )
         
         # salvar as mudanças no disco
         mapping.save_to_disk(mapping_file)

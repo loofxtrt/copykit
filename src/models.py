@@ -234,7 +234,7 @@ class Entry:
     targets: List[Target]
     canonical: Optional[str]
     changelog: Optional[str]
-    sources: Optional[dict]
+    sources: Optional[list[dict]]
     processing: Optional[str]
 
     @classmethod
@@ -276,9 +276,24 @@ class Entry:
             targets=targets,
             canonical=data.get('canonical'),
             changelog=data.get('changelog'),
-            sources=data.get('sources', {}),
+            sources=data.get('sources', []),
             processing=data.get('processing')
         )
+
+    def insert_target(self, target: Target):
+        self.targets.append(target)
+    
+    def insert_source(self, source: str, assets: list[str] | None = None, used: str | None = None):
+        data = {
+            'source': source
+        }
+
+        if assets:
+            data['assets'] = assets
+        if used:
+            data['used'] = used
+        
+        self.sources.append(data)
 
     def to_dict(self) -> dict:
         targets = []
@@ -295,9 +310,8 @@ class Entry:
         }
 
         return {
-            k: v
-            for k, v in data.items()
-            if v is not None
+            # TODO: func separada?
+            k: v for k, v in data.items() if v is not None
         }
 
 
@@ -377,6 +391,9 @@ class Mapping:
             'context': self.context.to_dict(),
             'entries': entries
         }
+    
+    def insert_entry(self, key: str, entry: Entry):
+        self.entries[key] = entry
     
     def save_to_disk(self, file: Path):
         """
