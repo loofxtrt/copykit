@@ -74,8 +74,7 @@ class CLI:
         if args.root == 'local':
             run_copykit(PACK_LOCAL)
         elif args.root == 'remote':
-            # run_copykit(PACK_REMOTE)
-            pass
+            run_copykit(PACK_REMOTE)
     
     def cmd_docs(self, args):
         run_documenter()
