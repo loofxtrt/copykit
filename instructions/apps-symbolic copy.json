@@ -1,0 +1,24 @@
+{
+    "context": {
+        "id": "apps:teste",
+        "target_parent": "ROOT/nada/symbolic"
+    },
+    "entries": {
+        "desktop": {
+            "targets": [
+                {
+                    "icon": "preferences-desktop-symbolic",
+                    "action": "symlink"
+                }
+            ],
+            "canonical": "../../places/symbolic/user-desktop-symbolic",
+            "sources": {}
+        },
+        "farelo": {
+            "targets": [],
+            "canonical": "no",
+            "changelog": "gueto",
+            "sources": {}
+        }
+    }
+}

@@ -101,11 +101,12 @@ class Context:
         return Path(raw.replace('SUBSTITUTES', str(SUBSTITUTES)))
     
     def to_dict(self) -> dict:
-        return {
-            'id': self.id,
-            'substitute_parent': self.substitute_parent,
-            'target_parent': self.target_parent
-        }    
+        # return {
+        #     'id': self.id,
+        #     'substitute_parent': self.substitute_parent,
+        #     'target_parent': self.target_parent
+        # }
+        return self.data
 
 
 @dataclass
@@ -134,6 +135,9 @@ class Target:
     		caminho absoluto do arquivo no sistema
             é opcional porque depende da cadeia de classes que contêm o active_root
             que em alguns casos pode não estar presente
+
+            não faz parte dos dados fixos do Target, só é conveniência pro código
+            então normalmente não deve ser incluido num dict quando for serializado
     """
     
     icon: str # equivalente à name, TODO: talvez mudar pra name
@@ -149,13 +153,12 @@ class Target:
     def to_dict(self) -> dict:
         return {
             'icon': self.icon,
-            'action': self.action,
-            'path': self.path
+            'action': self.action
         }
 
 
 @dataclass
-class Substitute:
+class Substitute: # TODO: trocar substitute pra substitute_name no json? provavelmente não
     """
     representa um arquivo substituto que será usado em operações de create ou replace
 
@@ -279,16 +282,22 @@ class Entry:
 
     def to_dict(self) -> dict:
         targets = []
-        for t in targets:
+        for t in self.targets:
             targets.append(t.to_dict())
-
-        return {
-            'substitute': self.substitute,
+        
+        data = {
+            'substitute': self.substitute.name if self.substitute else None,
             'targets': targets,
             'canonical': self.canonical,
             'changelog': self.changelog,
             'sources': self.sources,
             'processing': self.processing
+        }
+
+        return {
+            k: v
+            for k, v in data.items()
+            if v is not None
         }
 
 
@@ -360,9 +369,9 @@ class Mapping:
         return mapping
     
     def to_dict(self) -> dict:
-        entries = []
-        for e in self.entries:
-            entries.append(e.to_dict())
+        entries = {}
+        for key, value in self.entries.items():
+            entries[key] = value.to_dict()
 
         return {
             'context': self.context.to_dict(),

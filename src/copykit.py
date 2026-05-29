@@ -7,7 +7,7 @@ import argparse
 
 from pathvalidate import sanitize_filename
 
-from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normalize_json_name, normalize_svg_name, write_json
+from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normalize_json_name, normalize_svg_name, read_json, write_json
 from .models import Entry, Target, Mapping, Context, Substitute
 from .handlers import remove, replace, symlink
 from .logger import EntryLogger
@@ -29,6 +29,7 @@ class CLI:
         self._register_apply()
         self._register_docs()
         self._register_mkmap()
+        self._register_entry()
 
     def execute(self):
         args = self.parser.parse_args()
@@ -67,7 +68,15 @@ class CLI:
         )
         parser_entry.add_argument(
             '--key',
-            '-k'
+            '-k',
+            required=True
+        )
+        parser_entry.add_argument(
+            '--mapping-file',
+            '-mf',
+            required=True,
+            help="""caminho relativo do mapping a partir do diretório de instruções,
+            ex: PATH_INSTRUCOES + -mf apps/apps-simbolicos.json -> PATH_INSTRUCOES/apps/apps-simbolicos.json"""
         )
         parser_entry.set_defaults(func=self.cmd_entry)
 
@@ -114,30 +123,16 @@ class CLI:
 
     def cmd_entry(self, args):
         key = args.key
-
-        if args.mode != 'new' and not keys: # new consegue pedir a chave manualmente
-            logger.error('impossível continuar sem definir uma key pra entry')
-            return
         
-        try:
-            # TODO: raise de filenotfound
-            mapping_id = args.id
-            file = INSTRUCTIONS / mapping_id
+        # resolver qual mapping é o alvo da edição
+        mapping_file = INSTRUCTIONS / args.mapping_file
+        if not mapping_file.exists():
+            logger.error(f'arquivo mapping não existe: {mapping_file}')
 
-            if not file.exists():
-                logger.error(f'arquivo não existe: {file.name}')
-                return
-        except Exception as e:
-            logger.error(e)
+        mapping = Mapping.from_file(mapping_file)
 
-        mapping = Mapping.from_file(file)
-
+        # delegar ações com base no modo do comando
         if args.mode == 'new':
-            # solicitar a chave nova caso ela já não tinha sido explicitamente passada
-            # passar ela como argumento ou pelo input dá no mesmo
-            if not key:
-                key = input('key: ')
-
             # obter outros campos opcionais
             substitute = input('substitute: ')
             canonical = input('canonical: ')
@@ -153,8 +148,10 @@ class CLI:
                 data['changelog'] = changelog
             
             # adicionar os dados obtidos no mapping
-            entry = Entry.from_dict(data)
-            mapping.entries[key] = entry
+            # TODO: substitute exige path e isso quebra pq não dá pra serializar
+            #       e faz ele nunca nem ser escrito no json
+            new_entry = Entry.from_dict(data=data, key=key, context=mapping.context)
+            mapping.entries[key] = new_entry
         elif args.mode == 'target':
             icon = input('icon: ')
             action = input('action: ')
@@ -163,18 +160,25 @@ class CLI:
                 logger.error('impossível continuar sem um icon e action pro novo target')
                 return
 
-            targets = mapping.entries.targets or []
+            targets = mapping.entries[key].targets or []
             targets.append(Target(icon=icon, action=action))
         elif args.mode == 'source':
             source = input('source: ')
             used = input('used: ')
             single_asset = input('(single) asset: ') # single pra não ter que tratar lista no cli
             
-            mapping.entries[key]
-            
+            data = {
+                'source': source
+            }
+            if used:
+                data['used'] = used
+            if single_asset:
+                data['assets'].append(single_asset)
+
+            mapping.entries[key].sources.append(data)
         
         # salvar as mudanças no disco
-        mapping.save_to_disk(file)
+        mapping.save_to_disk(mapping_file)
 
 
 def handle_mapping(
