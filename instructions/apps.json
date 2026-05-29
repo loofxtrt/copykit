@@ -910,6 +910,11 @@
                     "used": "blue colors and the idea of semi-transparent letters"
                 }
             ]
+        },
+        "Mass delete": {
+            "targets": [
+                { "action": "remove", "icon": "browser-tor-tentative-redesign" }
+            ]
         }
     }
 }

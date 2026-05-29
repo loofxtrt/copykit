@@ -1,0 +1,22 @@
+{
+    "context": {
+        "id": "devices",
+        "target_parent": "ROOT/devices/scalable",
+        "substitute_parent": "SUBSTITUTES/devices"
+    },
+    "entries": {
+        "network": {
+            "substitute": "kora_sequeler",
+            "canonical": "network-server",
+            "targets": [
+                { "action": "replace", "icon": "network-server" }
+            ],
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/com.github.alecaddd.sequeler" ]
+                }
+            ]
+        }
+    }
+}

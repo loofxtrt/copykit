@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 from typing import List, Optional
 import json
 
-from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normalize_json_name, normalize_svg_name, read_json
+from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normalize_json_name, normalize_svg_name, read_json, write_json
 from . import logger
 
 
@@ -99,6 +99,13 @@ class Context:
             raise ValueError(f"'SUBSTITUTES' precisa estar presente em substitute_parent ou ser completamente nulo ({self.id})")
         
         return Path(raw.replace('SUBSTITUTES', str(SUBSTITUTES)))
+    
+    def to_dict(self) -> dict:
+        return {
+            'id': self.id,
+            'substitute_parent': self.substitute_parent,
+            'target_parent': self.target_parent
+        }    
 
 
 @dataclass
@@ -138,6 +145,13 @@ class Target:
             return False
 
         return self.path.exists() and self.path.is_file()
+
+    def to_dict(self) -> dict:
+        return {
+            'icon': self.icon,
+            'action': self.action,
+            'path': self.path
+        }
 
 
 @dataclass
@@ -263,6 +277,20 @@ class Entry:
             processing=data.get('processing')
         )
 
+    def to_dict(self) -> dict:
+        targets = []
+        for t in targets:
+            targets.append(t.to_dict())
+
+        return {
+            'substitute': self.substitute,
+            'targets': targets,
+            'canonical': self.canonical,
+            'changelog': self.changelog,
+            'sources': self.sources,
+            'processing': self.processing
+        }
+
 
 @dataclass
 class Mapping:
@@ -330,3 +358,21 @@ class Mapping:
             entries=entries
         )
         return mapping
+    
+    def to_dict(self) -> dict:
+        entries = []
+        for e in self.entries:
+            entries.append(e.to_dict())
+
+        return {
+            'context': self.context.to_dict(),
+            'entries': entries
+        }
+    
+    def save_to_disk(self, file: Path):
+        """
+        transforma o estado atual da classe em texto
+        e escreve no disco, substituindo o conteúdo anterior
+        """
+
+        write_json(file, self.to_dict())

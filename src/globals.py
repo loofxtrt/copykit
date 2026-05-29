@@ -27,3 +27,7 @@ def normalize_json_name(name: str) -> str:
 def read_json(file: Path) -> dict:
     with file.open('r', encoding='utf-8') as f:
         return json.load(f)
+
+def write_json(file: Path, data: dict) -> dict:
+    with file.open('w', encoding='utf-8') as f:
+        return json.dump(data, f, indent=4, ensure_ascii=False)
