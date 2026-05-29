@@ -6,6 +6,7 @@ import shutil
 import argparse
 
 from pathvalidate import sanitize_filename
+from prompt_toolkit import PromptSession
 
 from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normalize_json_name, normalize_svg_name, read_json, write_json
 from .models import Entry, Target, Mapping, Context, Substitute
@@ -30,6 +31,7 @@ class CLI:
         self._register_docs()
         self._register_mkmap()
         self._register_entry()
+        self._register_map()
 
     def execute(self):
         args = self.parser.parse_args()
@@ -58,6 +60,15 @@ class CLI:
         )
         parser_mkmap.set_defaults(func=self.cmd_mkmap)
     
+    def _register_map(self):
+        parser_map = self.subparsers.add_parser('map')
+        parser_map.add_argument(
+            '--mapping-file',
+            '-mf',
+            required=True
+        )
+        parser_map.set_defaults(func=self.cmd_map)
+
     def _register_entry(self):
         parser_entry = self.subparsers.add_parser('entry')
         parser_entry.add_argument(
@@ -121,6 +132,9 @@ class CLI:
         # escrever o json final
         write_json(file, mapping)
 
+    def cmd_map(self, args):
+        shell(INSTRUCTIONS / args.mapping_file)
+
     def cmd_entry(self, args):
         key = args.key
         
@@ -179,6 +193,55 @@ class CLI:
         
         # salvar as mudanças no disco
         mapping.save_to_disk(mapping_file)
+
+
+def shell(mapping_file: Path):
+    mapping = Mapping.from_file(mapping_file)
+    
+    session = PromptSession()
+
+    while True:
+        try:
+            cmd = session.prompt(f'{mapping.context.id} > ')
+
+            if cmd == 'exit' or cmd == 'quit':
+                break
+            if cmd == 'entry':
+                new_key = session.prompt('new key: ')
+                substitute = session.prompt('substitute: ')
+                canonical = session.prompt('canonical: ')
+                changelog = session.prompt('changelog: ')
+
+                data = {}
+
+                if substitute:
+                    data['substitute'] = substitute
+                if canonical:
+                    data['canonical'] = canonical
+                if changelog:
+                    data['changelog'] = changelog
+                
+                # adicionar os dados obtidos no mapping
+                new_entry = Entry.from_dict(data=data, key=new_key, context=mapping.context)
+                
+                mapping.insert_entry(key=new_key, entry=new_entry)
+                mapping.save_to_disk(mapping_file)
+            if cmd == 'target':
+                key == session.prom
+                
+                icon = input('icon: ')
+                action = input('action: ')
+
+                if not icon or not action:
+                    logger.error('impossível continuar sem um icon e action pro novo target')
+                    return
+
+                target = Target(icon=icon, action=action)
+                mapping.entries[key].insert_target(target)
+        except KeyboardInterrupt:
+            # aceitar ctrl + c pra fechar
+            break
+    
 
 
 def handle_mapping(

@@ -1,0 +1,9 @@
+lxml==6.1.1
+markdown-it-py==4.2.0
+mdurl==0.1.2
+pathvalidate==3.3.1
+prompt_toolkit==3.0.52
+Pygments==2.20.0
+rich==15.0.0
+wcwidth==0.7.0
+yattag==1.16.1
