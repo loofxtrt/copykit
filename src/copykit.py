@@ -176,8 +176,8 @@ def shell(mapping_file: Path):
                     mapping.insert_entry(key=key, entry=new_entry)
                     _save_mapping()
                 elif cmd == 'target':
-                    icon = input('icon: ')
-                    action = input('action: ')
+                    icon = prompt('icon')
+                    action = prompt('action')
 
                     if not icon or not action:
                         logger.error('impossível continuar sem um icon e action pro novo target')
@@ -188,9 +188,9 @@ def shell(mapping_file: Path):
                     mapping.entries[key].insert_target(target)
                     _save_mapping()
                 elif cmd == 'source':
-                    source = input('source: ')
-                    used = input('used: ')
-                    single_asset = input('(single) asset: ') # single temporário pra não ter que tratar lista no cli
+                    source = prompt('source')
+                    used = prompt('used')
+                    single_asset = prompt('(single) asset: ') # single temporário pra não ter que tratar lista no cli
                     
                     assets = None
                     if single_asset:

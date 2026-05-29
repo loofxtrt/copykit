@@ -6,246 +6,473 @@
     },
     "entries": {
         "zip": {
+            "substitute": "zip",
             "targets": [
-                { "action": "replace", "icon": "zip" },
-                { "action": "symlink", "icon": "application-7zip" },
-                { "action": "symlink", "icon": "application-archive" },
-                { "action": "symlink", "icon": "application-archive-zip" },
-                { "action": "symlink", "icon": "application-x-ace" },
-                { "action": "symlink", "icon": "application-x-arj" },
-                { "action": "symlink", "icon": "application-x-bzdvi" },
-                { "action": "symlink", "icon": "application-x-bzip" },
-                { "action": "symlink", "icon": "application-x-compressed-tar" },
-                { "action": "symlink", "icon": "application-x-cpio" },
-                { "action": "symlink", "icon": "application-x-gzdvi" },
-                { "action": "symlink", "icon": "application-x-gzip" },
-                { "action": "symlink", "icon": "application-x-lha" },
-                { "action": "symlink", "icon": "application-x-lzma" },
-                { "action": "symlink", "icon": "application-x-lzop" },
-                { "action": "symlink", "icon": "application-x-rar" },
-                { "action": "symlink", "icon": "application-x-stuffit" },
-                { "action": "symlink", "icon": "application-x-tar" },
-                { "action": "symlink", "icon": "application-x-tarz" },
-                { "action": "symlink", "icon": "application-x-tha" },
-                { "action": "symlink", "icon": "application-x-thz" },
-                { "action": "symlink", "icon": "application-x-tzo" }
+                {
+                    "icon": "zip",
+                    "action": "replace"
+                },
+                {
+                    "icon": "application-7zip",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-archive",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-archive-zip",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-x-ace",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-x-arj",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-x-bzdvi",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-x-bzip",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-x-compressed-tar",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-x-cpio",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-x-gzdvi",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-x-gzip",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-x-lha",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-x-lzma",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-x-lzop",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-x-rar",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-x-stuffit",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-x-tar",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-x-tarz",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-x-tha",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-x-thz",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-x-tzo",
+                    "action": "symlink"
+                }
             ],
             "canonical": "zip",
-            "substitute": "zip",
+            "changelog": "changed colors, simplified the tape, added QOGIR details on top of it",
             "sources": [
                 {
                     "source": "YOSAMAX",
-                    "assets": [ "mimetypes/scalable/zip" ],
+                    "assets": [
+                        "mimetypes/scalable/zip"
+                    ],
                     "used": "base shape"
                 },
                 {
                     "source": "QOGIR",
-                    "assets": [ "scalable/apps/ark" ],
+                    "assets": [
+                        "scalable/apps/ark"
+                    ],
                     "used": "top details"
                 }
-            ],
-            "changelog": "changed colors, simplified the tape, added QOGIR details on top of it"
+            ]
         },
         "android": {
             "substitute": "android",
-            "canonical": "android-package-archive",
             "targets": [
-                { "action": "replace", "icon": "android-package-archive" }
-            ]
+                {
+                    "icon": "android-package-archive",
+                    "action": "replace"
+                }
+            ],
+            "canonical": "android-package-archive",
+            "sources": []
         },
         "audio": {
             "substitute": "audio-3-papirus",
-            "canonical": "audio-mp3",
             "targets": [
-                { "action": "replace", "icon": "audio-mp3" },
-                { "action": "symlink", "icon": "audio-flac" },
-                { "action": "symlink", "icon": "application-audio" },
-                { "action": "symlink", "icon": "audio-wav" }
+                {
+                    "icon": "audio-mp3",
+                    "action": "replace"
+                },
+                {
+                    "icon": "audio-flac",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-audio",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "audio-wav",
+                    "action": "symlink"
+                }
             ],
+            "canonical": "audio-mp3",
             "sources": [
                 {
                     "source": "PAPIRUS",
-                    "assets": [ "64x64/mimetypes/audio-ac3" ],
+                    "assets": [
+                        "64x64/mimetypes/audio-ac3"
+                    ],
                     "used": "colors"
                 }
             ]
         },
         "playlist": {
             "substitute": "playlist-2-papirus",
-            "canonical": "application-audio-playlist",
             "targets": [
-                { "action": "replace", "icon": "application-audio-playlist" },
-                { "action": "symlink", "icon": "audio-x-smart-playlist" }
+                {
+                    "icon": "application-audio-playlist",
+                    "action": "replace"
+                },
+                {
+                    "icon": "audio-x-smart-playlist",
+                    "action": "symlink"
+                }
             ],
+            "canonical": "application-audio-playlist",
             "sources": [
                 {
                     "source": "PAPIRUS",
-                    "assets": [ "64x64/mimetypes/playlist" ],
+                    "assets": [
+                        "64x64/mimetypes/playlist"
+                    ],
                     "used": "colors"
                 }
             ]
         },
         "bitwig project": {
             "substitute": "bitwig-project",
-            "canonical": "application-bitwig-project",
             "targets": [
-                { "action": "replace", "icon": "application-bitwig-project" }
-            ]
+                {
+                    "icon": "application-bitwig-project",
+                    "action": "replace"
+                }
+            ],
+            "canonical": "application-bitwig-project",
+            "sources": []
         },
         "bitwig project folder": {
             "substitute": "bitwig-project-folder",
-            "canonical": "application-bitwig-project-folder",
             "targets": [
-                { "action": "replace", "icon": "application-bitwig-project-folder" }
-            ]
+                {
+                    "icon": "application-bitwig-project-folder",
+                    "action": "replace"
+                }
+            ],
+            "canonical": "application-bitwig-project-folder",
+            "sources": []
         },
         "bitwig template": {
             "substitute": "bitwig-template",
-            "canonical": "application-bitwig-template",
             "targets": [
-                { "action": "replace", "icon": "application-bitwig-template" }
-            ]
+                {
+                    "icon": "application-bitwig-template",
+                    "action": "replace"
+                }
+            ],
+            "canonical": "application-bitwig-template",
+            "sources": []
         },
         "bitwig preset": {
             "substitute": "bitwig-preset",
-            "canonical": "application-bitwig-preset",
             "targets": [
-                { "action": "replace", "icon": "application-bitwig-preset" }
-            ]
+                {
+                    "icon": "application-bitwig-preset",
+                    "action": "replace"
+                }
+            ],
+            "canonical": "application-bitwig-preset",
+            "sources": []
         },
         "image": {
             "substitute": "image-3-papirus",
-            "canonical": "application-images",
             "targets": [
-                { "action": "replace", "icon": "application-images" },
-                { "action": "symlink", "icon": "application-image-tiff" },
-                { "action": "symlink", "icon": "application-image-tga" },
-                { "action": "symlink", "icon": "application-image-png" },
-                { "action": "symlink", "icon": "application-image-jxl" },
-                { "action": "symlink", "icon": "application-image-jpg" },
-                { "action": "symlink", "icon": "application-image-gif" },
-                { "action": "symlink", "icon": "application-image-exr" },
-                { "action": "symlink", "icon": "application-image-bmp" },
-                { "action": "symlink", "icon": "application-image-avif" }
+                {
+                    "icon": "application-images",
+                    "action": "replace"
+                },
+                {
+                    "icon": "application-image-tiff",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-image-tga",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-image-png",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-image-jxl",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-image-jpg",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-image-gif",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-image-exr",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-image-bmp",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "application-image-avif",
+                    "action": "symlink"
+                }
             ],
+            "canonical": "application-images",
             "sources": [
                 {
                     "source": "PAPIRUS",
-                    "assets": [ "64x64/mimetypes/image-x-tiff" ],
+                    "assets": [
+                        "64x64/mimetypes/image-x-tiff"
+                    ],
                     "used": "colors and symbol"
                 }
             ]
         },
         "markdown": {
             "substitute": "markdown-2",
-            "canonical": "text-markdown",
             "targets": [
-                { "action": "replace", "icon": "text-markdown" }
+                {
+                    "icon": "text-markdown",
+                    "action": "replace"
+                }
             ],
+            "canonical": "text-markdown",
             "sources": [
                 {
                     "source": "MOREWAITA",
-                    "assets": [ "scalable/mimetypes/text-x-markdown" ],
+                    "assets": [
+                        "scalable/mimetypes/text-x-markdown"
+                    ],
                     "used": "symbols"
                 },
                 {
                     "source": "KORA",
-                    "assets": [ "scalable/mimetypes/application-document" ],
+                    "assets": [
+                        "scalable/mimetypes/application-document"
+                    ],
                     "used": "colors"
                 }
             ]
         },
         "svg": {
             "substitute": "svg",
-            "canonical": "application-vector",
             "targets": [
-                { "action": "replace", "icon": "application-vector" }
+                {
+                    "icon": "application-vector",
+                    "action": "replace"
+                }
             ],
+            "canonical": "application-vector",
             "sources": [
                 {
                     "source": "FAIRYWREN",
-                    "assets": [ "mimetypes/image-x-svg+xml" ],
+                    "assets": [
+                        "mimetypes/image-x-svg+xml"
+                    ],
                     "used": "symbols"
                 },
                 {
                     "source": "BREEZE",
-                    "assets": [ "mimetypes/64/x-office-drawing" ],
+                    "assets": [
+                        "mimetypes/64/x-office-drawing"
+                    ],
                     "used": "colors"
                 }
             ]
         },
         "blank": {
             "substitute": "blank",
-            "canonical": "application-blank",
             "targets": [
-                { "action": "replace", "icon": "application-blank" }
+                {
+                    "icon": "application-blank",
+                    "action": "replace"
+                }
             ],
+            "canonical": "application-blank",
             "sources": [
                 {
                     "source": "KORA",
-                    "assets": [ "mimetypes/scalable/application-blank" ],
+                    "assets": [
+                        "mimetypes/scalable/application-blank"
+                    ],
                     "used": "colors"
                 }
             ]
         },
         "document": {
             "substitute": "document",
-            "canonical": "application-document",
             "targets": [
-                { "action": "replace", "icon": "application-document" }
+                {
+                    "icon": "application-document",
+                    "action": "replace"
+                }
             ],
+            "canonical": "application-document",
             "sources": [
                 {
                     "source": "KORA",
-                    "assets": [ "scalable/mimetypes/application-document" ],
+                    "assets": [
+                        "scalable/mimetypes/application-document"
+                    ],
                     "used": "colors and symbol"
                 }
             ]
         },
         "xml": {
             "substitute": "xml",
-            "canonical": "text-xml",
             "targets": [
-                { "action": "replace", "icon": "text-xml" },
-                { "action": "symlink", "icon": "application-x-osm+xml" }
+                {
+                    "icon": "text-xml",
+                    "action": "replace"
+                },
+                {
+                    "icon": "application-x-osm+xml",
+                    "action": "symlink"
+                }
             ],
+            "canonical": "text-xml",
             "sources": [
                 {
                     "source": "KORA",
-                    "assets": [ "scalable/mimetypes/text-xml" ],
+                    "assets": [
+                        "scalable/mimetypes/text-xml"
+                    ],
                     "used": "symbols"
                 },
                 {
                     "source": "BREEZE",
-                    "assets": [ "mimetypes/64/text-xml" ],
+                    "assets": [
+                        "mimetypes/64/text-xml"
+                    ],
                     "used": "colors"
                 }
             ]
         },
         "executable": {
             "substitute": "executable",
-            "canonical": "application-executable",
             "targets": [
-                { "action": "replace", "icon": "application-executable" }
+                {
+                    "icon": "application-executable",
+                    "action": "replace"
+                }
             ],
+            "canonical": "application-executable",
             "sources": [
                 {
                     "source": "KORA",
-                    "assets": [ "scalable/mimetypes/application-document" ],
+                    "assets": [
+                        "scalable/mimetypes/application-document"
+                    ],
                     "used": "colors and symbol"
                 }
             ]
         },
         "json": {
             "substitute": "json",
-            "canonical": "application-json",
             "targets": [
-                { "action": "replace", "icon": "application-json" }
+                {
+                    "icon": "application-json",
+                    "action": "replace"
+                }
             ],
+            "canonical": "application-json",
             "sources": [
                 {
                     "source": "original logo",
-                    "assets": [ "https://commons.wikimedia.org/wiki/File:JSON_vector_logo.svg" ]
+                    "assets": [
+                        "https://commons.wikimedia.org/wiki/File:JSON_vector_logo.svg"
+                    ]
+                }
+            ]
+        },
+        "script": {
+            "substitute": "script",
+            "targets": [
+                {
+                    "icon": "text-x-script",
+                    "action": "replace"
+                }
+            ],
+            "canonical": "text-x-script",
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [
+                        "mimetypes/scalable/text-x-script"
+                    ],
+                    "used": "symbol and colors"
+                }
+            ]
+        },
+        "python": {
+            "substitute": "python",
+            "targets": [
+                {
+                    "icon": "text-x-python",
+                    "action": "replace"
+                }
+            ],
+            "canonical": "text-x-python",
+            "changelog": "made one of the snakes translucent",
+            "sources": [
+                {
+                    "source": "MOREWAITA",
+                    "assets": [
+                        "scalable/mimetypes/text-x-python"
+                    ],
+                    "used": "symbol and background color"
                 }
             ]
         }

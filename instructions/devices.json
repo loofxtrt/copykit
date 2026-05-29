@@ -9,7 +9,8 @@
             "substitute": "kora_sequeler",
             "canonical": "network-server",
             "targets": [
-                { "action": "replace", "icon": "network-server" }
+                { "action": "replace", "icon": "network-server" },
+                { "action": "symlink", "icon": "network-server-database" }
             ],
             "sources": [
                 {
