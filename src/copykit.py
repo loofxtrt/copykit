@@ -229,9 +229,10 @@ def handle_mapping(
     """
 
     # validação informações básicas do mapping
-    target_parent = mapping.context.target_parent
-    substitute_parent = mapping.context.substitute_parent
-    id = mapping.context.id
+    context = mapping.context
+    target_parent = context.target_parent
+    substitute_parent = context.substitute_parent
+    _id = context.id
 
     if not target_parent.is_dir():
         logger.error(f'{target_parent} não é um diretório')
@@ -245,19 +246,19 @@ def handle_mapping(
     # começar as operações
     entries = mapping.entries
     if not entries:
-        logger.error(f'nenhuma entry presente em {id}')
+        logger.error(f'nenhuma entry presente em {_id}')
         return
     
     for entry in mapping.entries.values():
         # criar o logger dessa entry específica
         entry_logger = EntryLogger(
             title=entry.key,
-            prefix=f'{id}:'
+            prefix=f'{_id}:'
         )
         
         targets = entry.targets
         if not targets:
-            entry_logger.error(f'nenhum target encontrado para substituir em {id}')
+            entry_logger.error(f'nenhum target encontrado para substituir em {_id}')
             continue
         
         canonical = entry.canonical
@@ -270,7 +271,7 @@ def handle_mapping(
             icon = t.icon
 
             if not icon:
-                entry_logger.error(f'target sem ícone em {id}')
+                entry_logger.error(f'target sem ícone em {_id}')
                 continue
 
             if not action:
@@ -285,23 +286,26 @@ def handle_mapping(
                 replace.handle_create_or_replace(
                     entry=entry,
                     target=t,
+                    context=context,
                     hard_replace=hard_replace,
                     skip_symlinks=skip_symlinks,
                     logger=entry_logger
                 )
             elif action == 'symlink':
                 if not canonical:
-                    entry_logger.info(f'canonical não definido para {id}')
+                    entry_logger.info(f'canonical não definido para {_id}')
                     continue
 
                 symlink.handle_symlink(
                     canonical=canonical,
                     target=t,
-                    logger=entry_logger
+                    logger=entry_logger,
+                    context=context
                 )
             elif action == 'remove':
                 remove.handle_remove(
                     target=t,
+                    context=context,
                     logger=entry_logger
                 )
         

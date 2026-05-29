@@ -1,7 +1,7 @@
 from pathlib import Path
 import shutil
 
-from ..models import Target, Entry
+from ..models import Target, Entry, Context
 from ..logger import EntryLogger
 from ..globals import is_icon_valid
 from .. import processor
@@ -11,6 +11,7 @@ from .. import processor
 def handle_create_or_replace(
     entry: Entry,
     target: Target,
+    context: Context,
     hard_replace: bool,
     skip_symlinks: bool,
     logger: EntryLogger
@@ -38,13 +39,13 @@ def handle_create_or_replace(
         logger.error(f'substituto não encontrado para {target.icon}')
         return
     
-    substitute_path = substitute.resolve_path()
+    substitute_path = substitute.resolve_path(context)
     if not is_icon_valid(substitute_path):
         logger.error(f'caminho de substituto inválido: {substitute_path}')
         return
 
     # resolver o target
-    target_path = target.resolve_path()
+    target_path = target.resolve_path(context)
     
     # após ter um caminho de ícone substituto válido, as ações podem começar
     if target.action == 'replace':

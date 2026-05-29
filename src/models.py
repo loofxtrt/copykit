@@ -166,7 +166,7 @@ class Substitute: # TODO: trocar substitute pra substitute_name no json? provave
             logger.error(f'não é possível resolver o caminho do substitute sem um substitute_parent: {context.id}')
             return
         
-        return context.substitute_parent / normalize_json_name(self.name)
+        return context.substitute_parent / normalize_svg_name(self.name)
 
 
 @dataclass

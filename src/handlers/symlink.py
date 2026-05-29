@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from ..models import Target
+from ..models import Target, Context
 from ..globals import normalize_svg_name
 from ..logger import EntryLogger
 # from .. import logger
@@ -9,6 +9,7 @@ from ..logger import EntryLogger
 def handle_symlink(
     canonical: Path,
     target: Target,
+    context: Context,
     logger: EntryLogger
     ):
     """
@@ -18,6 +19,9 @@ def handle_symlink(
     	canonical:
     		caminho do arquivo que será referenciado pelo symlink
             ex: 'blender.svg'
+
+        context:
+            contexto. pra saber como resolver o path do target
 
     	target:
     		target que define onde o symlink será criado
@@ -30,7 +34,7 @@ def handle_symlink(
         return
     
     # deletar o antigo arquivo/symlink que possivelmente existe no destino do symlink novo
-    link = target_path
+    link = target.resolve_path(context)
     if link.exists() or link.is_symlink():
         link.unlink()
 

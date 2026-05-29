@@ -1,12 +1,13 @@
 from pathlib import Path
 
-from ..models import Target
+from ..models import Target, Context
 from ..logger import EntryLogger
 # from .. import logger
 
 
 def handle_remove(
     target: Target,
+    context: Context,
     logger: EntryLogger
     ):
     """
@@ -18,7 +19,7 @@ def handle_remove(
     """
 
     try:
-        target.resolve_path().unlink()
+        target.resolve_path(context).unlink()
         logger.success(f'{target.icon} deletado')
     except FileNotFoundError:
         logger.info(f'{target.icon} não precisa ser deletado porque já não existe')
