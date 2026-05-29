@@ -114,6 +114,10 @@ class CLI:
 
     def cmd_entry(self, args):
         key = args.key
+
+        if args.mode != 'new' and not keys: # new consegue pedir a chave manualmente
+            logger.error('impossível continuar sem definir uma key pra entry')
+            return
         
         try:
             # TODO: raise de filenotfound
@@ -130,12 +134,9 @@ class CLI:
 
         if args.mode == 'new':
             # solicitar a chave nova caso ela já não tinha sido explicitamente passada
-            # passar ela como argumento ou no input dá no mesmo
+            # passar ela como argumento ou pelo input dá no mesmo
             if not key:
                 key = input('key: ')
-            if not key:
-                logger.error('impossível continuar sem definir uma key pra entry')
-                return
 
             # obter outros campos opcionais
             substitute = input('substitute: ')
@@ -169,6 +170,7 @@ class CLI:
             used = input('used: ')
             single_asset = input('(single) asset: ') # single pra não ter que tratar lista no cli
             
+            mapping.entries[key]
             
         
         # salvar as mudanças no disco
