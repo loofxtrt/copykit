@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 from typing import List, Optional
 import json
 
-from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normalize_json_name, normalize_svg_name, read_json, write_json
+from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normalize_json_name, normalize_svg_name, read_json, write_json, drop_empty
 from . import logger
 
 
@@ -101,11 +101,6 @@ class Context:
         return Path(raw.replace('SUBSTITUTES', str(SUBSTITUTES)))
     
     def to_dict(self) -> dict:
-        # return {
-        #     'id': self.id,
-        #     'substitute_parent': self.substitute_parent,
-        #     'target_parent': self.target_parent
-        # }
         return self.data
 
 
@@ -254,14 +249,11 @@ class Entry:
         self.targets.append(target)
     
     def insert_source(self, source: str, assets: list[str] | None = None, used: str | None = None):
-        data = {
-            'source': source
-        }
-
-        if assets:
-            data['assets'] = assets
-        if used:
-            data['used'] = used
+        data = drop_empty({
+            'source': source,
+            'assets': assets,
+            'used': used
+        })
         
         self.sources.append(data)
 
@@ -270,19 +262,16 @@ class Entry:
         for t in self.targets:
             targets.append(t.to_dict())
         
-        data = {
+        data = drop_empty({
             'substitute': self.substitute.name if self.substitute else None,
             'targets': targets,
             'canonical': self.canonical,
             'changelog': self.changelog,
             'sources': self.sources,
             'processing': self.processing
-        }
+        })
 
-        return {
-            # TODO: func separada?
-            k: v for k, v in data.items() if v is not None
-        }
+        return data
 
 
 @dataclass

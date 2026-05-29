@@ -8,7 +8,7 @@ import argparse
 from pathvalidate import sanitize_filename
 from prompt_toolkit import PromptSession
 
-from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normalize_json_name, normalize_svg_name, read_json, write_json
+from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normalize_json_name, normalize_svg_name, read_json, write_json, drop_empty
 from .models import Entry, Target, Mapping, Context, Substitute
 from .handlers import remove, replace, symlink
 from .logger import EntryLogger
@@ -112,7 +112,10 @@ class CLI:
         write_json(file, mapping)
 
     def cmd_map(self, args):
-        shell(INSTRUCTIONS / args.mapping_file)
+        try:
+            shell(INSTRUCTIONS / args.mapping_file)
+        except ValueError:
+            logger.error(f'{args.mapping_file} não é um arquivo mapping válido')
 
 
 def shell(mapping_file: Path):
@@ -161,14 +164,11 @@ def shell(mapping_file: Path):
                     canonical = prompt('canonical')
                     changelog = prompt('changelog')
 
-                    data = {}
-
-                    if substitute:
-                        data['substitute'] = substitute
-                    if canonical:
-                        data['canonical'] = canonical
-                    if changelog:
-                        data['changelog'] = changelog
+                    data = drop_empty({
+                        'substitute': substitute,
+                        'canonical': canonical,
+                        'changelog': changelog
+                    })
                     
                     # adicionar os dados obtidos no mapping
                     new_entry = Entry.from_dict(data=data, key=key, context=mapping.context)
@@ -190,7 +190,7 @@ def shell(mapping_file: Path):
                 elif cmd == 'source':
                     source = prompt('source')
                     used = prompt('used')
-                    single_asset = prompt('(single) asset: ') # single temporário pra não ter que tratar lista no cli
+                    single_asset = prompt('(single) asset: ') # TODO: single temporário pra não ter que tratar lista no cli
                     
                     assets = None
                     if single_asset:

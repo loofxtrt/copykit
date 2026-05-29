@@ -34,3 +34,15 @@ def write_json(file: Path, data: dict) -> dict:
 
 def is_icon_valid(file: Path) -> bool:
     return file.is_file() and file.suffix == '.svg'
+
+def drop_empty(data: dict) -> dict:
+    """
+    filtra um dict, removendo todos os valores vazios dele
+    isso inclui nulos, listas vazias, strings vazias etc.
+    mas não inclui 0, false etc.
+    """
+
+    return {
+        k: v for k, v in data.items()
+        if v is not None and v != [] and v != '' and v != {}
+    }
