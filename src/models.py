@@ -135,7 +135,7 @@ class Target:
             logger.error(f'não é possível resolver o caminho do target sem um target_parent: {context.id}')
             return
         
-        return context.target_parent / normalize_json_name(self.icon)
+        return context.target_parent / normalize_svg_name(self.icon)
 
     def to_dict(self) -> dict:
         return {
