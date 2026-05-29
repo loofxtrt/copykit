@@ -223,12 +223,6 @@ class Entry:
             if not icon or not action:
                 logger.error(f'target inválido em {context.id}')
                 continue
-            
-            # resolver o path completo do target com base no contexto
-            target_parent = context.target_parent
-            path = None
-            if target_parent:
-                path = context.target_parent / normalize_svg_name(icon)
 
             # adicionar o target resolvido à lista
             targets.append(

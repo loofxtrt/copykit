@@ -462,6 +462,11 @@
                 {
                     "icon": "text-x-python",
                     "action": "replace"
+                },
+                {
+                    "comment": "em outros icon packs geralmente é diferente, mas no kora tava idêntico",
+                    "icon": "application-x-python-bytecode",
+                    "action": "symlink"
                 }
             ],
             "canonical": "text-x-python",
