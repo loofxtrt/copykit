@@ -30,7 +30,6 @@ class CLI:
         self._register_apply()
         self._register_docs()
         self._register_mkmap()
-        self._register_entry()
         self._register_map()
 
     def execute(self):
@@ -56,6 +55,8 @@ class CLI:
         parser_mkmap.add_argument(
             '--id',
             '-i',
+            help="""caminho relativo do mapping a partir do diretório de instruções,
+            ex: PATH_INSTRUCOES + -mf apps/apps-simbolicos.json -> PATH_INSTRUCOES/apps/apps-simbolicos.json""",
             required=True
         )
         parser_mkmap.set_defaults(func=self.cmd_mkmap)
@@ -68,28 +69,6 @@ class CLI:
             required=True
         )
         parser_map.set_defaults(func=self.cmd_map)
-
-    def _register_entry(self):
-        parser_entry = self.subparsers.add_parser('entry')
-        parser_entry.add_argument(
-            '--mode',
-            '-m',
-            choices=['new', 'entry', 'target', 'source'],
-            required=True
-        )
-        parser_entry.add_argument(
-            '--key',
-            '-k',
-            required=True
-        )
-        parser_entry.add_argument(
-            '--mapping-file',
-            '-mf',
-            required=True,
-            help="""caminho relativo do mapping a partir do diretório de instruções,
-            ex: PATH_INSTRUCOES + -mf apps/apps-simbolicos.json -> PATH_INSTRUCOES/apps/apps-simbolicos.json"""
-        )
-        parser_entry.set_defaults(func=self.cmd_entry)
 
     def cmd_apply(self, args):
         if args.root == 'local':
@@ -135,65 +114,6 @@ class CLI:
     def cmd_map(self, args):
         shell(INSTRUCTIONS / args.mapping_file)
 
-    def cmd_entry(self, args):
-        key = args.key
-        
-        # resolver qual mapping é o alvo da edição
-        mapping_file = INSTRUCTIONS / args.mapping_file
-        if not mapping_file.exists():
-            logger.error(f'arquivo mapping não existe: {mapping_file}')
-
-        mapping = Mapping.from_file(mapping_file)
-
-        # delegar ações com base no modo do comando
-        if args.mode == 'new':
-            # obter outros campos opcionais
-            substitute = input('substitute: ')
-            canonical = input('canonical: ')
-            changelog = input('changelog: ')
-
-            data = {}
-
-            if substitute:
-                data['substitute'] = substitute
-            if canonical:
-                data['canonical'] = canonical
-            if changelog:
-                data['changelog'] = changelog
-            
-            # adicionar os dados obtidos no mapping
-            # TODO: substitute exige path e isso quebra pq não dá pra serializar
-            #       e faz ele nunca nem ser escrito no json
-            new_entry = Entry.from_dict(data=data, key=key, context=mapping.context)
-            mapping.insert_entry(key=key, entry=new_entry)
-        elif args.mode == 'target':
-            icon = input('icon: ')
-            action = input('action: ')
-
-            if not icon or not action:
-                logger.error('impossível continuar sem um icon e action pro novo target')
-                return
-
-            target = Target(icon=icon, action=action)
-            mapping.entries[key].insert_target(target)
-        elif args.mode == 'source':
-            source = input('source: ')
-            used = input('used: ')
-            single_asset = input('(single) asset: ') # single temporário pra não ter que tratar lista no cli
-            
-            assets = None
-            if single_asset:
-                assets = [single_asset]
-
-            mapping.entries[key].insert_source(
-                source=source,
-                assets=assets,
-                used=used
-            )
-        
-        # salvar as mudanças no disco
-        mapping.save_to_disk(mapping_file)
-
 
 def shell(mapping_file: Path):
     def prompt(text: str | None = None):
@@ -217,9 +137,11 @@ def shell(mapping_file: Path):
     def _save_mapping():
         mapping.save_to_disk(mapping_file)
 
+    # resolver os dados
     mapping = Mapping.from_file(mapping_file)
     key = None
     
+    # iniciar a sessão shell que vai ficar ativa até ser manualmente interrompida
     session = PromptSession()
 
     while True:
@@ -230,28 +152,30 @@ def shell(mapping_file: Path):
                 break
             if cmd == 'entry':
                 key = prompt('key')
-                
-                substitute = prompt('substitute')
-                canonical = prompt('canonical')
-                changelog = prompt('changelog')
-
-                data = {}
-
-                if substitute:
-                    data['substitute'] = substitute
-                if canonical:
-                    data['canonical'] = canonical
-                if changelog:
-                    data['changelog'] = changelog
-                
-                # adicionar os dados obtidos no mapping
-                new_entry = Entry.from_dict(data=data, key=key, context=mapping.context)
-                
-                mapping.insert_entry(key=key, entry=new_entry)
-                _save_mapping()
             
+            # quando se tem uma chave ativa, significa que uma entry
+            # está sendo atualmente editada, seja ela nova ou não
             if key:
-                if cmd == 'target':
+                if cmd == 'new':
+                    substitute = prompt('substitute')
+                    canonical = prompt('canonical')
+                    changelog = prompt('changelog')
+
+                    data = {}
+
+                    if substitute:
+                        data['substitute'] = substitute
+                    if canonical:
+                        data['canonical'] = canonical
+                    if changelog:
+                        data['changelog'] = changelog
+                    
+                    # adicionar os dados obtidos no mapping
+                    new_entry = Entry.from_dict(data=data, key=key, context=mapping.context)
+                    
+                    mapping.insert_entry(key=key, entry=new_entry)
+                    _save_mapping()
+                elif cmd == 'target':
                     icon = input('icon: ')
                     action = input('action: ')
 
@@ -260,8 +184,8 @@ def shell(mapping_file: Path):
                         return
 
                     target = Target(icon=icon, action=action)
-                    mapping.entries[key].insert_target(target)
 
+                    mapping.entries[key].insert_target(target)
                     _save_mapping()
                 elif cmd == 'source':
                     source = input('source: ')
@@ -277,14 +201,12 @@ def shell(mapping_file: Path):
                         assets=assets,
                         used=used
                     )
-
                     _save_mapping()
                 elif cmd == '..': # voltar ao mapping anterior depois de ter entrado numa entry
                     key = None
         except KeyboardInterrupt:
             # aceitar ctrl + c pra fechar
             break
-    
 
 
 def handle_mapping(
