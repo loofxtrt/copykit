@@ -3,6 +3,7 @@ import shutil
 
 from ..models import Target, Entry
 from ..logger import EntryLogger
+from ..globals import is_icon_valid
 from .. import processor
 # from .. import logger, processor
 
@@ -33,36 +34,39 @@ def handle_create_or_replace(
     
     # garantir que existe um substituto válido antes de qualquer operação
     substitute = entry.substitute
-
     if not substitute:
         logger.error(f'substituto não encontrado para {target.icon}')
         return
     
-    if not substitute.is_valid():
-        logger.error(f'substituto inválido: {substitute.path}')
+    substitute_path = substitute.resolve_path()
+    if not is_icon_valid(substitute_path):
+        logger.error(f'caminho de substituto inválido: {substitute_path}')
         return
+
+    # resolver o target
+    target_path = target.resolve_path()
     
     # após ter um caminho de ícone substituto válido, as ações podem começar
     if target.action == 'replace':
         if not hard_replace:
-            if not target.is_valid():
-                logger.error(f'destino inválido: {target.path}')
+            if not is_icon_valid(target_path):
+                logger.error(f'caminho de target inválido: {target_path}')
                 return
-            
-            if target.path.is_symlink() and skip_symlinks:
+
+            if target_path.is_symlink() and skip_symlinks:
                 logger.info(f'symlink pulado: {target.icon}')
                 return
     
-        _copy(substitute=substitute.path, destination=target.path, operation='substituído', logger=logger)
+        _copy(substitute=substitute_path, destination=target_path, operation='substituído', logger=logger)
     elif target.action == 'create':
-        _copy(substitute=substitute.path, destination=target.path, operation='criado', logger=logger)
+        _copy(substitute=substitute_path, destination=target_path, operation='criado', logger=logger)
 
     # aplicar processing
     if entry.processing:
         processor.run(
             processing_id=entry.processing,
-            svg=target.path,
-            dest=target.path
+            svg=target_path,
+            dest=target_path
         )
 
 # TODO: param (flag) pra chamar ou não o processor e otimizar os svgs ao copiar eles

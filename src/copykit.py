@@ -63,7 +63,7 @@ class CLI:
         parser_entry.add_argument(
             '--mode',
             '-m',
-            choices=['new', 'entry', 'target'],
+            choices=['new', 'entry', 'target', 'source'],
             required=True
         )
         parser_entry.add_argument(

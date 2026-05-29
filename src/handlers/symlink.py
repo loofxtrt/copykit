@@ -30,7 +30,7 @@ def handle_symlink(
         return
     
     # deletar o antigo arquivo/symlink que possivelmente existe no destino do symlink novo
-    link = target.path
+    link = target_path
     if link.exists() or link.is_symlink():
         link.unlink()
 

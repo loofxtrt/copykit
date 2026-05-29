@@ -18,7 +18,7 @@ def handle_remove(
     """
 
     try:
-        target.path.unlink()
+        target.resolve_path().unlink()
         logger.success(f'{target.icon} deletado')
     except FileNotFoundError:
         logger.info(f'{target.icon} não precisa ser deletado porque já não existe')

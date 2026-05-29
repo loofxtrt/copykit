@@ -31,3 +31,6 @@ def read_json(file: Path) -> dict:
 def write_json(file: Path, data: dict) -> dict:
     with file.open('w', encoding='utf-8') as f:
         return json.dump(data, f, indent=4, ensure_ascii=False)
+
+def is_icon_valid(file: Path) -> bool:
+    return file.is_file() and file.suffix == '.svg'

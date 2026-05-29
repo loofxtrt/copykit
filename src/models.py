@@ -130,25 +130,17 @@ class Target:
             
             - remove
                 deleta um arquivo. não requer substitute
-
-    	path:
-    		caminho absoluto do arquivo no sistema
-            é opcional porque depende da cadeia de classes que contêm o active_root
-            que em alguns casos pode não estar presente
-
-            não faz parte dos dados fixos do Target, só é conveniência pro código
-            então normalmente não deve ser incluido num dict quando for serializado
     """
     
     icon: str # equivalente à name, TODO: talvez mudar pra name
     action: str
-    path: Optional[path]
 
-    def is_valid(self) -> bool:
-        if not self.path:
-            return False
-
-        return self.path.exists() and self.path.is_file()
+    def resolve_path(self, context: Context) -> Path | None:
+        if not context.target_parent:
+            logger.error(f'não é possível resolver o caminho do target sem um target_parent: {context.id}')
+            return
+        
+        return context.target_parent / normalize_json_name(self.icon)
 
     def to_dict(self) -> dict:
         return {
@@ -165,36 +157,16 @@ class Substitute: # TODO: trocar substitute pra substitute_name no json? provave
     args:
     	name:
     		nome lógico do substituto, vindo do json
-
-    	path:
-    		caminho absoluto do arquivo substituto
     """
 
     name: str
-    path: Path
 
-    def is_valid(self) -> bool:
-        return self.path.exists() and self.path.is_file()
-
-    @classmethod
-    def from_dict(
-        cls,
-        data: dict,
-        context: Context
-        ) -> Substitute | None:
-        name = data.get('substitute')
-        
-        if not name:
-            return None
-
+    def resolve_path(self, context: Context) -> Path | None:
         if not context.substitute_parent:
-            logger.warning(f'o nome de um substitute ({name}) foi definido, mas substitute_parent é inválido ({context.id})')
-            return None
-
-        return cls(
-            name=name,
-            path=context.substitute_parent / normalize_svg_name(name)
-        )
+            logger.error(f'não é possível resolver o caminho do substitute sem um substitute_parent: {context.id}')
+            return
+        
+        return context.substitute_parent / normalize_json_name(self.name)
 
 
 @dataclass
@@ -245,7 +217,7 @@ class Entry:
         context: Context
         ) -> Entry | None:
         # resolver o substitute
-        substitute = Substitute.from_dict(data=data, context=context)
+        substitute = Substitute(name=data.get('substitute'))
         
         # resolver os targets
         targets = []
@@ -264,11 +236,9 @@ class Entry:
                 path = context.target_parent / normalize_svg_name(icon)
 
             # adicionar o target resolvido à lista
-            targets.append(Target(
-                icon=icon,
-                action=action,
-                path=path
-            ))
+            targets.append(
+                Target(icon=icon, action=action)
+            )
 
         return cls(
             key=key,
