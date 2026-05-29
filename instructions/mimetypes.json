@@ -480,6 +480,134 @@
                     "used": "symbol and background color"
                 }
             ]
+        },
+        "toml": {
+            "substitute": "toml",
+            "targets": [
+                {
+                    "icon": "application-toml",
+                    "action": "replace"
+                }
+            ],
+            "canonical": "application-toml",
+            "sources": [
+                {
+                    "source": "MOREWAITA",
+                    "assets": [
+                        "scalable/mimetypes/application-toml"
+                    ],
+                    "used": "symbols"
+                }
+            ]
+        },
+        "rss": {
+            "substitute": "rss",
+            "targets": [
+                {
+                    "icon": "application-rss",
+                    "action": "replace"
+                },
+                {
+                    "icon": "application-rss_xml",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "gnome-mime-application-rss+xml",
+                    "action": "symlink"
+                }
+            ],
+            "canonical": "application-rss",
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [
+                        "mimetypes/scalable/application-rss_xml"
+                    ],
+                    "used": "symbol and colors"
+                }
+            ]
+        },
+        "rust": {
+            "substitute": "rust",
+            "targets": [
+                {
+                    "icon": "text-rust",
+                    "action": "replace"
+                },
+                {
+                    "icon": "text-x-rust",
+                    "action": "symlink"
+                }
+            ],
+            "canonical": "text-rust",
+            "sources": [
+                {
+                    "source": "original logo",
+                    "used": "symbol and colors"
+                }
+            ],
+            "changelog": "removed the cog around and kept only the R letter"
+        },
+        "ruby": {
+            "substitute": "ruby",
+            "targets": [
+                {
+                    "icon": "application-x-ruby",
+                    "action": "replace"
+                },
+                {
+                    "icon": "gnome-mime-application-x-ruby",
+                    "action": "symlink"
+                },
+                {
+                    "icon": "text-x-ruby",
+                    "action": "symlink"
+                }
+            ],
+            "canonical": "application-x-ruby",
+            "sources": [
+                {
+                    "source": "MOREWAITA",
+                    "assets": [ "scalable/mimetypes/application-x-ruby" ],
+                    "used": "symbol and colors"
+                }
+            ]
+        },
+        "scss": {
+            "substitute": "scss",
+            "targets": [
+                {
+                    "icon": "text-x-scss",
+                    "action": "replace"
+                }
+            ],
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [
+                        "mimetypes/scalable/text-x-scss"
+                    ],
+                    "used": "symbol and colors"
+                }
+            ]
+        },
+        "systemd": {
+            "substitute": "systemd",
+            "targets": [
+                {
+                    "icon": "text-x-systemd-unit",
+                    "action": "replace"
+                }
+            ],
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [
+                        "mimetypes/scalable/text-x-systemd-unit"
+                    ],
+                    "used": "symbol and colors"
+                }
+            ]
         }
     }
 }
