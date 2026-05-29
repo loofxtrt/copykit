@@ -196,21 +196,44 @@ class CLI:
 
 
 def shell(mapping_file: Path):
+    def prompt(text: str | None = None):
+        # refletir o estado atual do shell no prompt
+        prefix = f'{mapping.context.id}'
+
+        if key is not None:
+            prefix += f' (entry:{key})'
+
+        # mostrar > se for comando normal
+        # ou : se for um prompt requerindo algo
+        if text:
+            prefix += f' {text}'
+            prefix += ': '
+        else:
+            prefix += ' > '
+
+        # promptar
+        return session.prompt(prefix)
+
+    def _save_mapping():
+        mapping.save_to_disk(mapping_file)
+
     mapping = Mapping.from_file(mapping_file)
+    key = None
     
     session = PromptSession()
 
     while True:
         try:
-            cmd = session.prompt(f'{mapping.context.id} > ')
+            cmd = prompt()
 
             if cmd == 'exit' or cmd == 'quit':
                 break
             if cmd == 'entry':
-                new_key = session.prompt('new key: ')
-                substitute = session.prompt('substitute: ')
-                canonical = session.prompt('canonical: ')
-                changelog = session.prompt('changelog: ')
+                key = prompt('key')
+                
+                substitute = prompt('substitute')
+                canonical = prompt('canonical')
+                changelog = prompt('changelog')
 
                 data = {}
 
@@ -222,22 +245,42 @@ def shell(mapping_file: Path):
                     data['changelog'] = changelog
                 
                 # adicionar os dados obtidos no mapping
-                new_entry = Entry.from_dict(data=data, key=new_key, context=mapping.context)
+                new_entry = Entry.from_dict(data=data, key=key, context=mapping.context)
                 
-                mapping.insert_entry(key=new_key, entry=new_entry)
-                mapping.save_to_disk(mapping_file)
-            if cmd == 'target':
-                key == session.prom
-                
-                icon = input('icon: ')
-                action = input('action: ')
+                mapping.insert_entry(key=key, entry=new_entry)
+                _save_mapping()
+            
+            if key:
+                if cmd == 'target':
+                    icon = input('icon: ')
+                    action = input('action: ')
 
-                if not icon or not action:
-                    logger.error('impossível continuar sem um icon e action pro novo target')
-                    return
+                    if not icon or not action:
+                        logger.error('impossível continuar sem um icon e action pro novo target')
+                        return
 
-                target = Target(icon=icon, action=action)
-                mapping.entries[key].insert_target(target)
+                    target = Target(icon=icon, action=action)
+                    mapping.entries[key].insert_target(target)
+
+                    _save_mapping()
+                elif cmd == 'source':
+                    source = input('source: ')
+                    used = input('used: ')
+                    single_asset = input('(single) asset: ') # single temporário pra não ter que tratar lista no cli
+                    
+                    assets = None
+                    if single_asset:
+                        assets = [single_asset]
+
+                    mapping.entries[key].insert_source(
+                        source=source,
+                        assets=assets,
+                        used=used
+                    )
+
+                    _save_mapping()
+                elif cmd == '..': # voltar ao mapping anterior depois de ter entrado numa entry
+                    key = None
         except KeyboardInterrupt:
             # aceitar ctrl + c pra fechar
             break

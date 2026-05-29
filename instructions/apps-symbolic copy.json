@@ -15,24 +15,11 @@
             "sources": {}
         },
         "farelo": {
-            "substitute": "nada",
-            "targets": [
-                {
-                    "icon": "nada2",
-                    "action": "explodir"
-                }
-            ],
-            "canonical": "lero",
-            "changelog": "felo",
-            "sources": [
-                {
-                    "source": "nenhum",
-                    "assets": [
-                        "tudo"
-                    ],
-                    "used": "lugar"
-                }
-            ]
+            "substitute": "..",
+            "targets": [],
+            "canonical": "..",
+            "changelog": "..",
+            "sources": []
         }
     }
 }
