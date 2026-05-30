@@ -189,7 +189,7 @@ def shell(mapping_file: Path):
                 elif cmd == 'source':
                     source = prompt('source')
                     used = prompt('used')
-                    single_asset = prompt('(single) asset: ') # TODO: single temporário pra não ter que tratar lista no cli
+                    single_asset = prompt('(single) asset') # TODO: single temporário pra não ter que tratar lista no cli
                     
                     assets = None
                     if single_asset:

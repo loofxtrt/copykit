@@ -1,0 +1,33 @@
+{
+    "context": {
+        "id": "apps:miscellaneous",
+        "target_parent": "ROOT/apps/scalable",
+        "substitute_parent": "SUBSTITUTES/miscellaneous"
+    },
+    "entries": {
+        "preferences": {
+            "targets": [
+                { "action": "replace", "icon": "preferences-system" }
+            ],
+            "canonical": "preferences-system",
+            "substitute": "flatery_papirus_cog",
+            "sources": [
+                {
+                    "source": "PAPIRUS",
+                    "used": "colors and the idea of the wrench",
+                    "assets": [ "64x64/apps/preferences-system" ]
+                },
+                {
+                    "source": "FLATERY",
+                    "used": "base shape",
+                    "assets": [ "apps/64/preferences-system" ]
+                },
+                {
+                    "source": "KORA",
+                    "used": "wrench",
+                    "assets": [ "apps/scalable/mate-nettool" ]
+                }
+            ]
+        }
+    }
+}
