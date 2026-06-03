@@ -338,3 +338,7 @@ if __name__ == '__main__':
 # TODO: aviso de se um mapping não tem um substitute parent definido
 # TODO: remover código morto
 # TODO: melhorar segurança em relação a root opcional
+# TODO: erro quando uma action não existe
+# TODO: dataclass pra sources?
+# TODO: aplicar processing de optimize por padrão ou criar um bash que aplique
+# TODO: contexto pai declarativo, tipo substitutes, root etc. todos definidos num arquivo em vez de no código

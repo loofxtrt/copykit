@@ -915,6 +915,28 @@
             "targets": [
                 { "action": "remove", "icon": "browser-tor-tentative-redesign" }
             ]
+        },
+        "Kate": {
+            "targets": [
+                { "action": "replace", "icon": "kate" },
+                { "action": "symlink", "icon": "kate2" },
+                { "action": "symlink", "icon": "org.kde.kate" },
+                { "action": "symlink", "icon": "org.kde.plasma.katesessions" }
+            ],
+            "substitute": "kora_kate",
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [ "apps/scalable/kora" ],
+                    "used": "base shape"
+                },
+                {
+                    "source": "BREEZE",
+                    "assets": [ "apps/48/kate" ],
+                    "used": "colors and shadows"
+                }
+            ],
+            "changed": "changed colors and added shadows"
         }
     }
 }
