@@ -4,7 +4,7 @@ from xml.dom import minidom
 from yattag import Doc
 
 from .models import Mapping
-from .globals import INSTRUCTIONS, PACK_REPO
+from .globals import INSTRUCTIONS, PACK_REPO, README_TEMPLATE
 
 
 def make_hyperlink(url: str, text: str) -> str:
@@ -61,41 +61,25 @@ def resolve_table_writing(mapping: Mapping):
     return pretty_html
 
 def run_documenter():
-    kora       = make_hyperlink('https://store.kde.org/p/1256209', 'Kora')
-    breeze     = make_hyperlink('https://github.com/KDE/breeze-icons', 'Breeze')
-    marwaita   = make_hyperlink('https://www.gnome-look.org/p/1239855', 'Marwaita')
-    morewaita  = make_hyperlink('https://www.gnome-look.org/p/2276064', 'MoreWaita')
-    plasma_x   = make_hyperlink('https://www.gnome-look.org/p/1367155', 'PlasmaX')
-    infinity   = make_hyperlink('https://www.gnome-look.org/p/2112373', 'Infinity')
-    reversal   = make_hyperlink('https://www.gnome-look.org/p/1340791', 'Reversal')
-    flat_remix = make_hyperlink('https://store.kde.org/p/1012430', 'Flat Remix')
-    fairywren  = make_hyperlink('https://www.gnome-look.org/p/1684521', 'FairyWren')
-    yosa_max   = make_hyperlink('https://www.gnome-look.org/p/1196255/', 'Yosa Max')
-    papirus    = make_hyperlink('https://www.gnome-look.org/p/1166289/', 'Papirus')
-    qogir      = make_hyperlink('https://github.com/vinceliuice/Qogir-icon-theme', 'Qogir')
-    fluent     = make_hyperlink('https://store.kde.org/p/1477945', 'Fluent')
-    scratch    = 'made from scratch'
+    ICON_PACKS = {
+        'KORA': make_hyperlink('https://store.kde.org/p/1256209', 'Kora'),
+        'BREEZE': make_hyperlink('https://github.com/KDE/breeze-icons', 'Breeze'),
+        'MARWAITA': make_hyperlink('https://www.gnome-look.org/p/1239855', 'Marwaita'),
+        'MOREWAITA': make_hyperlink('https://www.gnome-look.org/p/2276064', 'MoreWaita'),
+        'PLASMAX': make_hyperlink('https://www.gnome-look.org/p/1367155', 'PlasmaX'),
+        'INFINITY': make_hyperlink('https://www.gnome-look.org/p/2112373', 'Infinity'),
+        'REVERSAL': make_hyperlink('https://www.gnome-look.org/p/1340791', 'Reversal'),
+        'FLAT_REMIX': make_hyperlink('https://store.kde.org/p/1012430', 'Flat Remix'),
+        'FAIRYWREN': make_hyperlink('https://www.gnome-look.org/p/1684521', 'FairyWren'),
+        'YOSA_MAX': make_hyperlink('https://www.gnome-look.org/p/1196255/', 'Yosa Max'),
+        'PAPIRUS': make_hyperlink('https://www.gnome-look.org/p/1166289/', 'Papirus'),
+        'QOGIR': make_hyperlink('https://github.com/vinceliuice/Qogir-icon-theme', 'Qogir'),
+        'FLUENT': make_hyperlink('https://store.kde.org/p/1477945', 'Fluent'),
+    }
 
-    FIRST_CHUNK = f'''
-<img src="./copycat_banner.svg" width="256" alt="Copycat" style="display: block;">
-An icon theme forked from Kora, replacing/modifying a few icons while trying to make them more accurate to the original software logo's colors and shapes  
-  
-All folder icons were regenerated using Copyhex to fix small inconsistencies in gradients and change glyphs  
-  
-[![Static Badge](https://img.shields.io/badge/tar.gz-download_icon_pack-yellow)](https://github.com/loofxtrt/copycat/releases/latest)  
-  
-## Credits
-Icons from different packs are included in this repo, **all licensed under the GPL3 license**  
-Those packs includes:  
-{kora}, {breeze}, {marwaita}, {morewaita}, {plasma_x}, {infinity}, {reversal}, {flat_remix}, {fairywren}, {yosa_max}, {papirus}, {qogir}, {fluent}
-
-## Major differences
-'''
-
-    LAST_CHUNK = '''
-## License
-[GPL3](https://www.gnu.org/licenses/gpl-3.0-standalone.html)
-'''
+    # ler o conteúdo base
+    with README_TEMPLATE.open('r', encoding='utf-8') as f:
+        base = f.read()
 
     # criar as tabelas
     tables = []
@@ -103,15 +87,26 @@ Those packs includes:
         mapping = resolve_table_writing(Mapping.from_file(f))
         tables.append(mapping)
     
-    # condensar as informações junto com as tabelas em uma só string
-    # e depois escrever o arquivo markdown final
-    condensed = FIRST_CHUNK
-    for t in tables:
-        condensed += t
-    condensed += LAST_CHUNK
+    # substituir os placeholders do template
+    resolved = base.replace(
+        '{TABLES}',
+        '\n'.join(tables)
+    )
 
-    readme = PACK_REPO / 'README.md'
+    resolved = resolved.replace(
+        '{ICON_PACKS}',
+        ', '.join(ICON_PACKS.values())
+    )
+
+    resolved = resolved.replace(
+        'SCRATCH',
+        'made from scratch'
+    )
+
+    # readme = PACK_REPO / 'README.md'
+    readme = Path('/mnt/seagate/workspace/coding/projetos/scripts/copykit/teste.md')
     with open(readme, 'w') as f:
-        f.write(condensed)
+        f.write(resolved)
 
 # TODO: adicionar o "from scratch", formatar melhor as sources pra não serem só uma list com str
+# TODO: fazer os templates dos json também serem envoltos em {} pra diferenciar melhor de texto comum

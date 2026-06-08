@@ -7,6 +7,7 @@ PACK_REMOTE = Path('/mnt/seagate/recursos/copycat/copycat') # icon pack dentro d
 PACK_REPO = Path('/mnt/seagate/recursos/copycat') # repositório git
 SUBSTITUTES = Path('/mnt/seagate/symlinks/copydb/substitutos')
 INSTRUCTIONS = Path('/mnt/seagate/workspace/coding/projetos/scripts/copykit/instructions')
+README_TEMPLATE = Path('/mnt/seagate/workspace/coding/projetos/scripts/copykit/base_readme.md')
 
 
 def _normalize_file_name(name: str, extension: str) -> str:
