@@ -60,7 +60,11 @@ def resolve_table_writing(mapping: Mapping):
 
     return pretty_html
 
-def run_documenter():
+def run_documenter(
+    # readme_template: Path,
+    # mappings: Path,
+    # git_repo: Path
+    ):
     ICON_PACKS = {
         'KORA': make_hyperlink('https://store.kde.org/p/1256209', 'Kora'),
         'BREEZE': make_hyperlink('https://github.com/KDE/breeze-icons', 'Breeze'),

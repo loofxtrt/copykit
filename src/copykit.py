@@ -5,11 +5,8 @@ import json
 import shutil
 import argparse
 
-from pathvalidate import sanitize_filename
-from prompt_toolkit import PromptSession
-
-from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normalize_json_name, normalize_svg_name, read_json, write_json, drop_empty
-from .models import Entry, Target, Mapping, Context, Substitute
+from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normalize_json_name, normalize_svg_name, read_json, write_json, drop_empty, read_toml
+from .models import Entry, Target, Mapping, Context, Substitute, Environment
 from .handlers import remove, replace, symlink
 from .logger import EntryLogger
 from .documenter import run_documenter
@@ -22,6 +19,14 @@ class CLI:
     def __init__(self):
         self.parser = argparse.ArgumentParser()
 
+        self.parser.add_argument(
+            '--environment',
+            '-e',
+            type=Path,
+            required=True,
+            help='arquivo toml que representa um environment'
+        )
+
         self.subparsers = self.parser.add_subparsers(
             dest='command',
             required=True
@@ -29,19 +34,24 @@ class CLI:
 
         self._register_apply()
         self._register_docs()
-        self._register_mkmap()
-        self._register_map()
 
     def execute(self):
         args = self.parser.parse_args()
+    
+        environment = args.environment
+        if not environment.is_file():
+            logger.error('o environment deve ser um toml')
+            return
+        self.environment = Environment.from_dict(read_toml(environment))
+
         args.func(args)
 
     def _register_apply(self):
         parser_apply = self.subparsers.add_parser('apply')
         parser_apply.add_argument(
-            '--root',
-            '-r',
-            choices=['local', 'remote'],
+            '--level',
+            '-l',
+            choices=['local', 'stable'],
             default='local'
         )
         parser_apply.set_defaults(func=self.cmd_apply)
@@ -49,163 +59,15 @@ class CLI:
     def _register_docs(self):
         parser_docs = self.subparsers.add_parser('docs')
         parser_docs.set_defaults(func=self.cmd_docs)
-    
-    def _register_mkmap(self):
-        parser_mkmap = self.subparsers.add_parser('mkmap')
-        parser_mkmap.add_argument(
-            '--id',
-            '-i',
-            help="""caminho relativo do mapping a partir do diretório de instruções,
-            ex: PATH_INSTRUCOES + -mf apps/apps-simbolicos.json -> PATH_INSTRUCOES/apps/apps-simbolicos.json""",
-            required=True
-        )
-        parser_mkmap.set_defaults(func=self.cmd_mkmap)
-    
-    def _register_map(self):
-        parser_map = self.subparsers.add_parser('map')
-        parser_map.add_argument(
-            '--mapping-file',
-            '-mf',
-            required=True
-        )
-        parser_map.set_defaults(func=self.cmd_map)
 
     def cmd_apply(self, args):
-        if args.root == 'local':
-            run_copykit(PACK_LOCAL)
-        elif args.root == 'remote':
-            run_copykit(PACK_REMOTE)
+        if args.level == 'local':
+            run_copykit(self.environment, self.environment.pack_local)
+        elif args.level == 'stable':
+            run_copykit(self.environment, self.environment.pack_stable)
     
     def cmd_docs(self, args):
         run_documenter()
-
-    def cmd_mkmap(self, args):
-        # sanitizar o id passado como arg e usar ele como nome do arquivo (só conveniência)
-        filename = normalize_json_name(sanitize_filename(args.id))
-        file = INSTRUCTIONS / filename
-        
-        if file.exists():
-            # TODO: raise de fileexists
-            logger.error(f'um json de mapping com o mesmo nome já existe: {file.name}')
-            return
-        
-        context = {
-            'id': args.id
-        }
-        
-        # obter dados opcionais e adiciona-los no contexto caso existam
-        target_parent = input('target_parent: ROOT/')
-        substitute_parent = input('substitute_parent: SUBSTITUTES/')
-        
-        if target_parent:
-            context['target_parent'] = 'ROOT/' + target_parent
-        if substitute_parent:
-            context['substitute_parent'] = 'SUBSTITUTES/' + substitute_parent
-
-        mapping = {
-            'context': context,
-            'entries': {}
-        }
-
-        # escrever o json final
-        write_json(file, mapping)
-
-    def cmd_map(self, args):
-        try:
-            shell(INSTRUCTIONS / args.mapping_file)
-        except ValueError:
-            logger.error(f'{args.mapping_file} não é um arquivo mapping válido')
-
-
-def shell(mapping_file: Path):
-    def prompt(text: str | None = None):
-        # refletir o estado atual do shell no prompt
-        prefix = f'{mapping.context.id}'
-
-        if key is not None:
-            prefix += f' (entry:{key})'
-
-        # mostrar > se for comando normal
-        # ou : se for um prompt requerindo algo
-        if text:
-            prefix += f' {text}'
-            prefix += ': '
-        else:
-            prefix += ' > '
-
-        # promptar
-        return session.prompt(prefix)
-
-    def _save_mapping():
-        mapping.save_to_disk(mapping_file)
-
-    # resolver os dados
-    mapping = Mapping.from_file(mapping_file)
-    key = None
-    
-    # iniciar a sessão shell que vai ficar ativa até ser manualmente interrompida
-    session = PromptSession()
-
-    while True:
-        try:
-            cmd = prompt()
-
-            if cmd == 'exit' or cmd == 'quit':
-                break
-            if cmd == 'entry':
-                key = prompt('key')
-            
-            # quando se tem uma chave ativa, significa que uma entry
-            # está sendo atualmente editada, seja ela nova ou não
-            if key:
-                if cmd == 'new':
-                    substitute = prompt('substitute')
-                    canonical = prompt('canonical')
-                    changelog = prompt('changelog')
-
-                    data = drop_empty({
-                        'substitute': substitute,
-                        'canonical': canonical,
-                        'changelog': changelog
-                    })
-                    
-                    # adicionar os dados obtidos no mapping
-                    new_entry = Entry.from_dict(data=data, key=key, context=mapping.context)
-                    
-                    mapping.insert_entry(key=key, entry=new_entry)
-                    _save_mapping()
-                elif cmd == 'target':
-                    icon = prompt('icon')
-                    action = prompt('action')
-
-                    if not icon or not action:
-                        logger.error('impossível continuar sem um icon e action pro novo target')
-                        return
-
-                    target = Target(icon=icon, action=action)
-
-                    mapping.entries[key].insert_target(target)
-                    _save_mapping()
-                elif cmd == 'source':
-                    source = prompt('source')
-                    used = prompt('used')
-                    single_asset = prompt('(single) asset') # TODO: single temporário pra não ter que tratar lista no cli
-                    
-                    assets = None
-                    if single_asset:
-                        assets = [single_asset]
-
-                    mapping.entries[key].insert_source(
-                        source=source,
-                        assets=assets,
-                        used=used
-                    )
-                    _save_mapping()
-                elif cmd == '..': # voltar ao mapping anterior depois de ter entrado numa entry
-                    key = None
-        except KeyboardInterrupt:
-            # aceitar ctrl + c pra fechar
-            break
 
 
 def handle_mapping(
@@ -312,21 +174,24 @@ def handle_mapping(
         # fechar o ambiente vivo desse logger quando terminar o processamento
         entry_logger.close()
 
-def run_copykit(root: Path):
+def run_copykit(environment: Environment, active_root: Path):
     """
     percorre todos os arquivos de instrução e executa o processo de replace para cada mapping
 
     args:
-    	root:
-    		caminho base do icon pack. ex: icons/copycat, icons/papirus
+    	environment:
+    		ambiente, o icon pack esse contexto trabalha sobre
+
+        active_root:
+            icon pack a ser afetado
     """
 
-    for f in INSTRUCTIONS.iterdir():
-        mapping = Mapping.from_file(file=f, active_root=root)
-        if not mapping:
+    for f in environment.mappings.iterdir():
+        m = Mapping.from_file(file=f, active_root=active_root, environment=environment)
+        if not m:
             continue
 
-        handle_mapping(mapping)
+        handle_mapping(m)
 
 def main():
     CLI().execute()

@@ -1,0 +1,11 @@
+{
+    "git_repo": "/mnt/seagate/recursos/copycat",
+    "pack_local": "/mnt/seagate/symlinks/kde-user-icons/copycat",
+    "pack_stable": "/mnt/seagate/recursos/copycat/copycat",
+    "substitutes_root": "/mnt/seagate/symlinks/copydb/substitutos",
+    "environment": {
+        "root": "/mnt/seagate/workspace/coding/projetos/scripts/copykit/environments/copycat",
+        "mappings": "{ENVIRONMENT}/mappings",
+        "readme": "{ENVIRONMENT}/README.md"
+    }
+}

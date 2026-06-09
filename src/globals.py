@@ -1,5 +1,6 @@
 from pathlib import Path
 import json
+import tomllib
 
 
 PACK_LOCAL = Path('/mnt/seagate/symlinks/kde-user-icons/copycat')
@@ -32,6 +33,10 @@ def read_json(file: Path) -> dict:
 def write_json(file: Path, data: dict) -> dict:
     with file.open('w', encoding='utf-8') as f:
         return json.dump(data, f, indent=4, ensure_ascii=False)
+
+def read_toml(file: Path) -> dict:
+    with file.open('rb') as f:
+        return tomllib.load(f)
 
 def is_icon_valid(file: Path) -> bool:
     return file.is_file() and file.suffix == '.svg'

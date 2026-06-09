@@ -7,6 +7,53 @@ from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normali
 from . import logger
 
 
+# TODO: remover SUBSTITUTES pro modelo novo
+
+
+@dataclass
+class Environment:
+    git_repo: Path
+    pack_local: Path
+    pack_stable: Path
+    substitutes: Path
+    env_root: Path
+    mappings: Path
+    readme: Path
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        paths = data.get('paths')
+        environment = data.get('environment')
+        
+        env_root = Path(environment.get('env_root'))
+        
+        mappings = environment.get(
+            'mappings', '{ENVIRONMENT}/mappings'
+        ).replace(
+            '{ENVIRONMENT}', str(env_root)
+        )
+        mappings = Path(mappings)
+
+        readme = environment.get(
+            'readme', '{ENVIRONMENT}/README.md'
+        ).replace(
+            '{ENVIRONMENT}', str(env_root)
+        )
+        readme = Path(readme)
+        
+        return cls(
+            git_repo=Path(paths.get('git_repo')),
+            pack_local=Path(paths.get('pack_local')),
+            pack_stable=Path(paths.get('pack_stable')),
+            substitutes=Path(paths.get('substitutes')),
+            env_root=env_root,
+            mappings=mappings,
+            readme=readme
+        )
+
+
+# TODO: mudar templates do context pra serem PACK em vez de ROOT, assim fica mais claro
+# TODO: func especializada em templates (com tratamento pra caminhos terminados em / ou não)
 @dataclass
 class Context:
     """
@@ -32,6 +79,9 @@ class Context:
         substitute_parent:
             mesma lógica do target_parent, mas pros substitutos
             'novo-blender', 'substitutos' -> substitutos/blender.svg
+
+        environment:
+            ambiente, o icon pack esse contexto trabalha sobre
     """
 
     id: str
@@ -39,6 +89,7 @@ class Context:
     active_root: Optional[Path]
     target_parent: Optional[Path] = field(init=False)
     substitute_parent: Optional[Path] = field(init=False)
+    environment: Environment
 
     def __post_init__(self):
         # TODO: erros melhores nos dois
@@ -51,6 +102,7 @@ class Context:
         cls,
         data: dict,
         file: Path,
+        environment: Environment,
         active_root: Path | None = None
         ) -> Context:
         """
@@ -69,6 +121,7 @@ class Context:
         return cls(
             id=_id,
             data=data,
+            environment=environment,
             active_root=active_root
         )
     
@@ -89,7 +142,6 @@ class Context:
 
     def _resolve_substitute_parent(self) -> Path | None:
         # obter o parent do substituto e resolver o path
-        # TODO: fazer SUBSTITUTES ser param
         raw = self.data.get('substitute_parent')
         
         if not raw:
@@ -98,7 +150,7 @@ class Context:
         if 'SUBSTITUTES' not in raw:
             raise ValueError(f"'SUBSTITUTES' precisa estar presente em substitute_parent ou ser completamente nulo ({self.id})")
         
-        return Path(raw.replace('SUBSTITUTES', str(SUBSTITUTES)))
+        return Path(raw.replace('SUBSTITUTES', str(self.environment.substitutes)))
     
     def to_dict(self) -> dict:
         return self.data
@@ -289,6 +341,7 @@ class Mapping:
     def from_file(
         cls,
         file: Path,
+        environment: Environment,
         active_root: Path | None = None
         ) -> Mapping | None:
         """
@@ -312,6 +365,7 @@ class Mapping:
             context = Context.from_dict(
                 data=data.get('context'),
                 file=file,
+                environment=environment,
                 active_root=active_root
             )
         except ValueError as err:
