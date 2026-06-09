@@ -7,4 +7,4 @@ substitutes = "/mnt/seagate/symlinks/copydb/substitutos"
 [environment]
 env_root = "/mnt/seagate/workspace/coding/projetos/scripts/copykit/environments/copycat"
 mappings = "{ENVIRONMENT}/mappings"
-readme = "{ENVIRONMENT}/README.md"
+readme_template = "{ENVIRONMENT}/README.md"

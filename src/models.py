@@ -3,11 +3,8 @@ from dataclasses import dataclass, field
 from typing import List, Optional
 import json
 
-from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normalize_json_name, normalize_svg_name, read_json, write_json, drop_empty
+from .utils import normalize_json_name, normalize_svg_name, read_json, write_json, drop_empty
 from . import logger
-
-
-# TODO: remover SUBSTITUTES pro modelo novo
 
 
 @dataclass
@@ -18,7 +15,9 @@ class Environment:
     substitutes: Path
     env_root: Path
     mappings: Path
-    readme: Path
+    readme_template: Path
+
+    # TODO: documentação
 
     @classmethod
     def from_dict(cls, data: dict):
@@ -26,7 +25,7 @@ class Environment:
         environment = data.get('environment')
         
         env_root = Path(environment.get('env_root'))
-        
+
         mappings = environment.get(
             'mappings', '{ENVIRONMENT}/mappings'
         ).replace(
@@ -34,12 +33,12 @@ class Environment:
         )
         mappings = Path(mappings)
 
-        readme = environment.get(
-            'readme', '{ENVIRONMENT}/README.md'
+        readme_template = environment.get(
+            'readme_template', '{ENVIRONMENT}/README.md'
         ).replace(
             '{ENVIRONMENT}', str(env_root)
         )
-        readme = Path(readme)
+        readme_template = Path(readme_template)
         
         return cls(
             git_repo=Path(paths.get('git_repo')),
@@ -48,7 +47,7 @@ class Environment:
             substitutes=Path(paths.get('substitutes')),
             env_root=env_root,
             mappings=mappings,
-            readme=readme
+            readme_template=readme_template
         )
 
 

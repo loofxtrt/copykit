@@ -3,8 +3,7 @@ from pathlib import Path
 from xml.dom import minidom
 from yattag import Doc
 
-from .models import Mapping
-from .globals import INSTRUCTIONS, PACK_REPO, README_TEMPLATE
+from .models import Mapping, Environment
 
 
 def make_hyperlink(url: str, text: str) -> str:
@@ -60,11 +59,7 @@ def resolve_table_writing(mapping: Mapping):
 
     return pretty_html
 
-def run_documenter(
-    # readme_template: Path,
-    # mappings: Path,
-    # git_repo: Path
-    ):
+def run_documenter(environment: Environment):
     ICON_PACKS = {
         'KORA': make_hyperlink('https://store.kde.org/p/1256209', 'Kora'),
         'BREEZE': make_hyperlink('https://github.com/KDE/breeze-icons', 'Breeze'),
@@ -82,14 +77,14 @@ def run_documenter(
     }
 
     # ler o conteúdo base
-    with README_TEMPLATE.open('r', encoding='utf-8') as f:
+    with environment.readme_template.open('r', encoding='utf-8') as f:
         base = f.read()
 
     # criar as tabelas
     tables = []
-    for f in INSTRUCTIONS.rglob('*.json'):
-        mapping = resolve_table_writing(Mapping.from_file(f))
-        tables.append(mapping)
+    for f in environment.mappings.rglob('*.json'):
+        m = resolve_table_writing(Mapping.from_file(f, environment=environment))
+        tables.append(m)
     
     # substituir os placeholders do template
     resolved = base.replace(
@@ -107,8 +102,7 @@ def run_documenter(
         'made from scratch'
     )
 
-    # readme = PACK_REPO / 'README.md'
-    readme = Path('/mnt/seagate/workspace/coding/projetos/scripts/copykit/teste.md')
+    readme = environment.git_repo / 'README.md'
     with open(readme, 'w') as f:
         f.write(resolved)
 

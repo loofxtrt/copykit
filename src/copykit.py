@@ -5,7 +5,7 @@ import json
 import shutil
 import argparse
 
-from .globals import PACK_LOCAL, PACK_REMOTE, SUBSTITUTES, INSTRUCTIONS, normalize_json_name, normalize_svg_name, read_json, write_json, drop_empty, read_toml
+from .utils import normalize_json_name, normalize_svg_name, read_json, write_json, drop_empty, read_toml
 from .models import Entry, Target, Mapping, Context, Substitute, Environment
 from .handlers import remove, replace, symlink
 from .logger import EntryLogger
@@ -67,7 +67,7 @@ class CLI:
             run_copykit(self.environment, self.environment.pack_stable)
     
     def cmd_docs(self, args):
-        run_documenter()
+        run_documenter(environment=self.environment)
 
 
 def handle_mapping(

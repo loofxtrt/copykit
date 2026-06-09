@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from ..models import Target, Context
-from ..globals import normalize_svg_name
+from ..utils import normalize_svg_name
 from ..logger import EntryLogger
 # from .. import logger
 

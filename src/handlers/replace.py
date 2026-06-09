@@ -3,7 +3,7 @@ import shutil
 
 from ..models import Target, Entry, Context
 from ..logger import EntryLogger
-from ..globals import is_icon_valid
+from ..utils import is_icon_valid
 from .. import processor
 # from .. import logger, processor
 
