@@ -608,6 +608,25 @@
                     "used": "symbol and colors"
                 }
             ]
+        },
+        "trash": {
+            "substitute": "trash",
+            "targets": [
+                {
+                    "icon": "application-x-trash",
+                    "action": "replace"
+                }
+            ],
+            "canonical": "application-x-trash",
+            "sources": [
+                {
+                    "source": "KORA",
+                    "assets": [
+                        "scalable/mimetypes/application-x-trash"
+                    ],
+                    "used": "colors and symbol"
+                }
+            ]
         }
     }
 }

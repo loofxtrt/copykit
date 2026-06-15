@@ -2,6 +2,7 @@ convenção não fixa de ids/logging
 pai:pai:pai:filho  
 actions:16  
 actions:symbolic  
+16:mimetypes  
   
 exemplo da cli  
 ```bash

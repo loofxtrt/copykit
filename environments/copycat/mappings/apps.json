@@ -937,6 +937,12 @@
                 }
             ],
             "changed": "changed colors and added shadows"
+        },
+        "Trash Indicator": {
+            "canonical": "../../places/scalable/user-trash-full",
+            "targets": [
+                { "action": "symlink", "icon": "trashindicator" }
+            ]
         }
     }
 }

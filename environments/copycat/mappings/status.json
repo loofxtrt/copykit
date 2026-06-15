@@ -1,0 +1,20 @@
+{
+    "context": {
+        "id": "status:scalable",
+        "target_parent": "ROOT/status/scalable"
+    },
+    "entries": {
+        "Trash full": {
+            "targets": [
+                { "action": "symlink", "icon": "user-trash-full" }
+            ],
+            "canonical": "../../places/scalable/user-trash-full"
+        },
+        "Trash": {
+            "targets": [
+                { "action": "symlink", "icon": "user-trash" }
+            ],
+            "canonical": "../../places/scalable/user-trash"
+        }
+    }
+}

@@ -5,12 +5,18 @@ import json
 import shutil
 import argparse
 
+from rich.console import Console
+from rich.text import Text
+
 from .utils import normalize_json_name, normalize_svg_name, read_json, write_json, drop_empty, read_toml
 from .models import Entry, Target, Mapping, Context, Substitute, Environment
 from .handlers import remove, replace, symlink
 from .logger import EntryLogger
 from .documenter import run_documenter
 from . import logger, processor
+
+
+# TODO: template de index.theme
 
 
 class CLI:
@@ -192,6 +198,11 @@ def run_copykit(environment: Environment, active_root: Path):
             continue
 
         handle_mapping(m)
+
+    # TODO: fazer panel costum pro rich e desaclopar do logger de entry    
+    # console = Console()
+    # text = Text()
+    # text.append('')
 
 def main():
     CLI().execute()

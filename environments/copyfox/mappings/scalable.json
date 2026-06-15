@@ -1,0 +1,28 @@
+{
+    "context": {
+        "id": "scalable"
+    },
+    "entries": {
+        "pseudo-scalables": {
+            "targets": [
+                { "action": "remove", "target": "256" },
+                { "action": "remove", "target": "256@2x" },
+                { "action": "remove", "target": "256@3x" },
+                { "action": "remove", "target": "32/categories" }
+            ]
+        },
+        "some symbolics": {
+            "targets": [
+                { "action": "remove", "target": "22/mimetypes" },
+                { "action": "replace", "target": "22/emblems" },
+                { "action": "remove", "target": "16/mimetypes" },
+                { "action": "replace", "target": "16/emblems" }
+            ]
+        },
+        "16:places": {
+            "targets": [
+                { "action": "replace", "target": "16/places" }
+            ]
+        }
+    }
+}
