@@ -1,37 +1,38 @@
 {
     "context": {
         "id": "scalable",
+        "target_parent": "ROOT/scalable",
         "substitute_parent": "SUBSTITUTES"
     },
     "entries": {
         "apps": {
-            "canonical": "apps/scalable",
+            "canonical": "SUBSTITUTES/apps/scalable",
             "targets": [
-                { "action": "symlink", "target": "scalable/apps" }
+                { "action": "symlink", "icon": "apps" }
             ]
         },
         "devices": {
-            "canonical": "devices/scalable",
+            "canonical": "SUBSTITUTES/devices/scalable",
             "targets": [
-                { "action": "symlink", "target": "scalable/devices" }
+                { "action": "symlink", "icon": "devices" }
             ]
         },
         "mimetypes": {
-            "canonical": "mimetypes/scalable",
+            "canonical": "SUBSTITUTES/mimetypes/scalable",
             "targets": [
-                { "action": "symlink", "target": "scalable/mimetypes" }
+                { "action": "symlink", "icon": "mimetypes" }
             ]
         },
         "places": {
-            "canonical": "places/scalable",
+            "canonical": "SUBSTITUTES/places/scalable",
             "targets": [
-                { "action": "symlink", "target": "scalable/places" }
+                { "action": "symlink", "icon": "places" }
             ]
         },
         "status": {
-            "canonical": "status/scalable",
+            "canonical": "SUBSTITUTES/status/scalable",
             "targets": [
-                { "action": "symlink", "target": "scalable/status" }
+                { "action": "symlink", "icon": "scalable/status" }
             ]
         }
     }

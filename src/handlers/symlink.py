@@ -3,6 +3,7 @@ from pathlib import Path
 from ..models import Target, Context
 from ..utils import normalize_svg_name
 from ..logger import EntryLogger
+from ..templates import resolve_placeholders
 # from .. import logger
 
 
@@ -20,12 +21,15 @@ def handle_symlink(
     		caminho do arquivo que será referenciado pelo symlink
             ex: 'blender.svg'
 
+            ISSO NÃO NORMALIZA AUTOMATICAMENTE O NOME DO ARQUIVO,
+            É EXIGIDO QUE ELE JÁ VENHA COM EXTENSÃO SE NECESSÁRIO
+
         context:
             contexto. pra saber como resolver o path do target
 
     	target:
     		target que define onde o symlink será criado
-            ex: copycat/apps/scalable/blender-2.svg
+            ex: copycat/apps/scalable/blender-2.svg <- é um symlink
     """
     
     # symlink depende de um arquivo base previamente definido
@@ -38,8 +42,7 @@ def handle_symlink(
     if link.exists() or link.is_symlink():
         link.unlink()
 
-    # criar o symlink
-    canonical = normalize_svg_name(canonical)
+    # criar o symlink    
     link.symlink_to(canonical)
 
     if not link.exists() or not link.is_file():

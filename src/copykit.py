@@ -11,8 +11,9 @@ from rich.text import Text
 from .utils import normalize_json_name, normalize_svg_name, read_json, write_json, drop_empty, read_toml
 from .models import Entry, Target, Mapping, Context, Substitute, Environment
 from .handlers import remove, replace, symlink
-from .logger import EntryLogger
+from .templates import resolve_placeholders
 from .documenter import run_documenter
+from .logger import EntryLogger
 from . import logger, processor
 
 
@@ -97,6 +98,7 @@ def handle_mapping(
 
     # validação informações básicas do mapping
     context = mapping.context
+    environment = context.environment
     target_parent = context.target_parent
     substitute_parent = context.substitute_parent
     _id = context.id
@@ -130,6 +132,10 @@ def handle_mapping(
         
         canonical = entry.canonical
         if canonical:
+            # resolve os possíveis placeholders do canonical
+            # isso pode fazer, por ex: SUBSTITUTES/apps, virar ../kora/apps
+            # se o SUBSTITUTES do env for definido como ../kora
+            canonical = resolve_placeholders('SUBSTITUTES', environment.substitutes)
             entry_logger.info(f'canonical definido como {canonical}')
 
         # reconstruir o caminho do ícone e fazer as mudanças
@@ -218,3 +224,4 @@ if __name__ == '__main__':
 # TODO: dataclass pra sources?
 # TODO: aplicar processing de optimize por padrão ou criar um bash que aplique
 # TODO: contexto pai declarativo, tipo substitutes, root etc. todos definidos num arquivo em vez de no código
+# TODO: módulo pra resolver os placeholders dos templates, tipo SUBSTITUTES e ENVIRONMENT
