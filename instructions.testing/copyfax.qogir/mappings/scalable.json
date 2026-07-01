@@ -1,0 +1,39 @@
+{
+    "context": {
+        "id": "scalable",
+        "target_parent": "ROOT/scalable",
+        "substitute_parent": "SUBSTITUTES"
+    },
+    "entries": {
+        "apps": {
+            "canonical": "SUBSTITUTES/apps/scalable",
+            "targets": [
+                { "action": "symlink", "icon": "apps", "kind": "dir" }
+            ]
+        }, 
+        "devices": {
+            "canonical": "SUBSTITUTES/devices/scalable",
+            "targets": [
+                { "action": "symlink", "icon": "devices", "kind": "dir" }
+            ]
+        },
+        "mimetypes": {
+            "canonical": "SUBSTITUTES/mimetypes/scalable",
+            "targets": [
+                { "action": "symlink", "icon": "mimetypes", "kind": "dir" }
+            ]
+        },
+        "places": {
+            "canonical": "SUBSTITUTES/places/scalable",
+            "targets": [
+                { "action": "symlink", "icon": "places", "kind": "dir" }
+            ]
+        },
+        "status": {
+            "canonical": "SUBSTITUTES/status/scalable",
+            "targets": [
+                { "action": "symlink", "icon": "scalable/status", "kind": "dir" }
+            ]
+        }
+    }
+}

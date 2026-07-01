@@ -50,9 +50,10 @@ def safe_delete(path: Path):
     # IMPORTANTE
     # is_symlink, mesmo possivelmente apontando pra um diretório,
     # ainda é tratado como arquivo, pq é um link pra um dir, não um dir em si
-    if path.is_dir() and not path.is_symlink():
+    if path.is_file() or path.is_symlink():
+        path.unlink()
+    elif path.is_dir():
         shutil.rmtree(path)
     else:
-        path.unlink()
-
-    # TODO: raise exception 
+        pass
+        # TODO: raise exception

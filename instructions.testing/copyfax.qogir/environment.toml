@@ -1,0 +1,20 @@
+[paths]
+git_repo = "/mnt/seagate/symlinks/kde-user-icons/copyfax-qogir"
+pack_local = "/mnt/seagate/symlinks/kde-user-icons/copyfax-qogir"
+pack_stable = "/mnt/seagate/symlinks/kde-user-icons/copyfax-qogir"
+
+# FIXME: por algum motivo tá quebrado, mas o fluent (idêntico) funciona e esse não
+# tem inconsistências de tamanho etc.
+
+# IMPORTANTE
+# isso provavelmente quebra o pack_stable
+# mas funciona quando ele vira pack_local, então o pack deve ser testado COM BASE NO LOCAL
+#
+# depende do copycat original já estar instalado
+# e também estar no mesmo diretório pai que o copycat (ex: /usr/share/icons/) 
+substitutes = "../../copycat"
+
+[environment]
+env_root = "/mnt/seagate/workspace/coding/projetos/scripts/copykit/environments/copyfax.qogir"
+mappings = "{ENVIRONMENT}/mappings"
+readme_template = "{ENVIRONMENT}/README.md"
