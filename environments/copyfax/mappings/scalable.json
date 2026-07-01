@@ -1,0 +1,38 @@
+{
+    "context": {
+        "id": "scalable",
+        "substitute_parent": "SUBSTITUTES"
+    },
+    "entries": {
+        "apps": {
+            "canonical": "apps/scalable",
+            "targets": [
+                { "action": "symlink", "target": "scalable/apps" }
+            ]
+        },
+        "devices": {
+            "canonical": "devices/scalable",
+            "targets": [
+                { "action": "symlink", "target": "scalable/devices" }
+            ]
+        },
+        "mimetypes": {
+            "canonical": "mimetypes/scalable",
+            "targets": [
+                { "action": "symlink", "target": "scalable/mimetypes" }
+            ]
+        },
+        "places": {
+            "canonical": "places/scalable",
+            "targets": [
+                { "action": "symlink", "target": "scalable/places" }
+            ]
+        },
+        "status": {
+            "canonical": "status/scalable",
+            "targets": [
+                { "action": "symlink", "target": "scalable/status" }
+            ]
+        }
+    }
+}
