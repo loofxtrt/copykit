@@ -8,31 +8,31 @@
         "apps": {
             "canonical": "SUBSTITUTES/apps/scalable",
             "targets": [
-                { "action": "symlink", "icon": "apps" }
+                { "action": "symlink", "icon": "apps", "kind": "dir" }
             ]
-        },
+        }, 
         "devices": {
             "canonical": "SUBSTITUTES/devices/scalable",
             "targets": [
-                { "action": "symlink", "icon": "devices" }
+                { "action": "symlink", "icon": "devices", "kind": "dir" }
             ]
         },
         "mimetypes": {
             "canonical": "SUBSTITUTES/mimetypes/scalable",
             "targets": [
-                { "action": "symlink", "icon": "mimetypes" }
+                { "action": "symlink", "icon": "mimetypes", "kind": "dir" }
             ]
         },
         "places": {
             "canonical": "SUBSTITUTES/places/scalable",
             "targets": [
-                { "action": "symlink", "icon": "places" }
+                { "action": "symlink", "icon": "places", "kind": "dir" }
             ]
         },
         "status": {
             "canonical": "SUBSTITUTES/status/scalable",
             "targets": [
-                { "action": "symlink", "icon": "scalable/status" }
+                { "action": "symlink", "icon": "scalable/status", "kind": "dir" }
             ]
         }
     }

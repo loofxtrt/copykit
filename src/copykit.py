@@ -136,7 +136,11 @@ def handle_mapping(
             # resolve os possíveis placeholders do canonical
             # isso pode fazer, por ex: SUBSTITUTES/apps, virar ../kora/apps
             # se o SUBSTITUTES do env for definido como ../kora
-            canonical = resolve_placeholders('SUBSTITUTES', environment.substitutes)
+            canonical = resolve_placeholders(
+                text=canonical,
+                variables={'SUBSTITUTES': str(environment.substitutes)}
+            )
+
             entry_logger.info(f'canonical definido como {canonical}')
 
         # reconstruir o caminho do ícone e fazer as mudanças
@@ -226,3 +230,4 @@ if __name__ == '__main__':
 # TODO: aplicar processing de optimize por padrão ou criar um bash que aplique
 # TODO: contexto pai declarativo, tipo substitutes, root etc. todos definidos num arquivo em vez de no código
 # TODO: módulo pra resolver os placeholders dos templates, tipo SUBSTITUTES e ENVIRONMENT
+# TODO: mudar "icon" pra "target"

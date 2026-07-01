@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from ..models import Target, Context
-from ..utils import normalize_svg_name
+from ..utils import normalize_svg_name, safe_delete
 from ..logger import EntryLogger
 from ..templates import resolve_placeholders
 # from .. import logger
@@ -40,13 +40,21 @@ def handle_symlink(
     # deletar o antigo arquivo/symlink que possivelmente existe no destino do symlink novo
     link = target.resolve_path(context)
     if link.exists() or link.is_symlink():
-        link.unlink()
+        safe_delete(link)
+    
+    if not link.parent:
+        logger.error(f'parent inválido pro symlink {link}')
+        return
 
     # criar o symlink    
     link.symlink_to(canonical)
 
-    if not link.exists() or not link.is_file():
+    if not link.exists() and not link.is_symlink():
+        safe_delete(link) # deleta o link quebrado que foi criado
+
         logger.error(f'{link} não foi criado como um symlink válido')
         return
 
     logger.symlink(f'criado symlink apontando para {canonical} -> {link}')
+
+# TODO: try que cubra fileexistserror

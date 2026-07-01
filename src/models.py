@@ -176,17 +176,25 @@ class Target:
             
             - remove
                 deleta um arquivo. não requer substitute
+        
+        kind:
+            tipo que aquele target é. se não for especificado, se assume que é um svg
+            por ex: o kind poderia ser "dir" e então o icon nunca seria normalizado com .svg no final
     """
     
     icon: str # equivalente à name, TODO: talvez mudar pra name
     action: str
+    kind: Optional[str]
 
     def resolve_path(self, context: Context) -> Path | None:
         if not context.target_parent:
             logger.error(f'não é possível resolver o caminho do target sem um target_parent: {context.id}')
             return
         
-        return context.target_parent / normalize_svg_name(self.icon)
+        if self.kind != 'dir':
+            return context.target_parent / normalize_svg_name(self.icon)
+        
+        return context.target_parent / self.icon
 
     def to_dict(self) -> dict:
         return {
@@ -270,6 +278,7 @@ class Entry:
         for raw_target in data.get('targets', []):
             icon = raw_target.get('icon')
             action = raw_target.get('action')
+            kind = raw_target.get('kind')
 
             if not icon or not action:
                 logger.error(f'target inválido em {context.id}')
@@ -277,7 +286,7 @@ class Entry:
 
             # adicionar o target resolvido à lista
             targets.append(
-                Target(icon=icon, action=action)
+                Target(icon=icon, action=action, kind=kind)
             )
 
         return cls(

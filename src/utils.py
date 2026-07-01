@@ -1,4 +1,5 @@
 from pathlib import Path
+import shutil
 import json
 import tomllib
 
@@ -44,3 +45,14 @@ def drop_empty(data: dict) -> dict:
         k: v for k, v in data.items()
         if v is not None and v != [] and v != '' and v != {}
     }
+
+def safe_delete(path: Path):
+    # IMPORTANTE
+    # is_symlink, mesmo possivelmente apontando pra um diretório,
+    # ainda é tratado como arquivo, pq é um link pra um dir, não um dir em si
+    if path.is_dir() and not path.is_symlink():
+        shutil.rmtree(path)
+    else:
+        path.unlink()
+
+    # TODO: raise exception 
