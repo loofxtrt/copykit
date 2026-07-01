@@ -15,3 +15,11 @@ substitutes = "../../copycat"
 env_root = "/mnt/seagate/workspace/coding/projetos/scripts/copykit/environments/copyfax.fluent"
 mappings = "{ENVIRONMENT}/mappings"
 readme_template = "{ENVIRONMENT}/README.md"
+
+# TODO:
+# 32:categories (deviam ser as categories scalables do copycat)
+# symbolic:apps (faz o vlc aparecer como simbólico no menu)
+# 256:applets
+# scalable:applets
+# adicionar tom secundário igual ao que o qogir tem e igual ao que o kora tentou fazer
+# *:mimetypes (menos o scalable)

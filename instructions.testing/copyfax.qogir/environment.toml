@@ -6,6 +6,11 @@ pack_stable = "/mnt/seagate/symlinks/kde-user-icons/copyfax-qogir"
 # FIXME: por algum motivo tá quebrado, mas o fluent (idêntico) funciona e esse não
 # tem inconsistências de tamanho etc.
 
+# instruções:
+# cria uma cópia do qogir
+# muda o index.theme
+# coloca os paths da cópia aqui
+
 # IMPORTANTE
 # isso provavelmente quebra o pack_stable
 # mas funciona quando ele vira pack_local, então o pack deve ser testado COM BASE NO LOCAL
