@@ -106,11 +106,12 @@ def handle_mapping(
     if not target_parent.is_dir():
         logger.error(f'{target_parent} não é um diretório')
         return
-    
-    if substitute_parent is not None:
-        if not substitute_parent.is_dir():
-            logger.error(f'{substitute_parent} está presente, mas não é um diretório')
-            return
+
+    # SUSPENSO pra liberar o SUBSTITUTES possa ser outra coisa, tipo um path relativo    
+    # if substitute_parent is not None:
+    #     if not substitute_parent.is_dir():
+    #         logger.error(f'{substitute_parent} está presente, mas não é um diretório')
+    #         return
 
     # começar as operações
     entries = mapping.entries
